@@ -1,0 +1,84 @@
+body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+.login-container {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Add styles for the top bar */
+.navbar {
+    position: relative;
+    background-color: #222222;
+    color: #9d9d9d;
+    min-height: 50px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.left-section {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    font-size: 22px;
+    margin-left: 50px;
+    margin-right: 10px;
+}
+
+.info,
+.user {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.right-section .user {
+    margin-right: 0; /* Remove right margin for the last element */
+}
+
