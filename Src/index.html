@@ -1,34 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
     <title>MyKehadiran</title>
-</head>
-<body>
-    <div class="navbar">
-        <div class="left-section">
-            <span class="logo">MyKehadiran</span>
-            <span class="info">Info <i class="fas fa-caret-down"></i></span>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="left-section">
+        <div class="brand-title">MyKehadiran</div>
+        <a href="#" class="toggle-button">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </a>
+        <div class="navbar-links">
+          <ul>
+            <li><a href="#">Info</a></li>
+            <li><a href="#">Analisis Kehadiran</a></li>
+          </ul>
         </div>
-        <div class="right-section">
-            <span class="user">Guest <i class="fas fa-caret-down"></i></span>
-        </div>
-    </div>
-    
+      </div>
+      <div class="right-section">
+        <span class="user">Guest <i class="fas fa-caret-down"></i></span>
+      </div>
+    </nav>
+
     <div class="login-container">
-        <h2>Login</h2>
-        <form id="login-form">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
+      <h2>Login</h2>
+      <form id="login-form">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required />
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required />
 
-            <button type="submit">Login</button>
-        </form>
+        <button type="submit">Login</button>
+      </form>
     </div>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
