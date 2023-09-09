@@ -12,9 +12,9 @@ document.getElementById("login-form").addEventListener("submit", function (event
 
 const toggleButton = document.getElementsByClassName('toggle-button')[0]
 const navbarLinks = document.getElementsByClassName('navbar-links')[0]
-const rightSec = document.getElementsByClassName('right-section')[0]
+const user = document.getElementsByClassName('user')[0]
 
 toggleButton.addEventListener('click', () => {
     navbarLinks.classList.toggle('active')
-    rightSec.classList.toggle('active')
+    user.classList.toggle('active')
 })

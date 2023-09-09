@@ -3,6 +3,7 @@ body {
     background-color: #fff;
     margin: 0;
     padding: 0;
+    font-size: 16px;
 }
 
 .login-container {
@@ -83,7 +84,6 @@ button:hover {
 
 .navbar-links li a{
     text-decoration: none;
-    font-size: 16px;
     color: #9d9d9d;
     display: block;
     padding:1rem;
@@ -93,10 +93,30 @@ button:hover {
     color: white;
 }
 
-.right-section .user {
-    margin-right: 50px; /* Remove right margin for the last element */
+.right-section{
+    display: flex;
+    align-items: center;
+    margin-right: 50px;
+}
+
+.user ul{
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+.user li{
+    list-style: none;
+}
+.user li a{
+    text-decoration: none;
+    color: #9d9d9d;
     display: block;
-    align-items: center;/*notfinished*/
+    padding: 1rem;
+}
+.user a:hover{
+    color: white;
 }
 
 .toggle-button{
@@ -126,32 +146,24 @@ button:hover {
         flex-direction: column;
         align-items: flex-start;
     }
-    .left-section{
+    .left-section,.right-section{
         flex-direction: column;
         align-items:flex-start;
     }
-    .navbar-links{
+    .navbar-links,.user{
         display: none;
     }
 
-    .right-section{
-        display: none;
-        padding-left: 115px;
-    }
-
-    .navbar-links ul{
+    .navbar-links ul,.user ul{
         flex-direction: column;
-        align-items: baseline;
+        align-items: flex-start;
     }
 
-    .navbar-links li a{
+    .navbar-links li a,.user li a{
         padding: .5rem 1rem;
     }
     
-    .navbar-links.active{
-        display:flex;
-    }
-    .right-section.active{
+    .navbar-links.active,.user.active{
         display:flex;
     }
 }
