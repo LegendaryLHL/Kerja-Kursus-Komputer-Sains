@@ -3,13 +3,13 @@ body {
     background-color: #fff;
     margin: 0;
     padding: 0;
-    font-size: 16px;
+    font-size: 17px;
 }
 
 .login-container {
-    width: 300px;
+    width: 500px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 40px;
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -21,17 +21,26 @@ h2 {
     color: #333;
 }
 
-label {
-    font-weight: bold;
+label{
+    display: block; 
+    margin-left: 5px;
+    margin-bottom: 4px;
 }
 
 input[type="text"],
 input[type="password"] {
-    width: 100%;
-    padding: 10px;
+    width: calc(100% - 12px);;
+    padding-top: 10px;
+    padding-bottom: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
+    padding-left: 10px;
+    font-size: 14px;
+}
+
+input[type="text"]{
+    margin-bottom: 30px;
 }
 
 button {
@@ -50,24 +59,24 @@ button:hover {
 
 /* Add styles for the top bar */
 .navbar {
+    padding-left: 100px;
     position: relative;
     background-color: #222222;
     color: #9d9d9d;
     min-height: 55px;
     margin-bottom: 20px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-}
-.left-section {
-    display: flex;
-    align-items: center;
-    margin-left: 100px;
 }
 
 .brand-title {
     font-size: 22px;
     padding: 0.9rem 0.8rem;
+    color: #9d9d9d;
+    text-decoration: none;
+}
+.brand-title:hover{
+    color: white;
 }
 
 .navbar-links ul{
@@ -93,10 +102,9 @@ button:hover {
     color: white;
 }
 
-.right-section{
-    display: flex;
-    align-items: center;
-    margin-right: 50px;
+.user{
+    margin-left: auto;
+    margin-right: 150px;
 }
 
 .user ul{
@@ -146,12 +154,10 @@ button:hover {
         flex-direction: column;
         align-items: flex-start;
     }
-    .left-section,.right-section{
-        flex-direction: column;
-        align-items:flex-start;
-    }
+
     .navbar-links,.user{
         display: none;
+        margin: 0;
     }
 
     .navbar-links ul,.user ul{
@@ -165,5 +171,45 @@ button:hover {
     
     .navbar-links.active,.user.active{
         display:flex;
+    }
+}
+
+
+
+@media (max-width: 1600px) {
+    .navbar {
+        padding-left: 80px; /* Decrease left margin for smaller screens */
+    }
+    .user{
+        margin-right: 110px;
+    }
+}
+
+
+@media (max-width: 1400px) {
+    .navbar {
+        padding-left: 50px; /* Decrease left margin for smaller screens */
+    }
+    .user{
+        margin-right: 90px;
+    }
+}
+
+
+@media (max-width: 1200px) {
+    .navbar {
+        padding-left: 20px; /* Decrease left margin for smaller screens */
+    }
+    .user{
+        margin-right: 50px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .navbar {
+        padding-left: 0px; /* Decrease left margin for smaller screens */
+    }
+    .user{
+        margin-right: 0px;
     }
 }
