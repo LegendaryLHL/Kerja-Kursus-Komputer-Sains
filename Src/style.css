@@ -6,8 +6,101 @@ body {
     font-size: 17px;
 }
 
+/* Add styles for the top bar */
+.navbar {
+    padding-left: clamp(0px, 5%, 100px);
+    position: relative;
+    background-color: #222222;
+    color: #9d9d9d;
+    min-height: 55px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.brand-title {
+    font-size: 22px;
+    padding: 0.9rem 0.8rem;
+    color: #9d9d9d;
+    text-decoration: none;
+}
+.brand-title:hover{
+    color: white;
+}
+
+.navbar-links ul{
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-links li{
+    list-style: none;
+}
+
+.navbar-links li a{
+    text-decoration: none;
+    color: #9d9d9d;
+    display: block;
+    padding:1rem;
+}
+
+.navbar-links a:hover{
+    color: white;
+}
+
+.user{
+    margin-left: auto;
+    margin-right: clamp(0px, 5%, 150px);
+}
+
+.user ul{
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+.user li{
+    list-style: none;
+}
+.user li a{
+    text-decoration: none;
+    color: #9d9d9d;
+    display: block;
+    padding: 1rem;
+}
+.user a:hover{
+    color: white;
+}
+
+.toggle-button{
+    position: absolute;
+    top: .75rem;
+    right: 1rem;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    padding-right: clamp(0px, 5%, 150px);
+}
+
+.toggle-button:hover  .bar{
+    background-color: white;
+}
+
+.toggle-button .bar{
+    height: 3px;
+    width: 100%;
+    background-color: #9d9d9d;
+    border-radius: 10px;
+}
+
 .login-container {
-    width: 500px;
+    width: clamp(200px, 60%, 500px);
     margin: 0 auto;
     padding: 40px;
     background-color: #fff;
@@ -85,97 +178,7 @@ button:hover {
     background-color: #0056b3;
 }
 
-/* Add styles for the top bar */
-.navbar {
-    padding-left: 100px;
-    position: relative;
-    background-color: #222222;
-    color: #9d9d9d;
-    min-height: 55px;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-}
 
-.brand-title {
-    font-size: 22px;
-    padding: 0.9rem 0.8rem;
-    color: #9d9d9d;
-    text-decoration: none;
-}
-.brand-title:hover{
-    color: white;
-}
-
-.navbar-links ul{
-    margin: 0;
-    padding: 0;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-}
-
-.navbar-links li{
-    list-style: none;
-}
-
-.navbar-links li a{
-    text-decoration: none;
-    color: #9d9d9d;
-    display: block;
-    padding:1rem;
-}
-
-.navbar-links a:hover{
-    color: white;
-}
-
-.user{
-    margin-left: auto;
-    margin-right: 150px;
-}
-
-.user ul{
-    margin: 0;
-    padding: 0;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-}
-.user li{
-    list-style: none;
-}
-.user li a{
-    text-decoration: none;
-    color: #9d9d9d;
-    display: block;
-    padding: 1rem;
-}
-.user a:hover{
-    color: white;
-}
-
-.toggle-button{
-    position: absolute;
-    top: .75rem;
-    right: 1rem;
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 21px;
-}
-
-.toggle-button:hover  .bar{
-    background-color: white;
-}
-
-.toggle-button .bar{
-    height: 3px;
-    width: 100%;
-    background-color: #9d9d9d;
-    border-radius: 10px;
-}
 
 @media(max-width: 1000px){
     .toggle-button{
@@ -207,54 +210,4 @@ button:hover {
 }
 
 
-
-@media (max-width: 1600px) {
-    .navbar {
-        padding-left: 80px; /* Decrease left margin for smaller screens */
-    }
-    .user{
-        margin-right: 110px;
-    }
-}
-
-
-@media (max-width: 1400px) {
-    .navbar {
-        padding-left: 50px;
-    }
-    .user{
-        margin-right: 90px;
-    }
-}
-
-
-@media (max-width: 1200px) {
-    .navbar {
-        padding-left: 20px;
-    }
-    .user{
-        margin-right: 50px;
-    }
-}
-
-@media (max-width: 1000px) {
-    .navbar {
-        padding-left: 0px;
-    }
-    .user{
-        margin-right: 0px;
-    }
-}
-
-@media (max-width: 600px) {
-    .navbar {
-        padding-left: 0px;
-    }
-    .user{
-        margin-right: 0px;
-    }
-    .login-container{
-        width: 300px;
-    }
-}
 
