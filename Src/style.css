@@ -166,6 +166,10 @@ button:hover {
     height: 21px;
 }
 
+.toggle-button:hover  .bar{
+    background-color: white;
+}
+
 .toggle-button .bar{
     height: 3px;
     width: 100%;
