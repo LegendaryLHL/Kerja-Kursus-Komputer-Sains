@@ -82,6 +82,12 @@ body {
     border-right: 4px solid transparent;
 }
 
+.fa-user-alt{    
+    text-align: center;
+    display: inline-block;
+    font-size: 12px;
+}
+
 .toggle-button{
     position: absolute;
     top: .75rem;
