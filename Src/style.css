@@ -73,7 +73,8 @@ input[type="text"]{
 button {
     width: 100%;
     padding: 10px;
-    background-color: #007BFF;
+    background-color: #337ab7;
+    font-size: 18px;
     color: #fff;
     border: none;
     border-radius: 3px;
@@ -215,7 +216,7 @@ button:hover {
 
 @media (max-width: 1400px) {
     .navbar {
-        padding-left: 50px; /* Decrease left margin for smaller screens */
+        padding-left: 50px;
     }
     .user{
         margin-right: 90px;
@@ -225,7 +226,7 @@ button:hover {
 
 @media (max-width: 1200px) {
     .navbar {
-        padding-left: 20px; /* Decrease left margin for smaller screens */
+        padding-left: 20px;
     }
     .user{
         margin-right: 50px;
@@ -234,9 +235,22 @@ button:hover {
 
 @media (max-width: 1000px) {
     .navbar {
-        padding-left: 0px; /* Decrease left margin for smaller screens */
+        padding-left: 0px;
     }
     .user{
         margin-right: 0px;
     }
 }
+
+@media (max-width: 600px) {
+    .navbar {
+        padding-left: 0px;
+    }
+    .user{
+        margin-right: 0px;
+    }
+    .login-container{
+        width: 300px;
+    }
+}
+
