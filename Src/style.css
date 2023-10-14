@@ -46,6 +46,9 @@ body {
 .navbar-links a:hover{
     color: white;
 }
+.navbar-links a:hover .caret{
+    border-top: 4px solid white;
+}
 
 .user{
     position: absolute;
@@ -64,6 +67,19 @@ body {
 
 .user a:hover{
     color: white;
+}
+.user a:hover .caret{
+    border-top: 4px solid white;
+}
+
+.caret{
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    margin-left: 2px;
+    border-top: 4px solid #9d9d9d;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
 }
 
 .toggle-button{
