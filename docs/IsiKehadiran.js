@@ -10,7 +10,6 @@ async function reverseGeocode(latitude, longitude) {
         const data = await response.json();
 
         if (data && data.display_name !== undefined || data.display_name !== null) {
-            const locationName = data.display_name;
             const locationDisplay = data.display_name +  " Latitude: " + latitude + " Longtitude: " + longitude
             return locationDisplay;
         } else {
@@ -42,31 +41,21 @@ function handleLocationError(error) {
 
 // Watch for changes in GPS location
 async function watchGPSLocation() {
-    async function getGPSLocation() {
+    if ("geolocation" in navigator) {
         try {
-            const position = await new Promise((resolve, reject) => {
-                navigator.geolocation.getCurrentPosition(resolve, reject, GeoOptions);
-            });
-            return position;
+            watchID = navigator.geolocation.watchPosition(displayGPSLocation, handleLocationError);
         } catch (error) {
-            return error;
+            handleLocationError(error);
         }
+    } else {
+        handleLocationError(new Error("Geolocation is not supported in your browser."));
     }
-
-    // Set the interval to run the geolocation search every 2 seconds
-    const searchInterval = 2000; // 2 seconds
-    setInterval(async () => {
-        const position = await getGPSLocation();
-        if (!(position instanceof Error)) {
-            displayGPSLocation(position);
-        } else {
-            handleLocationError(position);
-        }
-    }, searchInterval);
 }
 
 function stopWatchingGPSLocation() {
-    clearInterval(watchID);
+    if (watchID) {
+        navigator.geolocation.clearWatch(watchID);
+    }
 }
 
 document.addEventListener("DOMContentLoaded", function () {
