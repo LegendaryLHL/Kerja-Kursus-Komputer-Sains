@@ -8,9 +8,9 @@ async function reverseGeocode(latitude, longitude) {
     try {
         const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
         const data = await response.json();
-
+        update++;
         if (data && data.display_name !== undefined || data.display_name !== null) {
-            const locationDisplay = data.display_name + " Latitude: " + latitude + " Longtitude: " + longitude + "WatchID(debug): " + watchID;
+            const locationDisplay = data.display_name + " Latitude: " + latitude + " Longtitude: " + longitude + " Update(debug): " + update;
             return locationDisplay;
         } else {
             return "Location not found";
@@ -71,6 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("date").textContent = currentDate.getDate() + "/" + currentDate.getMonth() + "/" + currentDate.getYear();
 
     // Start watching the GPS location
+    update = 0;
     watchGPSLocation();
 
     // Handle form submission
