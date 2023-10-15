@@ -10,7 +10,7 @@ async function reverseGeocode(latitude, longitude) {
         const data = await response.json();
 
         if (data && data.display_name !== undefined || data.display_name !== null) {
-            const locationDisplay = data.display_name +  " Latitude: " + latitude + " Longtitude: " + longitude
+            const locationDisplay = data.display_name + " Latitude: " + latitude + " Longtitude: " + longitude + "WatchID(debug): " + watchID;
             return locationDisplay;
         } else {
             return "Location not found";
@@ -42,13 +42,20 @@ function handleLocationError(error) {
 // Watch for changes in GPS location
 async function watchGPSLocation() {
     if ("geolocation" in navigator) {
+        let geolocationPermission = await navigator.permissions.query({ name: 'geolocation' });
+        while (geolocationPermission.state !== "granted") {
+            // Keep checking the permission status until it's granted
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+            geolocationPermission = await navigator.permissions.query({ name: 'geolocation' });
+            handleLocationError(new Error("Tolong Buka GPS"));
+        }
         try {
             watchID = navigator.geolocation.watchPosition(displayGPSLocation, handleLocationError);
         } catch (error) {
             handleLocationError(error);
         }
     } else {
-        handleLocationError(new Error("Geolocation is not supported in your browser."));
+        handleLocationError(new Error("Geolokasi tidak disokong dalam penyemak imbas anda."));
     }
 }
 
