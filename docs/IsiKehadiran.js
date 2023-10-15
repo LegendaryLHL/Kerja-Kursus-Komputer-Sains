@@ -11,7 +11,8 @@ async function reverseGeocode(latitude, longitude) {
 
         if (data && data.display_name !== undefined || data.display_name !== null) {
             const locationName = data.display_name;
-            return locationName;
+            const locationDisplay = data.display_name +  " Latitude: " + latitude + " Longtitude: " + longitude
+            return locationDisplay;
         } else {
             return "Location not found";
         }
@@ -71,7 +72,7 @@ function stopWatchingGPSLocation() {
 document.addEventListener("DOMContentLoaded", function () {
     // Get the current date and display it
     var currentDate = new Date();
-    document.getElementById("date").textContent = currentDate.toDateString();
+    document.getElementById("date").textContent = currentDate.getDate() + "/" + currentDate.getMonth() + "/" + currentDate.getYear();
 
     // Start watching the GPS location
     watchGPSLocation();
