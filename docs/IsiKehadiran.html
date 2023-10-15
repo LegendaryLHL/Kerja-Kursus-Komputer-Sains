@@ -37,23 +37,41 @@
     </nav>
     <div class="kehadiran-container">
       <div class="info-box">
-        <p>Date: <span id="date">[Insert Date]</span></p>
-        <p>
-          GPS Location: <span id="gps-location">[Insert GPS Location]</span>
-        </p>
+        <p>Date: <span id="date"></span></p>
+        <p>GPS Location: <span id="gps-location"> Sedang cari...</span></p>
       </div>
-      <div class="input-form">
-        <form id="bullet-choice">
-          <p>Can you go to work?</p>
-          <input type="radio" name="can-go-work" value="yes" id="yes-radio" />
-          <label for="yes-radio">Yes</label>
-          <input type="radio" name="can-go-work" value="no" id="no-radio" />
-          <label for="no-radio">No</label>
+      <div class="bullet-box">
+        <form id="bullet-form">
+          <p>Adakah anda hadir untuk bekerja?</p>
+          <div class="question">
+            <input
+              type="radio"
+              name="can-go-work"
+              value="Saya boleh hadir"
+              id="yes-radio"
+            />
+            <label for="yes-radio">Saya boleh hadir</label>
+          </div>
+          <div class="question">
+            <input
+              type="radio"
+              name="can-go-work"
+              value="Saya tidak boleh hadir"
+              id="no-radio"
+            />
+            <label for="no-radio">Saya tidak boleh hadir</label>
+          </div>
         </form>
       </div>
-      <div class="reason-form">
-        <label for="reason">Reason for not going to work:</label>
-        <textarea id="reason" rows="4" cols="50"></textarea>
+      <div class="reason-box">
+        <label for="reason">Tuliskan sebab tidak hadir untuk bekerja</label>
+        <input
+          type="reason"
+          id="reason"
+          name="reason"
+          placeholder="Jawapan anda"
+          required
+        />
       </div>
       <button type="submit">Hantar</button>
     </div>

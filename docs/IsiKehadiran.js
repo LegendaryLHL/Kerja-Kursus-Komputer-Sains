@@ -1,9 +1,15 @@
+const GeoOptions = {
+    enableHighAccuracy: true,
+    maximumAge: 2000,
+    timeout: 10000,
+};
+
 async function reverseGeocode(latitude, longitude) {
     try {
         const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
         const data = await response.json();
 
-        if (data && data.display_name != undefined || data.display_name != null) {
+        if (data && data.display_name !== undefined || data.display_name !== null) {
             const locationName = data.display_name;
             return locationName;
         } else {
@@ -34,24 +40,32 @@ function handleLocationError(error) {
 }
 
 // Watch for changes in GPS location
-var watchID;
 async function watchGPSLocation() {
-    if ("geolocation" in navigator) {
+    async function getGPSLocation() {
         try {
-            watchID = navigator.geolocation.watchPosition(displayGPSLocation, handleLocationError);
+            const position = await new Promise((resolve, reject) => {
+                navigator.geolocation.getCurrentPosition(resolve, reject, GeoOptions);
+            });
+            return position;
         } catch (error) {
-            handleLocationError(error);
+            return error;
         }
-    } else {
-        handleLocationError(new Error("Geolocation is not supported in your browser."));
     }
+
+    // Set the interval to run the geolocation search every 2 seconds
+    const searchInterval = 2000; // 2 seconds
+    setInterval(async () => {
+        const position = await getGPSLocation();
+        if (!(position instanceof Error)) {
+            displayGPSLocation(position);
+        } else {
+            handleLocationError(position);
+        }
+    }, searchInterval);
 }
 
-// To stop watching GPS location (if needed)
 function stopWatchingGPSLocation() {
-    if (watchID) {
-        navigator.geolocation.clearWatch(watchID);
-    }
+    clearInterval(watchID);
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -63,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
     watchGPSLocation();
 
     // Handle form submission
-    document.getElementById("bullet-choice").addEventListener("submit", function (event) {
+    document.getElementById("bullet-form").addEventListener("submit", function (event) {
         event.preventDefault();
         // Get the selected value from the "Can Go to Work" selector
         var canGoToWork = document.querySelector('input[name="can-go-work"]:checked').value;
@@ -71,8 +85,6 @@ document.addEventListener("DOMContentLoaded", function () {
         // Get the reason for not going to work
         var reasonForNotGoing = document.getElementById("reason").value;
 
-        // You can now send this data to your server or perform further actions as needed
-        // For demonstration, we'll just log the data to the console
         console.log("Can Go to Work: " + canGoToWork);
         console.log("Reason for Not Going to Work: " + reasonForNotGoing);
     });
