@@ -5,16 +5,8 @@ document.getElementById("login-form").addEventListener("submit", function (event
     var username = document.getElementById("email").value;
     var password = document.getElementById("password").value;
 
-    // You can add your authentication logic here
-    alert("E-mel: " + username + "\nKatalaluan: " + password);
+    // Authentication logic here
+
+    // Redirect to the new page after form submission
+    window.location.href = "isikehadiran.html";
 });
-
-const toggleButton = document.getElementsByClassName('toggle-button')[0]
-const navbarLinks = document.getElementsByClassName('navbar-links')[0]
-const user = document.getElementsByClassName('user')[0]
-
-toggleButton.addEventListener('click', () => {
-    navbarLinks.classList.toggle('active')
-    user.classList.toggle('active')
-    console.log('active');
-})

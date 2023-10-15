@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" type="text/css" href="IsiKehadiran.css" />
+    <link rel="stylesheet" type="text/css" href="common.css" />
+    <title>PkjKehadiran</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="index.html" class="brand-title">PkjKehadiran</a>
+      <a href="#" class="toggle-button">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </a>
+      <div class="navbar-links">
+        <a href="#">Info <span class="caret"></span></a>
+        <a href="#">Ind</a>
+        <a href="#">Isfo</a>
+      </div>
+      <div class="user">
+        <a href="#">
+          <i class="fas fa-user-alt"></i>
+          Guest
+          <span class="caret"></span>
+        </a>
+      </div>
+    </nav>
+    <div class="kehadiran-container">
+      <div class="info-box">
+        <p>Date: <span id="date">[Insert Date]</span></p>
+        <p>
+          GPS Location: <span id="gps-location">[Insert GPS Location]</span>
+        </p>
+      </div>
+      <div class="input-form">
+        <form id="bullet-choice">
+          <p>Can you go to work?</p>
+          <input type="radio" name="can-go-work" value="yes" id="yes-radio" />
+          <label for="yes-radio">Yes</label>
+          <input type="radio" name="can-go-work" value="no" id="no-radio" />
+          <label for="no-radio">No</label>
+        </form>
+      </div>
+      <div class="reason-form">
+        <label for="reason">Reason for not going to work:</label>
+        <textarea id="reason" rows="4" cols="50"></textarea>
+      </div>
+      <button type="submit">Hantar</button>
+    </div>
+    <script src="IsiKehadiran.js"></script>
+    <script src="common.js"></script>
+  </body>
+</html>
