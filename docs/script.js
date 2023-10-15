@@ -8,5 +8,5 @@ document.getElementById("login-form").addEventListener("submit", function (event
     // Authentication logic here
 
     // Redirect to the new page after form submission
-    window.location.href = "isikehadiran.html";
+    window.location.href = "IsiKehadiran.html";
 });
