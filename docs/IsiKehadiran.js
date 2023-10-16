@@ -9,7 +9,7 @@ async function reverseGeocode(latitude, longitude) {
         const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
         const data = await response.json();
         if (data && data.display_name !== undefined || data.display_name !== null) {
-            const locationDisplay = data.display_name + " Latitude: " + latitude + " Longtitude: " + longitude + " Update(debug): " + update;
+            const locationDisplay = data.display_name + " Latitude: " + latitude + " Longtitude: " + longitude;
             return locationDisplay;
         } else {
             return "Location not found";
@@ -52,11 +52,12 @@ async function watchGPSLocation() {
         // Update geolocationPermission
         setInterval(async () => {
             geolocationPermission = await navigator.permissions.query({ name: 'geolocation' });
+            document.getElementById("date").textContent = geolocationPermission.state;
         }, 500);
 
         // Event listener to respond to changes in geolocation permission
         geolocationPermission.addEventListener('change', async () => {
-            update++;
+            document.getElementById("debug").textContent = geolocationPermission.state;
             if (geolocationPermission.state === "granted") {
                 startWatching();
             } else {
@@ -90,7 +91,6 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("date").textContent = currentDate.getDate() + "/" + currentDate.getMonth() + "/" + currentDate.getYear();
 
     // Start watching the GPS location
-    update = 0;
     watchGPSLocation();
 
     // Handle form submission
