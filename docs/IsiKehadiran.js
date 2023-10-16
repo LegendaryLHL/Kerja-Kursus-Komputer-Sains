@@ -39,7 +39,7 @@ function handleLocationError(error) {
 
 async function watchGPSLocation() {
     if ("geolocation" in navigator) {
-        const geolocationPermission = await navigator.permissions.query({ name: 'geolocation' });
+        let geolocationPermission = await navigator.permissions.query({ name: 'geolocation' });
 
         const startWatching = async () => {
             try {
@@ -49,7 +49,12 @@ async function watchGPSLocation() {
             }
         };
 
-        // Add an event listener to respond to changes in geolocation permission
+        // Update geolocationPermission
+        setInterval(async () => {
+            geolocationPermission = await navigator.permissions.query({ name: 'geolocation' });
+        }, 500);
+
+        // Event listener to respond to changes in geolocation permission
         geolocationPermission.addEventListener('change', async () => {
             update++;
             if (geolocationPermission.state === "granted") {
