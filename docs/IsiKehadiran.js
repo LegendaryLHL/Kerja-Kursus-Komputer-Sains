@@ -8,7 +8,6 @@ async function reverseGeocode(latitude, longitude) {
     try {
         const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
         const data = await response.json();
-        update++;
         if (data && data.display_name !== undefined || data.display_name !== null) {
             const locationDisplay = data.display_name + " Latitude: " + latitude + " Longtitude: " + longitude + " Update(debug): " + update;
             return locationDisplay;
@@ -19,7 +18,6 @@ async function reverseGeocode(latitude, longitude) {
         return "Error occurred during reverse geocoding" + error;
     }
 }
-
 
 // Display the updated GPS location
 function displayGPSLocation(position) {
@@ -39,25 +37,38 @@ function handleLocationError(error) {
     document.getElementById("gps-location").textContent = errorMessage;
 }
 
-// Watch for changes in GPS location
 async function watchGPSLocation() {
     if ("geolocation" in navigator) {
-        let geolocationPermission = await navigator.permissions.query({ name: 'geolocation' });
-        while (geolocationPermission.state !== "granted") {
-            // Keep checking the permission status until it's granted
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-            geolocationPermission = await navigator.permissions.query({ name: 'geolocation' });
-            handleLocationError(new Error("Tolong Buka GPS"));
-        }
-        try {
-            watchID = navigator.geolocation.watchPosition(displayGPSLocation, handleLocationError);
-        } catch (error) {
-            handleLocationError(error);
+        const geolocationPermission = await navigator.permissions.query({ name: 'geolocation' });
+
+        const startWatching = async () => {
+            try {
+                watchID = navigator.geolocation.watchPosition(displayGPSLocation, handleLocationError);
+            } catch (error) {
+                handleLocationError(error);
+            }
+        };
+
+        // Add an event listener to respond to changes in geolocation permission
+        geolocationPermission.addEventListener('change', async () => {
+            update++;
+            if (geolocationPermission.state === "granted") {
+                startWatching();
+            } else {
+                stopWatchingGPSLocation();
+                handleLocationError(new Error("Tolong buka GPS"));
+            }
+        });
+
+        // Start watching if the permission is initially granted
+        if (geolocationPermission.state === "granted") {
+            startWatching();
         }
     } else {
         handleLocationError(new Error("Geolokasi tidak disokong dalam penyemak imbas anda."));
     }
 }
+
 
 function stopWatchingGPSLocation() {
     if (watchID) {
