@@ -52,11 +52,13 @@ async function watchGPSLocation() {
         // Update geolocationPermission
         setInterval(async () => {
             geolocationPermission = await navigator.permissions.query({ name: 'geolocation' });
+            update++;
+            handleLocationError(new Error(geolocationPermission.state));
         }, 500);
 
         // Event listener to respond to changes in geolocation permission
         geolocationPermission.addEventListener('change', async () => {
-            update++;
+            console.log("changed");
             if (geolocationPermission.state === "granted") {
                 startWatching();
             } else {
