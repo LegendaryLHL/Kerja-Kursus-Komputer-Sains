@@ -33,17 +33,24 @@ function displayGPSLocation(position) {
 }
 
 function handleLocationError(error) {
-    var errorMessage = "Unable to retrieve GPS location: " + error.message;
+    var errorMessage = "ERROR " + error.message;
     document.getElementById("gps-location").textContent = errorMessage;
 }
 
+let watchID = null;
 async function watchGPSLocation() {
     if ("geolocation" in navigator) {
         let geolocationPermission = await navigator.permissions.query({ name: 'geolocation' });
 
         const startWatching = async () => {
+            if (watchID) {
+                // A watch is already active
+                return;
+            }
+
             try {
-                watchID = navigator.geolocation.watchPosition(displayGPSLocation, handleLocationError);
+                watchID = navigator.geolocation.watchPosition(displayGPSLocation, handleLocationError, GeoOptions);
+                console.log("new Watcher");
             } catch (error) {
                 handleLocationError(error);
             }
@@ -52,19 +59,13 @@ async function watchGPSLocation() {
         // Update geolocationPermission
         setInterval(async () => {
             geolocationPermission = await navigator.permissions.query({ name: 'geolocation' });
-            document.getElementById("date").textContent = geolocationPermission.state;
-        }, 500);
-
-        // Event listener to respond to changes in geolocation permission
-        geolocationPermission.addEventListener('change', async () => {
-            document.getElementById("debug").textContent = geolocationPermission.state;
             if (geolocationPermission.state === "granted") {
                 startWatching();
             } else {
                 stopWatchingGPSLocation();
                 handleLocationError(new Error("Tolong buka GPS"));
             }
-        });
+        }, 500);
 
         // Start watching if the permission is initially granted
         if (geolocationPermission.state === "granted") {
@@ -82,6 +83,7 @@ async function watchGPSLocation() {
 function stopWatchingGPSLocation() {
     if (watchID) {
         navigator.geolocation.clearWatch(watchID);
+        watchID = null;
     }
 }
 
