@@ -49,13 +49,7 @@ async function watchGPSLocation() {
             }
         };
 
-        // Update geolocationPermission
-        setInterval(async () => {
-            geolocationPermission = await navigator.permissions.query({ name: 'geolocation' });
-        }, 500);
-
-        // Event listener to respond to changes in geolocation permission
-        geolocationPermission.addEventListener('change', async () => {
+        geolocationPermission.onchange = () => {
             update++;
             if (geolocationPermission.state === "granted") {
                 startWatching();
@@ -63,11 +57,14 @@ async function watchGPSLocation() {
                 stopWatchingGPSLocation();
                 handleLocationError(new Error("Tolong buka GPS"));
             }
-        });
+        };
 
         // Start watching if the permission is initially granted
         if (geolocationPermission.state === "granted") {
             startWatching();
+        }
+        else {
+            handleLocationError(new Error("Tolong buka GPS"));
         }
     } else {
         handleLocationError(new Error("Geolokasi tidak disokong dalam penyemak imbas anda."));
