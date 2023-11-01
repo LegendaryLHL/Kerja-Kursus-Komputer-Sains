@@ -15,8 +15,43 @@
     margin-bottom: 4%;
 }
 #gps-location{
-    font-size: 15px;
+    display: block;
 }
+
+[data-tooltip] {
+    position: relative;
+}
+  
+[data-tooltip]:after {
+    font-size: 14px;
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 100%;
+    width: max-content;
+    padding: 5px;
+    background: #333;
+    color: #fff;
+    border-radius: 5px;
+    max-width: 100%;
+    white-space: normal;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  
+[data-tooltip]:hover:after {
+    visibility: visible;
+    opacity: 1;
+}
+
+[data-tooltip]:hover:after:hover {
+    visibility: hidden;
+    opacity: 1;
+}
+  
+  
 .reason-box{
     display: none;
 }

@@ -5,13 +5,14 @@ const GeoOptions = {
 };
 var latitudeTarget = 55.751244;
 var longtitudeTarget = 37.618423;
-var rangeKm = 50;
+var distanceFromTarget;
+var rangeKm = 1;
 async function reverseGeocode(latitude, longitude) {
     try {
         const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
         const data = await response.json();
         if (data && data.display_name !== undefined || data.display_name !== null) {
-            const locationDisplay = data.display_name + " Latitude: " + latitude + " Longtitude: " + longitude;
+            const locationDisplay = data.display_name;
             return locationDisplay;
         } else {
             return "Location not found";
@@ -49,8 +50,9 @@ function calculateDistanceKm(lat1, lon1, lat2, lon2) {
 // Display the updated GPS location
 function displayGPSLocation(position) {
     var latitude = position.coords.latitude;
-    var longitude = position.coords.longitude;
-    if (calculateDistanceKm(latitude, longitude, latitudeTarget, longtitudeTarget) < 5) {
+    var longtitude = position.coords.longitude;
+    distanceFromTarget = calculateDistanceKm(latitude, longtitude, latitudeTarget, longtitudeTarget)
+    if (distanceFromTarget < 5) {
         document.getElementById("gps-location").textContent = "* Lokasi GPS anda di tempat kerja";
         document.getElementById("gps-location").style.color = "green";
     }
@@ -58,18 +60,22 @@ function displayGPSLocation(position) {
         document.getElementById("gps-location").textContent = "* Lokasi GPS anda tidak di tempat kerja";
         document.getElementById("gps-location").style.color = "#d93025";
     }
-    // reverseGeocode(latitude, longitude)
-    //     .then(locationName => {
-    //         document.getElementById("gps-location").textContent = locationName;
-    //     })
-    //     .catch(error => {
-    //         handleLocationError(error);
-    //     });
+
+    // debug
+    reverseGeocode(latitudeTarget, longtitudeTarget)
+        .then(locationName => {
+            var element = document.getElementById("gps-location");
+            element.setAttribute("data-tooltip", "Jarak daripada tempat kerja iaitu " + locationName + " ialah " + Math.round(distanceFromTarget) + "Km");
+        })
+        .catch(error => {
+            handleLocationError(error);
+        });
 }
 
 function handleLocationError(error) {
     var errorMessage = "ERROR " + error.message;
     document.getElementById("gps-location").textContent = errorMessage;
+    document.getElementById("gps-location").style.color = "#d93025";
 }
 
 let watchID = null;
@@ -85,7 +91,6 @@ async function watchGPSLocation() {
 
             try {
                 watchID = navigator.geolocation.watchPosition(displayGPSLocation, handleLocationError, GeoOptions);
-                console.log("new Watcher");
             } catch (error) {
                 handleLocationError(error);
             }
