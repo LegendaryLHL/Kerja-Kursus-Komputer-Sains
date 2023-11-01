@@ -3,7 +3,9 @@ const GeoOptions = {
     maximumAge: 2000,
     timeout: 10000,
 };
-
+var latitudeTarget = 55.751244;
+var longtitudeTarget = 37.618423;
+var rangeKm = 50;
 async function reverseGeocode(latitude, longitude) {
     try {
         const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
@@ -19,17 +21,50 @@ async function reverseGeocode(latitude, longitude) {
     }
 }
 
+function calculateDistanceKm(lat1, lon1, lat2, lon2) {
+    const R = 6371; // Radius of the Earth in kilometers
+
+    // Convert latitude and longitude from degrees to radians
+    const lat1Rad = (lat1 * Math.PI) / 180;
+    const lon1Rad = (lon1 * Math.PI) / 180;
+    const lat2Rad = (lat2 * Math.PI) / 180;
+    const lon2Rad = (lon2 * Math.PI) / 180;
+
+    // Haversine formula
+    const dLat = lat2Rad - lat1Rad;
+    const dLon = lon2Rad - lon1Rad;
+
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1Rad) * Math.cos(lat2Rad) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+    const distance = R * c; // Distance in kilometers
+
+    return distance;
+}
+
 // Display the updated GPS location
 function displayGPSLocation(position) {
     var latitude = position.coords.latitude;
     var longitude = position.coords.longitude;
-    reverseGeocode(latitude, longitude)
-        .then(locationName => {
-            document.getElementById("gps-location").textContent = locationName;
-        })
-        .catch(error => {
-            handleLocationError(error);
-        });
+    if (calculateDistanceKm(latitude, longitude, latitudeTarget, longtitudeTarget) < 5) {
+        document.getElementById("gps-location").textContent = "* Lokasi GPS anda di tempat kerja";
+        document.getElementById("gps-location").style.color = "green";
+    }
+    else {
+        document.getElementById("gps-location").textContent = "* Lokasi GPS anda tidak di tempat kerja";
+        document.getElementById("gps-location").style.color = "#d93025";
+    }
+    // reverseGeocode(latitude, longitude)
+    //     .then(locationName => {
+    //         document.getElementById("gps-location").textContent = locationName;
+    //     })
+    //     .catch(error => {
+    //         handleLocationError(error);
+    //     });
 }
 
 function handleLocationError(error) {
@@ -87,24 +122,31 @@ function stopWatchingGPSLocation() {
     }
 }
 
+const noRadio = document.getElementById("no-radio");
+const yesRadio = document.getElementById("yes-radio");
+const reasonBox = document.getElementsByClassName("reason-box")[0];
+
+yesRadio.addEventListener("change", function () {
+    if (reasonBox.classList.contains("active")) {
+        reasonBox.classList.toggle("active");
+    }
+});
+
+noRadio.addEventListener("change", function () {
+    reasonBox.classList.toggle("active");
+});
+
 document.addEventListener("DOMContentLoaded", function () {
-    // Get the current date and display it
     var currentDate = new Date();
     document.getElementById("date").textContent = currentDate.getDate() + "/" + currentDate.getMonth() + "/" + currentDate.getYear();
 
-    // Start watching the GPS location
     watchGPSLocation();
 
-    // Handle form submission
-    document.getElementById("bullet-form").addEventListener("submit", function (event) {
+    document.getElementById("kehadiran-form").addEventListener("submit", function (event) {
         event.preventDefault();
-        // Get the selected value from the "Can Go to Work" selector
         var canGoToWork = document.querySelector('input[name="can-go-work"]:checked').value;
-
-        // Get the reason for not going to work
         var reasonForNotGoing = document.getElementById("reason").value;
 
-        console.log("Can Go to Work: " + canGoToWork);
-        console.log("Reason for Not Going to Work: " + reasonForNotGoing);
+        alert(canGoToWork + "\n " + reasonForNotGoing)
     });
 });

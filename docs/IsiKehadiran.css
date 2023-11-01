@@ -14,6 +14,19 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 4%;
 }
+#gps-location{
+    font-size: 15px;
+}
+.reason-box{
+    display: none;
+}
+.reason-box.active{
+    display: block;
+}
+.date-box{
+    font-size: 25px;
+    font-weight: bold;
+}
 
 
 button {

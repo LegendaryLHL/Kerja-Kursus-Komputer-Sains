@@ -35,46 +35,49 @@
         </a>
       </div>
     </nav>
-    <div class="kehadiran-container">
-      <div class="info-box">
-        <p>Date: <span id="date"></span></p>
-        <p>GPS Location: <span id="gps-location">Sedang cari...</span></p>
+    <form id="kehadiran-form">
+      <div class="kehadiran-container">
+        <div class="info-box">
+          <p class="date-box">Tarikh: <span id="date"></span></p>
+          <p><span id="gps-location">Sedang cari GPS...</span></p>
+        </div>
+        <div class="bullet-box">
+          <form id="bullet-form">
+            <p>Adakah anda hadir untuk bekerja?</p>
+            <div class="question">
+              <input
+                type="radio"
+                name="can-go-work"
+                value="Saya boleh hadir"
+                id="yes-radio"
+                required
+              />
+              <label for="yes-radio">Saya boleh hadir</label>
+            </div>
+            <div class="question">
+              <input
+                type="radio"
+                name="can-go-work"
+                value="Saya tidak boleh hadir"
+                id="no-radio"
+                required
+              />
+              <label for="no-radio">Saya tidak boleh hadir</label>
+            </div>
+          </form>
+        </div>
+        <div class="reason-box">
+          <label for="reason">Tuliskan sebab tidak hadir untuk bekerja</label>
+          <input
+            type="reason"
+            id="reason"
+            name="reason"
+            placeholder="Jawapan anda"
+          />
+        </div>
+        <button type="submit">Hantar</button>
       </div>
-      <div class="bullet-box">
-        <form id="bullet-form">
-          <p>Adakah anda hadir untuk bekerja?</p>
-          <div class="question">
-            <input
-              type="radio"
-              name="can-go-work"
-              value="Saya boleh hadir"
-              id="yes-radio"
-            />
-            <label for="yes-radio">Saya boleh hadir</label>
-          </div>
-          <div class="question">
-            <input
-              type="radio"
-              name="can-go-work"
-              value="Saya tidak boleh hadir"
-              id="no-radio"
-            />
-            <label for="no-radio">Saya tidak boleh hadir</label>
-          </div>
-        </form>
-      </div>
-      <div class="reason-box">
-        <label for="reason">Tuliskan sebab tidak hadir untuk bekerja</label>
-        <input
-          type="reason"
-          id="reason"
-          name="reason"
-          placeholder="Jawapan anda"
-          required
-        />
-      </div>
-      <button type="submit">Hantar</button>
-    </div>
+    </form>
     <script src="IsiKehadiran.js"></script>
     <script src="common.js"></script>
   </body>
