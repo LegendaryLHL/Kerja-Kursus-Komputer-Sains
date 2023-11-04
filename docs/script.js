@@ -47,3 +47,39 @@ content.addEventListener("mouseleave", function () {
         content.style.display = "none";
     }, 100);
 });
+
+//user
+var ubutton = document.getElementById("user-button");
+var ucontent = document.getElementById("user-content");
+var uhideTimeout;
+
+var uisMouseOverContent = false;
+
+ubutton.addEventListener("mouseenter", function () {
+    clearTimeout(uhideTimeout);
+    ucontent.style.display = "block";
+});
+
+ubutton.addEventListener("mouseleave", function () {
+    if (uisMouseOverContent) {
+        uisMouseOverContent = false;
+        uhideTimeout = setTimeout(function () {
+            ucontent.style.display = "none";
+        }, 100);
+    } else {
+        uhideTimeout = setTimeout(function () {
+            ucontent.style.display = "none";
+        }, 100);
+    }
+});
+
+ucontent.addEventListener("mouseenter", function () {
+    clearTimeout(uhideTimeout);
+    uisMouseOverContent = true;
+});
+ucontent.addEventListener("mouseleave", function () {
+    uisMouseOverContent = false;
+    uhideTimeout = setTimeout(function () {
+        ucontent.style.display = "none";
+    }, 100);
+});

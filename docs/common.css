@@ -94,6 +94,23 @@ body {
     border-top: 4px solid white;
 }
 
+#user-content{
+    position:absolute;
+    top: 100%;
+    display: none;
+    background-color: #222222;
+    color: #9d9d9d;
+}
+
+#user-content a{
+    padding: 0.4rem;
+    font-size: 15px;
+}
+
+#user-content a:hover{
+    color: white;
+}
+
 .caret{
     display: inline-block;
     position: relative;
