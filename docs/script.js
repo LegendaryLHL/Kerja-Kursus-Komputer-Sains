@@ -10,11 +10,40 @@ document.getElementById("login-form").addEventListener("submit", function (event
     // Redirect to the new page after form submission
     window.location.href = "IsiKehadiran.html";
 });
-document.getElementById("infoExpandButton").addEventListener("click", function () {
-    var content = document.getElementById("infoExpandContent");
-    if (content.style.display === "none" || content.style.display === "") {
-        content.style.display = "block";
+
+
+//info
+var button = document.getElementById("info-button");
+var content = document.getElementById("info-content");
+var hideTimeout;
+
+var isMouseOverContent = false;
+
+button.addEventListener("mouseenter", function () {
+    clearTimeout(hideTimeout);
+    content.style.display = "block";
+});
+
+button.addEventListener("mouseleave", function () {
+    if (isMouseOverContent) {
+        isMouseOverContent = false;
+        hideTimeout = setTimeout(function () {
+            content.style.display = "none";
+        }, 100);
     } else {
-        content.style.display = "none";
+        hideTimeout = setTimeout(function () {
+            content.style.display = "none";
+        }, 100);
     }
+});
+
+content.addEventListener("mouseenter", function () {
+    clearTimeout(hideTimeout);
+    isMouseOverContent = true;
+});
+content.addEventListener("mouseleave", function () {
+    isMouseOverContent = false;
+    hideTimeout = setTimeout(function () {
+        content.style.display = "none";
+    }, 100);
 });

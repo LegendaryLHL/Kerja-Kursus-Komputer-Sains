@@ -55,20 +55,20 @@ body {
     color: white;
 }
 
-#infoExpandButton{
-    position: relative;
-}
-
-#infoExpandContent {
-    display: none;
-    position: absolute;
+#info-content {
+    position:absolute;
     top: 100%;
-    left: 0;
+    display: none;
     background-color: #222222;
     color: #9d9d9d;
 }
 
-#infoExpandContent:hover{
+#info-content a{
+    padding: 0.4rem;
+    font-size: 15px;
+}
+
+#info-content a:hover{
     color: white;
 }
 
