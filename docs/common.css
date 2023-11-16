@@ -55,7 +55,7 @@ body {
     color: white;
 }
 
-#info-content {
+.content{
     position:absolute;
     top: 100%;
     display: none;
@@ -64,7 +64,7 @@ body {
 }
 
 #info-content a{
-    padding: 0.4rem;
+    padding: 0.5rem;
     font-size: 15px;
 }
 
@@ -94,16 +94,9 @@ body {
     border-top: 4px solid white;
 }
 
-#user-content{
-    position:absolute;
-    top: 100%;
-    display: none;
-    background-color: #222222;
-    color: #9d9d9d;
-}
 
 #user-content a{
-    padding: 0.4rem;
+    padding: 0.5rem;
     font-size: 15px;
 }
 
@@ -164,6 +157,17 @@ body {
         margin-left: -100px;
         padding-left: calc(100px + 1rem);
         width: 1000px;
+    }
+
+    #info-content{
+        z-index: 1;
+        top: auto;
+    }
+
+    .content #selected {
+        margin-left: 0px;
+        padding-left: auto;
+        width: auto;
     }
 
     .user{

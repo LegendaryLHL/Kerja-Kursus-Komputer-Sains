@@ -61,10 +61,10 @@ function displayGPSLocation(position) {
         document.getElementById("gps-location").style.color = "#d93025";
     }
 
-    reverseGeocode(latitudeTarget, longtitudeTarget)
+    reverseGeocode(latitude, longtitude)
         .then(locationName => {
             var element = document.getElementById("gps-location");
-            element.setAttribute("data-tooltip", "Jarak daripada tempat kerja iaitu " + locationName + " ialah " + Math.round(distanceFromTarget) + "Km");
+            element.setAttribute("data-tooltip", "Jarak daripada tempat kerja dari " + locationName + " ialah: " + Math.round(distanceFromTarget) + "Km");
         })
         .catch(error => {
             handleLocationError(error);
