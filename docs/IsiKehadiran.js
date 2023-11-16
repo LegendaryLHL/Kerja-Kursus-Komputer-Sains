@@ -61,7 +61,6 @@ function displayGPSLocation(position) {
         document.getElementById("gps-location").style.color = "#d93025";
     }
 
-    // debug
     reverseGeocode(latitudeTarget, longtitudeTarget)
         .then(locationName => {
             var element = document.getElementById("gps-location");
@@ -71,6 +70,7 @@ function displayGPSLocation(position) {
             handleLocationError(error);
         });
 }
+
 
 function handleLocationError(error) {
     var errorMessage = "ERROR " + error.message;

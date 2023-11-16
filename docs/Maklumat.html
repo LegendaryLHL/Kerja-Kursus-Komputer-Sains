@@ -10,7 +10,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="Maklumat.css" />
     <link rel="stylesheet" type="text/css" href="common.css" />
     <title>PkjKehadiran</title>
   </head>
@@ -50,26 +50,10 @@
       </div>
     </nav>
 
-    <div class="login-container">
-      <h2>Log Masuk</h2>
-      <form id="login-form">
-        <label for="ic-number">Nombor Kad Pengenalan</label>
-        <input type="text" id="ic-number" name="ic-number" required />
-
-        <label for="password">Katalaluan</label>
-        <input type="password" id="password" name="password" required />
-
-        <a href="LupaKatalaluan.html">Lupa Katalaluan?</a>
-
-        <div class="remember-me">
-          <input type="checkbox" id="remember-me" name="remember-me" />
-          <label for="remember-me">Ingat saya di komputer ini</label>
-        </div>
-
-        <button type="submit">Log Masuk</button>
-      </form>
+    <div class="container">
+      <p>Tempat kerja adalah di: <span id="gps-location"></span></p>
     </div>
-    <script src="script.js"></script>
+    <script src="Maklumat.js"></script>
     <script src="common.js"></script>
   </body>
 </html>
