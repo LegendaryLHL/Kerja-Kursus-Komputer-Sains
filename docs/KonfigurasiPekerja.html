@@ -11,6 +11,7 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" type="text/css" href="common.css" />
+    <link rel="stylesheet" type="text/css" href="KonfigurasiPekerja.css" />
     <title>PkjKehadiran</title>
   </head>
   <body>
@@ -49,7 +50,58 @@
       </div>
     </nav>
 
-    <div class="container"></div>
+    <div class="container">
+      <div id="search-container">
+        <input
+          type="text"
+          id="searchInput"
+          onkeyup="searchGrid()"
+          placeholder="Cari..."
+        />
+        <div id="search-box">
+          <span><i class="fas fa-search fa-fw"></i></span>
+        </div>
+      </div>
+      <div class="worker-grid">
+        <button class="add-worker-button">
+          <i class="fas fa-plus"></i>
+          <p>Tambah Pekerja</p>
+        </button>
+        <div class="worker-card">
+          <p class="worker-name">John Doe</p>
+          <button class="remove-button">Keluarkan</button>
+        </div>
+        <div class="worker-card">
+          <p class="worker-name">Jake</p>
+          <button class="remove-button">Keluarkan</button>
+        </div>
+        <div class="worker-card">
+          <p class="worker-name">Joe Biden</p>
+          <button class="remove-button">Keluarkan</button>
+        </div>
+        <div class="worker-card">
+          <p class="worker-name">Adolf Hitler</p>
+          <button class="remove-button">Keluarkan</button>
+        </div>
+        <div class="worker-card">
+          <p class="worker-name">Elon Musk</p>
+          <button class="remove-button">Keluarkan</button>
+        </div>
+        <div class="worker-card">
+          <p class="worker-name">Jake</p>
+          <button class="remove-button">Keluarkan</button>
+        </div>
+        <div class="worker-card">
+          <p class="worker-name">Jake</p>
+          <button class="remove-button">Keluarkan</button>
+        </div>
+        <div class="worker-card">
+          <p class="worker-name">Jake</p>
+          <button class="remove-button">Keluarkan</button>
+        </div>
+      </div>
+    </div>
     <script src="common.js"></script>
+    <script src="KonfigurasiPekerja.js"></script>
   </body>
 </html>
