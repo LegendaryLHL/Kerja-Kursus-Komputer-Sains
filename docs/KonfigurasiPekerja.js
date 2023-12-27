@@ -38,7 +38,10 @@ document.addEventListener('DOMContentLoaded', function () {
     addButton.addEventListener('click', handleAddButtonClick);
 
     function handleAddButtonClick(event) {
-        alert('Add worker button clicked!');
+        const workersContainer = document.getElementById("workers-container");
+        const addWorkerForm = document.getElementById("add-worker-form");
+        workersContainer.style.display = "none";
+        addWorkerForm.style.display = "block";
     }
 });
 

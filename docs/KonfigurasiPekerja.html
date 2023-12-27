@@ -51,55 +51,90 @@
     </nav>
 
     <div class="container">
-      <div id="search-container">
-        <input
-          type="text"
-          id="searchInput"
-          onkeyup="searchGrid()"
-          placeholder="Cari..."
-        />
-        <div id="search-box">
-          <span><i class="fas fa-search fa-fw"></i></span>
+      <div id="workers-container">
+        <div id="search-container">
+          <input
+            type="text"
+            id="searchInput"
+            onkeyup="searchGrid()"
+            placeholder="Cari..."
+          />
+          <div id="search-box">
+            <span><i class="fas fa-search fa-fw"></i></span>
+          </div>
+        </div>
+        <div class="worker-grid">
+          <button class="add-worker-button">
+            <i class="fas fa-plus"></i>
+            <p>Tambah Pekerja</p>
+          </button>
+          <div class="worker-card">
+            <p class="worker-name">John Doe</p>
+            <button class="remove-button">Keluarkan</button>
+          </div>
+          <div class="worker-card">
+            <p class="worker-name">Jake</p>
+            <button class="remove-button">Keluarkan</button>
+          </div>
+          <div class="worker-card">
+            <p class="worker-name">Joe Biden</p>
+            <button class="remove-button">Keluarkan</button>
+          </div>
+          <div class="worker-card">
+            <p class="worker-name">Adolf Hitler</p>
+            <button class="remove-button">Keluarkan</button>
+          </div>
+          <div class="worker-card">
+            <p class="worker-name">Elon Musk</p>
+            <button class="remove-button">Keluarkan</button>
+          </div>
+          <div class="worker-card">
+            <p class="worker-name">Jake</p>
+            <button class="remove-button">Keluarkan</button>
+          </div>
+          <div class="worker-card">
+            <p class="worker-name">Jake</p>
+            <button class="remove-button">Keluarkan</button>
+          </div>
+          <div class="worker-card">
+            <p class="worker-name">Jake</p>
+            <button class="remove-button">Keluarkan</button>
+          </div>
         </div>
       </div>
-      <div class="worker-grid">
-        <button class="add-worker-button">
-          <i class="fas fa-plus"></i>
-          <p>Tambah Pekerja</p>
-        </button>
-        <div class="worker-card">
-          <p class="worker-name">John Doe</p>
-          <button class="remove-button">Keluarkan</button>
+      <form id="add-worker-form">
+        <div class="add-worker-container">
+          <div class="info-box">
+            <p class="title-box">Tambah Pekerja</span></p>
+          </div>
+          <div class="form-box">
+            <form id="form-form">
+              <label for="nama">Nama</label>
+              <input
+                type="nama"
+                id="nama"
+                name="nama"
+                placeholder="Jawapan anda"
+              />
+              <label for="nombor-kad-pengenalan">Nombor Kad Pengenalan</label>
+              <input
+                type="nombor-kad-pengenalan"
+                id="nombor-kad-pengenalan"
+                name="nombor-kad-pengenalan"
+                placeholder="Jawapan anda"
+              />
+              <label for="kata-laluan">Kata Laluan</label>
+              <input
+                type="kata-laluan"
+                id="kata-laluan"
+                name="kata-laluan"
+                placeholder="Jawapan anda"
+              />
+            </form>
+          </div>
+          <button id="submit-button" type="submit">Hantar</button>
         </div>
-        <div class="worker-card">
-          <p class="worker-name">Jake</p>
-          <button class="remove-button">Keluarkan</button>
-        </div>
-        <div class="worker-card">
-          <p class="worker-name">Joe Biden</p>
-          <button class="remove-button">Keluarkan</button>
-        </div>
-        <div class="worker-card">
-          <p class="worker-name">Adolf Hitler</p>
-          <button class="remove-button">Keluarkan</button>
-        </div>
-        <div class="worker-card">
-          <p class="worker-name">Elon Musk</p>
-          <button class="remove-button">Keluarkan</button>
-        </div>
-        <div class="worker-card">
-          <p class="worker-name">Jake</p>
-          <button class="remove-button">Keluarkan</button>
-        </div>
-        <div class="worker-card">
-          <p class="worker-name">Jake</p>
-          <button class="remove-button">Keluarkan</button>
-        </div>
-        <div class="worker-card">
-          <p class="worker-name">Jake</p>
-          <button class="remove-button">Keluarkan</button>
-        </div>
-      </div>
+      </form>
     </div>
     <script src="common.js"></script>
     <script src="KonfigurasiPekerja.js"></script>

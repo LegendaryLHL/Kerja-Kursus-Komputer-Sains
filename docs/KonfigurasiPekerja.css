@@ -83,3 +83,64 @@ input[type="text"] {
     display: inline-block;
 }
   
+#add-worker-form{
+    display: none;
+    width: calc(clamp(200px, 60%, 500px) + 80px);
+    margin: 0 auto;
+    flex-direction: column;
+}
+
+
+.info-box, .form-box, .reason-box{
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 4%;
+}
+.title-box{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#submit-button {
+    width: 80px;
+    padding: 10px;
+    background-color: #337ab7;
+    font-size: 18px;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#submit-button:hover {
+    background-color: #0056b3;
+}
+
+input[type="nama"], input[type="nombor-kad-pengenalan"] {
+    width: calc(100% - 12px);
+    border: none;
+    border-bottom: 1px solid #9d9d9d;
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 35px;
+    font-size: 14px;
+}
+input[type="kata-laluan"]{
+    
+    width: calc(100% - 12px);
+    border: none;
+    border-bottom: 1px solid #9d9d9d;
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 14px; 
+}
+
+input[type="nama"]:focus, input[type="nombor-kad-pengenalan"]:focus, input[type="kata-laluan"]:focus {
+    outline: none;
+    border-bottom: 2px solid #0056b3;
+}
