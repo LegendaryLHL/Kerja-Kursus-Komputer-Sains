@@ -82,7 +82,7 @@ input[type="text"] {
     cursor: pointer;
     display: inline-block;
 }
-  
+
 #add-worker-form{
     display: none;
     width: calc(clamp(200px, 60%, 500px) + 80px);
@@ -91,7 +91,7 @@ input[type="text"] {
 }
 
 
-.info-box, .form-box, .reason-box{
+.info-box, .form-box{
     flex: 1;
     padding: 20px;
     background-color: #fff;
@@ -120,7 +120,7 @@ input[type="text"] {
     background-color: #0056b3;
 }
 
-input[type="nama"], input[type="nombor-kad-pengenalan"] {
+input[type="name"], input[type="ic-number"] {
     width: calc(100% - 12px);
     border: none;
     border-bottom: 1px solid #9d9d9d;
@@ -129,7 +129,7 @@ input[type="nama"], input[type="nombor-kad-pengenalan"] {
     margin-bottom: 35px;
     font-size: 14px;
 }
-input[type="kata-laluan"]{
+input[type="password"]{
     
     width: calc(100% - 12px);
     border: none;
@@ -140,7 +140,7 @@ input[type="kata-laluan"]{
     font-size: 14px; 
 }
 
-input[type="nama"]:focus, input[type="nombor-kad-pengenalan"]:focus, input[type="kata-laluan"]:focus {
+input[type="name"]:focus, input[type="ic-numbe"]:focus, input[type="password"]:focus {
     outline: none;
     border-bottom: 2px solid #0056b3;
 }
