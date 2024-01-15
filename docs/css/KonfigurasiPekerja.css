@@ -144,3 +144,9 @@ input[type="name"]:focus, input[type="ic-numbe"]:focus, input[type="password"]:f
     outline: none;
     border-bottom: 2px solid #0056b3;
 }
+
+.error{
+    color: #d93025;
+    font-size: 16px;
+    margin-top: 5px;
+}
