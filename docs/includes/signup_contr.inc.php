@@ -17,3 +17,8 @@ function isNameExist(object $pdo, string $name)
     }
     return false;
 }
+
+function createUser(object $pdo, string $name, string $ic_number, string $password)
+{
+    setUser($pdo, $name, $ic_number, $password);
+}

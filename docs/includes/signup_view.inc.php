@@ -25,3 +25,15 @@ function checkSignupErrors()
         unset($_SESSION['errors_signup']);
     }
 }
+
+
+function printAllPekerja(object $pdo)
+{
+    foreach (getAllPekerja($pdo) as $pekerja) {
+        echo
+        '<div class="worker-card">
+          <p class="worker-name">' . htmlspecialchars($pekerja['nama_pekerja']) . '</p>
+          <button class="remove-button">Keluarkan</button>
+        </div>';
+    }
+}

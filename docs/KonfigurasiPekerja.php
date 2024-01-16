@@ -1,5 +1,6 @@
 <?php
 require_once 'includes/config_session.inc.php';
+require_once 'includes/signup_model.inc.php';
 require_once 'includes/signup_view.inc.php';
 ?>
 
@@ -63,38 +64,14 @@ require_once 'includes/signup_view.inc.php';
           <i class="fas fa-plus"></i>
           Tambah Pekerja
         </button>
-        <div class="worker-card">
-          <p class="worker-name">John Doe</p>
-          <button class="remove-button">Keluarkan</button>
-        </div>
-        <div class="worker-card">
-          <p class="worker-name">Jake</p>
-          <button class="remove-button">Keluarkan</button>
-        </div>
-        <div class="worker-card">
-          <p class="worker-name">Joe Biden</p>
-          <button class="remove-button">Keluarkan</button>
-        </div>
-        <div class="worker-card">
-          <p class="worker-name">Adolf Hitler</p>
-          <button class="remove-button">Keluarkan</button>
-        </div>
-        <div class="worker-card">
-          <p class="worker-name">Elon Musk</p>
-          <button class="remove-button">Keluarkan</button>
-        </div>
-        <div class="worker-card">
-          <p class="worker-name">Jake</p>
-          <button class="remove-button">Keluarkan</button>
-        </div>
-        <div class="worker-card">
-          <p class="worker-name">Jake</p>
-          <button class="remove-button">Keluarkan</button>
-        </div>
-        <div class="worker-card">
-          <p class="worker-name">Jake</p>
-          <button class="remove-button">Keluarkan</button>
-        </div>
+        <?php
+        try {
+          require_once 'includes/dbh.inc.php';
+          printAllPekerja($pdo);
+        } catch (PDOException $e) {
+          die("Signup db failed: " . $e->getMessage());
+        }
+        ?>
       </div>
     </div>
     <form action="includes/signup.inc.php" method="post" id="add-worker-form">
@@ -120,6 +97,7 @@ require_once 'includes/signup_view.inc.php';
       </div>
     </form>
   </div>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script src="javascript/common.js"></script>
   <script src="javascript/KonfigurasiPekerja.js"></script>
 </body>

@@ -20,17 +20,26 @@ function searchGrid() {
 
 function handleRemoveButtonClick(event) {
     const card = event.currentTarget.closest('.worker-card');
+    const workerName = card.querySelector('.worker-name').innerText;
 
-    const name = card.querySelector('.worker-name').innerText;
-
-    alert('Clicked row content: Name - ' + name);
+    $.ajax({
+        type: "POST",
+        url: "includes/signup_model.inc.php",
+        data: { action: "removePekerja", nama_pekerja: workerName },
+        success: function (response) {
+            card.style.display = "none";
+        }
+    });
 }
+
 
 const removeButtons = document.getElementsByClassName('remove-button');
 for (let i = 0; i < removeButtons.length; i++) {
     removeButtons[i].addEventListener('click', handleRemoveButtonClick);
     removeButtons[i].style.cursor = 'pointer';
 }
+
+
 
 document.addEventListener('DOMContentLoaded', function () {
     const addButton = document.querySelector('.add-worker-button');

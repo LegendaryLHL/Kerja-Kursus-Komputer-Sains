@@ -25,6 +25,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if ($errors) {
             $_SESSION["errors_signup"] = $errors;
             header("Location: ../konfigurasiPekerja.php");
+        } else {
+            createUser($pdo, $name, $ic_number, $password);
+            header("Location: ../konfigurasiPekerja.php");
         }
     } catch (PDOException $e) {
         die("Signup db failed: " . $e->getMessage());
