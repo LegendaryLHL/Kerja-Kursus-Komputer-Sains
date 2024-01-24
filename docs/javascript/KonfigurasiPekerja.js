@@ -24,7 +24,7 @@ function handleRemoveButtonClick(event) {
 
     $.ajax({
         type: "POST",
-        url: "includes/signup_model.inc.php",
+        url: "../includes/signup_model.inc.php",
         data: { action: "removePekerja", nama_pekerja: workerName },
         success: function (response) {
             card.style.display = "none";
@@ -47,10 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
     addButton.addEventListener('click', handleAddButtonClick);
 
     function handleAddButtonClick(event) {
-        const workersContainer = document.getElementById("workers-container");
-        const addWorkerForm = document.getElementById("add-worker-form");
-        workersContainer.style.display = "none";
-        addWorkerForm.style.display = "block";
+        window.location.href = window.location.origin + window.location.pathname.replace(/\/$/, '') + '/' + "TambahPekerja.php";
     }
 });
 

@@ -1,0 +1,78 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+#add-worker-form{
+    width: calc(clamp(200px, 60%, 500px) + 80px);
+    margin: 0 auto;
+    flex-direction: column;
+}
+
+
+.info-box, .form-box{
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.info-box{
+    margin-bottom: 4%;
+}
+.title-box{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#submit-button {
+    width: 80px;
+    padding: 10px;
+    background-color: #337ab7;
+    font-size: 18px;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 4%;
+}
+
+#submit-button:hover {
+    background-color: #0056b3;
+}
+
+input[type="name"], input[type="ic-number"] {
+    width: calc(100% - 12px);
+    border: none;
+    border-bottom: 1px solid #9d9d9d;
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 35px;
+    font-size: 14px;
+}
+input[type="password"]{
+    
+    width: calc(100% - 12px);
+    border: none;
+    border-bottom: 1px solid #9d9d9d;
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 14px; 
+}
+
+input[type="name"]:focus, input[type="ic-numbe"]:focus, input[type="password"]:focus {
+    outline: none;
+    border-bottom: 2px solid #0056b3;
+}
+
+.error{
+    color: #d93025;
+    font-size: 16px;
+    margin-top: 1%;
+    margin-bottom: 0px;
+}
