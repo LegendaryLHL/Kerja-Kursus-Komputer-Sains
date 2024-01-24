@@ -19,6 +19,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (isNameExist($pdo, $name)) {
             $errors["name_taken"] = "Nama sudah didaftar, guna nama lain!";
         }
+        if (!preg_match('/^[0-9]+$/', $ic_number)) {
+            $errors["invalid_ic"] = "Nombor kad pengenalan hanya boleh guna nombor sahaja!";
+        }
 
         require_once 'config_session.inc.php';
 

@@ -1,5 +1,4 @@
 <?php
-require_once '../includes/config_session.inc.php';
 require_once '../includes/signup_model.inc.php';
 require_once '../includes/signup_view.inc.php';
 ?>
@@ -33,7 +32,7 @@ require_once '../includes/signup_view.inc.php';
           <span class="caret"></span>
         </a>
         <div id="info-content" class="content">
-          <a href="Maklumat.html">Maklumat</a>
+          <a href="../Maklumat.html">Maklumat</a>
           <a href="#">Bantuan</a>
         </div>
       </div>
