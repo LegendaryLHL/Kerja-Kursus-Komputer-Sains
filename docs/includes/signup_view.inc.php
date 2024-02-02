@@ -24,7 +24,6 @@ function printAllPekerja(object $pdo)
         echo
         '<div class="worker-card">
           <p class="worker-name">' . htmlspecialchars($pekerja['nama_pekerja']) . '</p>
-          <button class="remove-button">Keluarkan</button>
         </div>';
     }
 }

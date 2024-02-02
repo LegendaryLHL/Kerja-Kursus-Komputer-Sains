@@ -61,7 +61,7 @@ require_once '../includes/signup_view.inc.php';
                         <label for="nama">Nama</label>
                         <input type="name" id="nama" name="name" placeholder="Jawapan anda" />
                         <label for="nombor-kad-pengenalan">Nombor Kad Pengenalan</label>
-                        <input type="ic-number" id="nombor-kad-pengenalan" name="ic-number" placeholder="Jawapan anda" />
+                        <input type="number" id="nombor-kad-pengenalan" name="ic-number" placeholder="Jawapan anda" />
                         <label for="kata-laluan">Kata Laluan</label>
                         <input type="password" id="kata-laluan" name="password" placeholder="Jawapan anda" />
                     </div>

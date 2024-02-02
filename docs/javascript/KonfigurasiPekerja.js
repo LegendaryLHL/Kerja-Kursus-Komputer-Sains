@@ -18,25 +18,10 @@ function searchGrid() {
     }
 }
 
-function handleRemoveButtonClick(event) {
-    const card = event.currentTarget.closest('.worker-card');
-    const workerName = card.querySelector('.worker-name').innerText;
-
-    $.ajax({
-        type: "POST",
-        url: "../includes/signup_model.inc.php",
-        data: { action: "removePekerja", nama_pekerja: workerName },
-        success: function (response) {
-            card.style.display = "none";
-        }
-    });
-}
-
-
-const removeButtons = document.getElementsByClassName('remove-button');
-for (let i = 0; i < removeButtons.length; i++) {
-    removeButtons[i].addEventListener('click', handleRemoveButtonClick);
-    removeButtons[i].style.cursor = 'pointer';
+const workerCards = document.getElementsByClassName('worker-card');
+for (let i = 0; i < workerCards.length; i++) {
+    workerCards[i].addEventListener('click', handleWorkerCardClick);
+    workerCards[i].style.cursor = 'pointer';
 }
 
 
@@ -50,4 +35,16 @@ document.addEventListener('DOMContentLoaded', function () {
         window.location.href = window.location.origin + window.location.pathname.replace(/\/$/, '') + '/' + "TambahPekerja.php";
     }
 });
+
+function handleWorkerCardClick(event) {
+    const card = event.currentTarget.closest('.worker-card');
+    const workerName = card.querySelector('.worker-name').innerText;
+
+    const encodedWorkerName = encodeURIComponent(workerName);
+
+    const url = `../Pekerja.php?name=${encodedWorkerName}`;
+
+    window.location.href = url;
+}
+
 
