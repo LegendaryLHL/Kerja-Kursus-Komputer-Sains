@@ -19,16 +19,84 @@ input[type="text"] {
 }
 
 #month{
+    text-align: left;
+    width: 228px;
     font-size: 20px;
     margin: 0;
     margin-left: 1%;
 }
 
-#title-row div{
-    text-align: left;
+#month, .selector, .button{
+    margin-right: 3%;
+}
+
+.calendar {
+    font-size: 25px;
+    text-align: center;
+}
+
+.button button{
+    font-size: 16px;
+    display: inline-block;
+    cursor: pointer;
+    width: 80px;
+    height: 30px;
+    background-color: #337ab7;
+    color: white;
+    border: none; 
+    border-radius: 5px;
+    text-align: center; 
+    text-decoration: none;
+}
+
+.button button:hover {
+    background-color: #0056b3;
+}
+
+.selector select {
+    padding: 5px;
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.selector select:focus {
+    outline: none;
+    border-color: #66afe9;
+    box-shadow: 0 0 3px #337ab7;
+}
+
+#title-container{
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+#left-container{
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+#search{
+    display: flex;
+}
+
+#search-box {
+    border-radius: 4px;
+    color: white;
+    background-color: #337ab7;
+    margin: 0;
+    margin-right: 6px;
+    height: 28px;
+    width: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 2px;
+    padding-right: 2px;
 }
 
 tr:nth-child(even) {
@@ -47,23 +115,8 @@ tr td:nth-child(2), th:nth-child(2){
     text-align: left;
 }
 
-tr td:nth-child(2){
-    color: #337ab7
-}
-
 .data-row:hover {
     background-color: #f0f0f0;
     font-weight: bold;
-}
-
-#search-box {
-    border-radius: 4px;
-    color: white;
-    background-color: #337ab7;
-    margin: 0;
-    margin-right: 6px;
-    height: 28px;
-    width: 28px;
-    padding-left: 8px;
 }
 

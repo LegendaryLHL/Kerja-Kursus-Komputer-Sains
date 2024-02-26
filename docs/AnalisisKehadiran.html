@@ -54,8 +54,27 @@
       <tr>
         <th colspan="3" id="title-row">
           <div id="title-container">
-            <div id="month">Bulan Februari</div>
-            <div>
+            <div id="left-container">
+              <div id="month">Bulan <span id="month-value">January</span></div>
+              <div class="selector">
+                <select id="selector-dropdown">
+                  <option value="day">Day</option>
+                  <option value="month">Month</option>
+                  <option value="year">Year</option>
+                </select>
+              </div>
+              <div class="button left" onclick="moveCalendar(-1)">
+                <button>Previous</button>
+              </div>
+              <div class="button right" onclick="moveCalendar(1)">
+                <button>Next</button>
+              </div>
+              <div class="calendar" id="calendar">
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+              </div>
+            </div>
+
+            <div id="search">
               <input
                 type="text"
                 id="searchInput"

@@ -1,4 +1,4 @@
-.kehadiran-container{
+#kehadiran-form{
     width: calc(clamp(200px, 60%, 500px) + 80px);
     margin: 0 auto;
     display: flex;
@@ -91,7 +91,7 @@ input[type="reason"] {
 
 input[type="reason"]:focus {
     outline: none;
-    border-bottom: 2px solid #0056b3;
+    border-bottom: 2px solid #337ab7;
 }
 
 .question{

@@ -20,12 +20,11 @@ function searchTable() {
 
 function handleRowClick(event) {
     const rowData = event.currentTarget.getElementsByTagName('td');
-    let content = '';
-    for (let i = 0; i < rowData.length; i++) {
-        content += rowData[i].innerText + ' | ';
-    }
 
-    alert('Clicked row content: ' + content);
+    let workerName = rowData[1].innerText;
+    const url = `Pekerja.php?name=${workerName}`;
+
+    window.location.href = url;
 }
 
 const dataRows = document.getElementsByClassName('data-row');
@@ -33,3 +32,26 @@ for (let i = 0; i < dataRows.length; i++) {
     dataRows[i].addEventListener('click', handleRowClick);
     dataRows[i].style.cursor = 'pointer';
 }
+
+const months = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+];
+let currentMonthIndex = 1; // February
+
+function updateCalendar() {
+    const monthDiv = document.getElementById("month-value");
+    monthDiv.textContent = months[currentMonthIndex];
+    // Implement calendar functionality here
+}
+
+function moveCalendar(direction) {
+    currentMonthIndex += direction;
+    if (currentMonthIndex < 0) {
+        currentMonthIndex = 11; // December
+    } else if (currentMonthIndex > 11) {
+        currentMonthIndex = 0; // January
+    }
+    updateCalendar();
+}
+
+updateCalendar(); // Initial update

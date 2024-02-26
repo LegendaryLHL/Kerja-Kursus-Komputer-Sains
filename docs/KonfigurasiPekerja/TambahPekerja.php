@@ -52,26 +52,24 @@ require_once '../includes/signup_view.inc.php';
 
     <div class="container">
         <form action="../includes/signup.inc.php" method="post" id="add-worker-form">
-            <div class="add-worker-container">
-                <div class="info-box">
-                    <p class="title-box">Tambah Pekerja</p>
-                </div>
-                <div class="form-box">
-                    <div id="form-form">
-                        <label for="nama">Nama</label>
-                        <input type="name" id="nama" name="name" placeholder="Jawapan anda" />
-                        <label for="nombor-kad-pengenalan">Nombor Kad Pengenalan</label>
-                        <input type="number" id="nombor-kad-pengenalan" name="ic-number" placeholder="Jawapan anda" />
-                        <label for="kata-laluan">Kata Laluan</label>
-                        <input type="password" id="kata-laluan" name="password" placeholder="Jawapan anda" />
-                    </div>
-                </div>
-
-                <?php
-                checkSignupErrors();
-                ?>
-                <button id="submit-button" type="submit">Hantar</button>
+            <div class="info-box">
+                <p class="title-box">Tambah Pekerja</p>
             </div>
+            <div class="form-box">
+                <div id="form-form">
+                    <label for="nama">Nama</label>
+                    <input type="name" id="nama" name="name" placeholder="Jawapan anda" />
+                    <label for="nombor-kad-pengenalan">Nombor Kad Pengenalan</label>
+                    <input type="number" id="nombor-kad-pengenalan" name="ic-number" placeholder="Jawapan anda" />
+                    <label for="kata-laluan">Kata Laluan</label>
+                    <input type="password" id="kata-laluan" name="password" placeholder="Jawapan anda" />
+                </div>
+            </div>
+
+            <?php
+            checkSignupErrors();
+            ?>
+            <button id="submit-button" type="submit">Hantar</button>
         </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
