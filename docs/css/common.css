@@ -55,6 +55,10 @@ body {
     color: white;
 }
 
+button {
+  user-select: none;
+}
+
 .content{
     position:absolute;
     top: 100%;

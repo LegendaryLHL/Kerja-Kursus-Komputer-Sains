@@ -18,15 +18,15 @@ input[type="text"] {
     margin: 0;
 }
 
-#month{
+#date-segment{
     text-align: left;
-    width: 228px;
+    width: 248px;
     font-size: 20px;
     margin: 0;
     margin-left: 1%;
 }
 
-#month, .selector, .button{
+#date-segment, .selector, .button{
     margin-right: 3%;
 }
 
