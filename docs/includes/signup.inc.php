@@ -27,15 +27,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         if ($errors) {
             $_SESSION["errors_signup"] = $errors;
-            header("Location: ../KonfigurasiPekerja/TambahPekerja.php");
+            header("Location: ../TambahPekerja.php");
         } else {
             createUser($pdo, $name, $ic_number, $password);
-            header("Location: ../konfigurasiPekerja");
+            header("Location: ../konfigurasiPekerja.php");
         }
     } catch (PDOException $e) {
         die("Signup db failed: " . $e->getMessage());
     }
 } else {
-    header("Location: ../index.html");
+    header("Location: ../index.php");
     die();
 }

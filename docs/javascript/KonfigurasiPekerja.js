@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
     addButton.addEventListener('click', handleAddButtonClick);
 
     function handleAddButtonClick(event) {
-        window.location.href = window.location.origin + window.location.pathname.replace(/\/$/, '') + '/' + "TambahPekerja.php";
+        window.location.href = "./TambahPekerja.php";
     }
 });
 
