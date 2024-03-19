@@ -42,7 +42,7 @@ function handleWorkerCardClick(event) {
 
     const encodedWorkerName = encodeURIComponent(workerName);
 
-    const url = `../Pekerja.php?name=${encodedWorkerName}`;
+    const url = `./Pekerja.php?name=${encodedWorkerName}`;
 
     window.location.href = url;
 }

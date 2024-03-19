@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $_SESSION["errors_signup"] = $errors;
             header("Location: ../TambahPekerja.php");
         } else {
-            createUser($pdo, $name, $ic_number, $password);
+            setUser($pdo, $name, $ic_number, $password);
             header("Location: ../konfigurasiPekerja.php");
         }
     } catch (PDOException $e) {
