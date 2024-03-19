@@ -69,10 +69,3 @@ input[type="name"]:focus, input[type="number"]:focus, input[type="password"]:foc
     outline: none;
     border-bottom: 2px solid #0056b3;
 }
-
-.error{
-    color: #d93025;
-    font-size: 16px;
-    margin-top: 1%;
-    margin-bottom: 0px;
-}

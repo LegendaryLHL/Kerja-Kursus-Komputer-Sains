@@ -44,8 +44,6 @@ function setUser(object $pdo, string $name, string $ic_number, string $password)
 
 function removePekerja(string $name)
 {
-    error_reporting(E_ALL);
-    ini_set('display_errors', '1');
     try {
         require_once 'dbh.inc.php';
         // Check if the worker exists
@@ -71,13 +69,49 @@ function removePekerja(string $name)
     }
 }
 
-// Check if the request is coming via AJAX
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
-    $action = $_POST['action'];
+function login(object $pdo, string $ic_number, string $password)
+{
+    $query = "SELECT * FROM majikan WHERE katalaluan_majikan = :password AND no_kp_majikan = :ic_number LIMIT 1;";
+    $stmt = $pdo->prepare($query);
 
-    if ($action === 'removePekerja' && isset($_POST['nama_pekerja'])) {
-        removePekerja($_POST['nama_pekerja']);
+    $option = [
+        'cost' => 12
+    ];
+    // temp
+    //$hashedPassword = password_hash($password, PASSWORD_BCRYPT, $option);
+    $hashedPassword = $password;
+    $stmt->bindParam(":ic_number", $ic_number);
+    $stmt->bindParam(":password", $hashedPassword);
+    $stmt->execute();
+
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($result) {
+        $data = $result;
+        $_SESSION['name'] = $data['nama'];
+        $_SESSION['status'] = 'majikan';
+        $_SESSION['ic_number'] = 'no_kp_majikan';
     } else {
-        echo 'error';
+        $query = "SELECT * FROM pekerja WHERE katalaluan_pekerja = :password AND no_kp_pekerja = :ic_number LIMIT 1;";
+        $stmt = $pdo->prepare($query);
+
+        $option = [
+            'cost' => 12
+        ];
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT, $option);
+        $stmt->bindParam(":ic_number", $ic_number);
+        $stmt->bindParam(":password", $hashedPassword);
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($result) {
+            $data = $result;
+            $_SESSION['name'] = $data['nama'];
+            $_SESSION['status'] = 'pekerja';
+            $_SESSION['ic_number'] = 'no_kp_pekerja';
+        } else {
+            $errors = [];
+            $errors['failed_login'] = "Nombor kad pengenalan atau kata laluan salah!";
+            $_SESSION['errors'] = $errors;
+        }
     }
 }

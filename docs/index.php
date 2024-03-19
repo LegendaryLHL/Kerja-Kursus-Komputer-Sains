@@ -1,3 +1,13 @@
+<?php
+require_once 'includes/config_session.inc.php';
+require_once 'includes/signup_view.inc.php';
+
+if (!empty($_SESSION['status'])) {
+  header("Location: AnalisisKehadiran.php");
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +27,7 @@
 
   <div class="login-container">
     <h2>Log Masuk</h2>
-    <form id="login-form">
+    <form id="login-form" action='includes/login.inc.php' method='POST'>
       <label for="ic-number">Nombor Kad Pengenalan</label>
       <input type="text" id="ic-number" name="ic-number" required />
 
@@ -31,6 +41,9 @@
         <label for="remember-me">Ingat saya di komputer ini</label>
       </div>
 
+      <?php
+      checkSignupErrors();
+      ?>
       <button type="submit">Log Masuk</button>
     </form>
   </div>
