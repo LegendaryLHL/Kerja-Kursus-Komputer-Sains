@@ -11,7 +11,6 @@ if (!empty($_SESSION['status'])) {
         <span class="bar"></span>
       </a>
       <div class="navbar-links">
-        <a href="IsiKehadiran.php">Isi Kehadiran</a>
         <a href="AnalisisKehadiran.php">Analisis Kehadiran</a>
         <a href="KonfigurasiPekerja.php">Konfigurasi Pekerja</a>
         <div class="info-container">
@@ -27,7 +26,7 @@ if (!empty($_SESSION['status'])) {
       <div class="user">
         <a href="#" id="user-button">
           <i class="fas fa-user-alt"></i>
-          Guest
+          <?php echo htmlspecialchars($_SESSION["name"]) ?>
           <span class="caret"></span>
         </a>
         <div id="user-content" class="content">
@@ -62,7 +61,7 @@ if (!empty($_SESSION['status'])) {
       <div class="user">
         <a href="#" id="user-button">
           <i class="fas fa-user-alt"></i>
-          Guest
+          <?php echo htmlspecialchars($_SESSION["name"]) ?>
           <span class="caret"></span>
         </a>
         <div id="user-content" class="content">

@@ -2,11 +2,44 @@
 
 declare(strict_types=1);
 
-function getName(object $pdo, string $name)
+function getPekerja(object $pdo, string $name)
 {
-    $query = "SELECT nama_pekerja FROM pekerja WHERE nama_pekerja = :name;";
+    $query = "SELECT * FROM pekerja WHERE nama_pekerja = :name LIMIT 1;";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(":name", $name);
+    $stmt->execute();
+
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result;
+}
+
+function getPekerjaNoKp(object $pdo, string $nokp)
+{
+    $query = "SELECT * FROM pekerja WHERE no_kp_pekerja = :nokp LIMIT 1;";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":nokp", $nokp);
+    $stmt->execute();
+
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result;
+}
+
+function getMajikan(object $pdo, string $name)
+{
+    $query = "SELECT * FROM majikan WHERE nama_majikan = :name LIMIT 1;";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":name", $name);
+    $stmt->execute();
+
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result;
+}
+
+function getMajikanNoKp(object $pdo, string $nokp)
+{
+    $query = "SELECT * FROM majikan WHERE no_kp_majikan = :nokp LIMIT 1;";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":nokp", $nokp);
     $stmt->execute();
 
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -71,47 +104,21 @@ function removePekerja(string $name)
 
 function login(object $pdo, string $ic_number, string $password)
 {
-    $query = "SELECT * FROM majikan WHERE katalaluan_majikan = :password AND no_kp_majikan = :ic_number LIMIT 1;";
-    $stmt = $pdo->prepare($query);
 
-    $option = [
-        'cost' => 12
-    ];
-    // temp
-    //$hashedPassword = password_hash($password, PASSWORD_BCRYPT, $option);
-    $hashedPassword = $password;
-    $stmt->bindParam(":ic_number", $ic_number);
-    $stmt->bindParam(":password", $hashedPassword);
-    $stmt->execute();
-
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($result) {
-        $data = $result;
-        $_SESSION['name'] = $data['nama'];
+    $majikan = getMajikanNoKp($pdo, $ic_number);
+    if ($majikan && password_verify($password, $majikan["katalaluan_majikan"])) {
+        $_SESSION['name'] = $majikan['nama_majikan'];
         $_SESSION['status'] = 'majikan';
-        $_SESSION['ic_number'] = 'no_kp_majikan';
+        $_SESSION['ic_number'] = $ic_number;
     } else {
-        $query = "SELECT * FROM pekerja WHERE katalaluan_pekerja = :password AND no_kp_pekerja = :ic_number LIMIT 1;";
-        $stmt = $pdo->prepare($query);
-
-        $option = [
-            'cost' => 12
-        ];
-        $hashedPassword = password_hash($password, PASSWORD_BCRYPT, $option);
-        $stmt->bindParam(":ic_number", $ic_number);
-        $stmt->bindParam(":password", $hashedPassword);
-        $stmt->execute();
-
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($result) {
-            $data = $result;
-            $_SESSION['name'] = $data['nama'];
+        $pekerja = getPekerjaNoKp($pdo, $ic_number);
+        if ($pekerja && password_verify($password, $pekerja["katalaluan_pekerja"])) {
+            $_SESSION['name'] = $pekerja['nama_pekerja'];
             $_SESSION['status'] = 'pekerja';
-            $_SESSION['ic_number'] = 'no_kp_pekerja';
-        } else {
-            $errors = [];
-            $errors['failed_login'] = "Nombor kad pengenalan atau kata laluan salah!";
-            $_SESSION['errors'] = $errors;
+            $_SESSION['ic_number'] = $ic_number;
         }
     }
+    $errors = [];
+    $errors['failed_login'] = "Nombor kad pengenalan atau kata laluan salah!";
+    $_SESSION['errors'] = $errors;
 }

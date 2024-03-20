@@ -12,7 +12,7 @@ function isEmpty(string $name, string $ic_number, string $password)
 
 function isNameExist(object $pdo, string $name)
 {
-    if (getName($pdo, $name)) {
+    if (getPekerja($pdo, $name)) {
         return true;
     }
     return false;
