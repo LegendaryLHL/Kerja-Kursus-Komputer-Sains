@@ -18,6 +18,7 @@ require_once 'includes/signup_view.inc.php';
 <body>
     <?php
     require_once 'navbar.php';
+    require_once 'includes/check_admin.php';
     ?>
 
     <div class="container">

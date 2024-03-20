@@ -13,6 +13,7 @@
 <body>
   <?php
   require_once 'navbar.php';
+  require_once 'includes/check_user.php';
   ?>
   <form id="kehadiran-form">
     <div class="info-box">

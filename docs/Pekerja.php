@@ -17,7 +17,8 @@ require_once 'includes/signup_view.inc.php';
 
 <body>
     <?php
-    require_once 'navbar.php'
+    require_once 'navbar.php';
+    require_once 'includes/check_user.php';
     ?>
     <div class="container">
         <div class="worker-container">

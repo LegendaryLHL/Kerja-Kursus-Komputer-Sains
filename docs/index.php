@@ -34,8 +34,6 @@ if (!empty($_SESSION['status'])) {
       <label for="password">Katalaluan</label>
       <input type="password" id="password" name="password" required />
 
-      <a href="LupaKatalaluan.html">Lupa Katalaluan?</a>
-
       <div class="remember-me">
         <input type="checkbox" id="remember-me" name="remember-me" />
         <label for="remember-me">Ingat saya di komputer ini</label>
