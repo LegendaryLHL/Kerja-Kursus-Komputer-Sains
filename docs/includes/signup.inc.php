@@ -4,6 +4,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $name = $_POST["name"];
     $ic_number = $_POST["ic-number"];
     $password = $_POST["password"];
+    $is_majikan = $_POST["majikan-button"];
 
     try {
 
@@ -19,6 +20,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (isNameExist($pdo, $name)) {
             $errors["name_taken"] = "Nama sudah didaftar, guna nama lain!";
         }
+        if (isNoKpExist($pdo, $ic_number)) {
+            $errors["ic_taken"] = "Nombor kad pengenalan sudah daftar!";
+        }
         if (!preg_match('/^[0-9]+$/', $ic_number)) {
             $errors["invalid_ic"] = "Nombor kad pengenalan hanya boleh guna nombor sahaja!";
         }
@@ -29,7 +33,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $_SESSION["errors"] = $errors;
             header("Location: ../TambahPekerja.php");
         } else {
-            setUser($pdo, $name, $ic_number, $password);
+            if ($is_majikan == 'on') {
+                setMajikan($pdo, $name, $ic_number, $password);
+            } else {
+                setPekerja($pdo, $name, $ic_number, $password);
+            }
             header("Location: ../konfigurasiPekerja.php");
         }
     } catch (PDOException $e) {

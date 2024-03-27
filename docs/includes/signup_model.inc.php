@@ -56,9 +56,28 @@ function getAllPekerja(object $pdo)
     return $result;
 }
 
-function setUser(object $pdo, string $name, string $ic_number, string $password)
+function setPekerja(object $pdo, string $name, string $ic_number, string $password)
 {
     $query = "INSERT INTO pekerja (nama_pekerja, katalaluan_pekerja, no_kp_pekerja) VALUES (:name, :password, :ic_number);";
+    $stmt = $pdo->prepare($query);
+
+    $option = [
+        'cost' => 12
+    ];
+    $hashedPwd = password_hash($password, PASSWORD_BCRYPT, $option);
+
+    $stmt->bindParam(":name", $name);
+    $stmt->bindParam(":ic_number", $ic_number);
+    $stmt->bindParam(":password", $hashedPwd);
+    $stmt->execute();
+
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result;
+}
+
+function setMajikan(object $pdo, string $name, string $ic_number, string $password)
+{
+    $query = "INSERT INTO majikan (nama_majikan, katalaluan_majikan, no_kp_majikan) VALUES (:name, :password, :ic_number);";
     $stmt = $pdo->prepare($query);
 
     $option = [

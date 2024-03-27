@@ -37,6 +37,11 @@ require_once 'includes/signup_view.inc.php';
                 </div>
             </div>
 
+            <div class="majikan-button">
+                <input type="checkbox" id="majikan-button" name="majikan-button" />
+                <label for="majikan-button">Adalah majikan?</label>
+            </div>
+
             <?php
             checkSignupErrors();
             ?>
