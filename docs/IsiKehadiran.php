@@ -1,3 +1,7 @@
+<?php
+require_once 'includes/config_session.inc.php';
+require_once 'includes/signup_view.inc.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +19,7 @@
   require_once 'navbar.php';
   require_once 'includes/check_user.php';
   ?>
-  <form id="kehadiran-form">
+  <form id="kehadiran-form" action='includes/kehadiran.inc.php' method='POST'>
     <div class="info-box">
       <p class="date-box">Tarikh: <span id="date"></span></p>
       <p>
@@ -41,6 +45,9 @@
       <label for="reason">Tuliskan sebab tidak hadir untuk bekerja</label>
       <input type="reason" id="reason" name="reason" placeholder="Jawapan anda" />
     </div>
+    <?php
+    checkSignupErrors();
+    ?>
     <button type="submit">Hantar</button>
   </form>
   <script src="javascript/IsiKehadiran.js"></script>

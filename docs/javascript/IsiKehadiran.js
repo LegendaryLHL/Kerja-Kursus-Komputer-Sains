@@ -146,12 +146,4 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("date").textContent = currentDate.getDate() + "/" + currentDate.getMonth() + "/" + currentDate.getYear();
 
     watchGPSLocation();
-
-    document.getElementById("kehadiran-form").addEventListener("submit", function (event) {
-        event.preventDefault();
-        var canGoToWork = document.querySelector('input[name="can-go-work"]:checked').value;
-        var reasonForNotGoing = document.getElementById("reason").value;
-
-        alert(canGoToWork + "\n " + reasonForNotGoing)
-    });
 });
