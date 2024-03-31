@@ -22,7 +22,7 @@ function handleRowClick(event) {
     const rowData = event.currentTarget.getElementsByTagName('td');
 
     let workerName = rowData[1].innerText;
-    const url = `Pekerja.php?name=${workerName}`;
+    const url = `Profil.php?name=${workerName}`;
 
     window.location.href = url;
 }

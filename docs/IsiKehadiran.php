@@ -48,7 +48,7 @@ require_once 'includes/signup_view.inc.php';
     <?php
     checkSignupErrors();
     ?>
-    <button type="submit">Hantar</button>
+    <button type="submit" id="submit-button">Hantar</button>
   </form>
   <script src="javascript/IsiKehadiran.js"></script>
   <script src="javascript/common.js"></script>

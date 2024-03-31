@@ -3,10 +3,10 @@ const GeoOptions = {
     maximumAge: 2000,
     timeout: 10000,
 };
-var latitudeTarget = 55.751244;
-var longtitudeTarget = 37.618423;
-var distanceFromTarget;
-var rangeKm = 1;
+let latitudeTarget = 55.751244;
+let longtitudeTarget = 37.618423;
+let distanceFromTarget;
+let rangeKm = 1;
 async function reverseGeocode(latitude, longitude) {
     try {
         const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
@@ -49,21 +49,24 @@ function calculateDistanceKm(lat1, lon1, lat2, lon2) {
 
 // Display the updated GPS location
 function displayGPSLocation(position) {
-    var latitude = position.coords.latitude;
-    var longtitude = position.coords.longitude;
+    let latitude = position.coords.latitude;
+    let longtitude = position.coords.longitude;
     distanceFromTarget = calculateDistanceKm(latitude, longtitude, latitudeTarget, longtitudeTarget)
+    const button = document.getElementById("submit-button");
     if (distanceFromTarget < 5) {
         document.getElementById("gps-location").textContent = "* Lokasi GPS anda di tempat kerja";
         document.getElementById("gps-location").style.color = "green";
+        button.disabled = false;
     }
     else {
         document.getElementById("gps-location").textContent = "* Lokasi GPS anda tidak di tempat kerja";
         document.getElementById("gps-location").style.color = "#d93025";
+        button.disabled = true;
     }
 
     reverseGeocode(latitude, longtitude)
         .then(locationName => {
-            var element = document.getElementById("gps-location");
+            let element = document.getElementById("gps-location");
             element.setAttribute("data-tooltip", "Jarak daripada tempat kerja dari " + locationName + " ialah: " + Math.round(distanceFromTarget) + "Km");
         })
         .catch(error => {
@@ -73,7 +76,7 @@ function displayGPSLocation(position) {
 
 
 function handleLocationError(error) {
-    var errorMessage = "ERROR " + error.message;
+    let errorMessage = "ERROR " + error.message;
     document.getElementById("gps-location").textContent = errorMessage;
     document.getElementById("gps-location").style.color = "#d93025";
 }
@@ -142,8 +145,10 @@ noRadio.addEventListener("change", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-    var currentDate = new Date();
+    let currentDate = new Date();
     document.getElementById("date").textContent = currentDate.getDate() + "/" + currentDate.getMonth() + "/" + currentDate.getYear();
 
     watchGPSLocation();
+    const button = document.getElementById("submit-button");
+    button.disabled = true;
 });
