@@ -22,7 +22,18 @@ function getKehadiran(object $pdo, int $id_hari, int $id_pekerja)
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result;
 }
+function setFinish(object $pdo, int $id_hari, int $id_pekerja, string $datetime)
+{
+    $query = "UPDATE kehadiran SET masa_tamat = :date_time WHERE id_hari = :id_hari AND id_pekerja = :id_pekerja;";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":id_hari", $id_hari);
+    $stmt->bindParam(":id_pekerja", $id_pekerja);
+    $stmt->bindParam(":date_time", $datetime);
+    $stmt->execute();
 
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result;
+}
 function getHari($pdo)
 {
     $stmt = $pdo->prepare("SELECT id_hari, tarikh FROM hari ORDER BY tarikh DESC LIMIT 1");

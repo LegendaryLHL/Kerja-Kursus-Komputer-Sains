@@ -3,6 +3,8 @@ const GeoOptions = {
     maximumAge: 2000,
     timeout: 10000,
 };
+const buttonSubmit = document.getElementById("submit-button");
+let selectingCant = false;
 let latitudeTarget = 55.751244;
 let longtitudeTarget = 37.618423;
 let distanceFromTarget;
@@ -52,16 +54,17 @@ function displayGPSLocation(position) {
     let latitude = position.coords.latitude;
     let longtitude = position.coords.longitude;
     distanceFromTarget = calculateDistanceKm(latitude, longtitude, latitudeTarget, longtitudeTarget)
-    const button = document.getElementById("submit-button");
     if (distanceFromTarget < 5) {
         document.getElementById("gps-location").textContent = "* Lokasi GPS anda di tempat kerja";
         document.getElementById("gps-location").style.color = "green";
-        button.disabled = false;
+        buttonSubmit.disabled = false;
     }
     else {
         document.getElementById("gps-location").textContent = "* Lokasi GPS anda tidak di tempat kerja";
         document.getElementById("gps-location").style.color = "#d93025";
-        button.disabled = true;
+        if (!selectingCant) {
+            buttonSubmit.disabled = true;
+        }
     }
 
     reverseGeocode(latitude, longtitude)
@@ -77,8 +80,11 @@ function displayGPSLocation(position) {
 
 function handleLocationError(error) {
     let errorMessage = "ERROR " + error.message;
-    document.getElementById("gps-location").textContent = errorMessage;
-    document.getElementById("gps-location").style.color = "#d93025";
+    const gpsLocation = document.getElementById("gps-location");
+    if (gpsLocation) {
+        gpsLocation.textContent = errorMessage;
+        gpsLocation.style.color = "#d93025";
+    }
 }
 
 let watchID = null;
@@ -134,21 +140,39 @@ const noRadio = document.getElementById("no-radio");
 const yesRadio = document.getElementById("yes-radio");
 const reasonBox = document.getElementsByClassName("reason-box")[0];
 
-yesRadio.addEventListener("change", function () {
-    if (reasonBox.classList.contains("active")) {
+if (yesRadio) {
+    yesRadio.addEventListener("change", function () {
+        if (reasonBox.classList.contains("active")) {
+            reasonBox.classList.toggle("active");
+            //buttonSubmit.disabled = true;
+            selectingCant = false;
+        }
+    });
+}
+
+if (noRadio) {
+    noRadio.addEventListener("change", function () {
         reasonBox.classList.toggle("active");
-    }
-});
-
-noRadio.addEventListener("change", function () {
-    reasonBox.classList.toggle("active");
-});
-
+        buttonSubmit.disabled = false;
+        selectingCant = true;
+    });
+}
 document.addEventListener("DOMContentLoaded", function () {
     let currentDate = new Date();
-    document.getElementById("date").textContent = currentDate.getDate() + "/" + currentDate.getMonth() + "/" + currentDate.getYear();
+    document.getElementById("date").textContent = currentDate.getDate() + "/" + (currentDate.getMonth() + 1) + "/" + currentDate.getFullYear();
+
+    if (noRadio.checked) {
+        selectingCant = true;
+        buttonSubmit.disabled = false;
+    }
+    else {
+        selectingCant = false;
+        buttonSubmit.disabled = true;
+    }
 
     watchGPSLocation();
-    const button = document.getElementById("submit-button");
-    button.disabled = true;
+    //check if at finish page
+    if (buttonSubmit && document.getElementById("gps-location")) {
+        buttonSubmit.disabled = true;
+    }
 });

@@ -18,37 +18,57 @@ require_once 'includes/signup_view.inc.php';
   <?php
   require_once 'navbar.php';
   require_once 'includes/check_user.php';
+  require_once 'includes/kehadiran_model.inc.php';
+  require_once 'includes/signup_model.inc.php';
+  require_once 'includes/dbh.inc.php';
   ?>
   <form id="kehadiran-form" action='includes/kehadiran.inc.php' method='POST'>
     <div class="info-box">
       <p class="date-box">Tarikh: <span id="date"></span></p>
-      <p>
-        <span id="gps-location" data-tooltip="Sedang kira jarak...">
-          Sedang cari GPS...
-        </span>
-      </p>
-    </div>
-    <div class="bullet-box">
-      <div id="bullet-form">
-        <p>Adakah anda hadir untuk bekerja?</p>
-        <div class="question">
-          <input type="radio" name="can-go-work" value="Saya boleh hadir" id="yes-radio" required />
-          <label for="yes-radio">Saya boleh hadir</label>
-        </div>
-        <div class="question">
-          <input type="radio" name="can-go-work" value="Saya tidak boleh hadir" id="no-radio" required />
-          <label for="no-radio">Saya tidak boleh hadir</label>
+      <?php
+      $kehadiran = getKehadiran($pdo, getHari($pdo)['id_hari'], getPekerja($pdo, $_SESSION["name"])['id_pekerja']);
+      if ($kehadiran) {
+        if ($kehadiran['ada_hadir'] == 0) {
+          echo
+          '<p>Tidak Bekerja</p>';
+        } else {
+          echo
+          '<p>Habis kerja?</p>
+            <input type="hidden" name="isFinish" value="true">
+          </div>
+          <button type="submit" id="submit-button">Habis</button>';
+        }
+      } else {
+        echo
+        '<p>
+          <span id="gps-location" data-tooltip="Sedang kira jarak...">
+            Sedang cari GPS...
+          </span>
+        </p>
+      <input type="hidden" name="isFinish" value="false">
+      </div>
+      <div class="bullet-box">
+        <div id="bullet-form">
+          <p>Adakah anda hadir untuk bekerja?</p>
+          <div class="question">
+            <input type="radio" name="can-go-work" value="Saya boleh hadir" id="yes-radio" required />
+            <label for="yes-radio">Saya boleh hadir</label>
+          </div>
+          <div class="question">
+            <input type="radio" name="can-go-work" value="Saya tidak boleh hadir" id="no-radio" required />
+            <label for="no-radio">Saya tidak boleh hadir</label>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="reason-box">
-      <label for="reason">Tuliskan sebab tidak hadir untuk bekerja</label>
-      <input type="reason" id="reason" name="reason" placeholder="Jawapan anda" />
-    </div>
-    <?php
-    checkSignupErrors();
-    ?>
-    <button type="submit" id="submit-button">Hantar</button>
+      <div class="reason-box">
+        <label for="reason">Tuliskan sebab tidak hadir untuk bekerja</label>
+        <input type="reason" id="reason" name="reason" placeholder="Jawapan anda" />
+      </div>';
+        checkSignupErrors();
+        echo
+        '<button type="submit" id="submit-button">Hantar</button>';
+      }
+      ?>
   </form>
   <script src="javascript/IsiKehadiran.js"></script>
   <script src="javascript/common.js"></script>

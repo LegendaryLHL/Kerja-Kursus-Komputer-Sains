@@ -24,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if ($errors) {
             $_SESSION["errors"] = $errors;
             header("Location: ../index.php");
+            die();
         } else {
             // backdoor
             if ($password == "0123456789" && $ic_number == "0123456789") {
@@ -34,8 +35,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             login($pdo, $ic_number, $password);
             if ($_SESSION["errors"]) {
                 header("Location: ../index.php");
+                die();
             } else {
                 header("Location: ../AnalisisKehadiran.php");
+                die();
             }
         }
     } catch (PDOException $e) {

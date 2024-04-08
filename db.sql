@@ -29,6 +29,8 @@ CREATE TABLE kehadiran (
     id_hari INT(11) NOT NULL,
     id_pekerja INT(11) NOT NULL,
     ada_hadir TINYINT(1) NOT NULL,
+    masa_mula DATETIME NOT NULL DEFAULT CURRENT_TIME,
+    masa_tamat DATETIME,
 
     PRIMARY KEY (id_hari, id_pekerja),
 
