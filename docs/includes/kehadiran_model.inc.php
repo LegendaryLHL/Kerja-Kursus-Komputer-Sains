@@ -13,7 +13,7 @@ function setKehadiran(object $pdo, int $id_hari, int $id_pekerja, int $ada_hadir
 }
 function getKehadiran(object $pdo, int $id_hari, int $id_pekerja)
 {
-    $query = "SELECT ada_hadir FROM kehadiran WHERE id_hari = :id_hari AND id_pekerja = :id_pekerja LIMIT 1;";
+    $query = "SELECT * FROM kehadiran WHERE id_hari = :id_hari AND id_pekerja = :id_pekerja LIMIT 1;";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(":id_hari", $id_hari);
     $stmt->bindParam(":id_pekerja", $id_pekerja);
@@ -34,9 +34,9 @@ function setFinish(object $pdo, int $id_hari, int $id_pekerja, string $datetime)
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result;
 }
-function getHari($pdo)
+function getHari(object $pdo)
 {
-    $stmt = $pdo->prepare("SELECT id_hari, tarikh FROM hari ORDER BY tarikh DESC LIMIT 1");
+    $stmt = $pdo->prepare("SELECT * FROM hari ORDER BY tarikh DESC LIMIT 1");
     $stmt->execute();
     $lastHari = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -64,4 +64,43 @@ function getHari($pdo)
     $stmt = $pdo->prepare("SELECT id_hari, tarikh FROM hari ORDER BY tarikh DESC LIMIT 1");
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+
+function countHariBekerja(object $pdo, string $starting_date, string $ending_date, int $id_pekerja)
+{
+    $stmt = $pdo->prepare("SELECT 
+        COUNT(*) AS bilangan_hari_bekerja
+    FROM
+        hari
+    WHERE
+        tarikh BETWEEN :starting_date AND :ending_date
+            AND tarikh >= (SELECT created_at FROM pekerja WHERE id_pekerja = :id_pekerja)
+            AND adalah_hari_bekerja = 1");
+    $stmt->bindParam(":starting_date", $starting_date);
+    $stmt->bindParam(":ending_date", $ending_date);
+    $stmt->bindParam(":id_pekerja", $id_pekerja);
+    $stmt->execute();
+
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result;
+}
+
+function countHariDatang(object $pdo, string $starting_date, string $ending_date, string $id_pekerja)
+{
+    $stmt = $pdo->prepare("SELECT 
+        COUNT(*) AS bilangan_hari_datang
+    FROM
+        kehadiran JOIN hari ON kehadiran.id_hari = hari.id_hari
+    WHERE
+        id_pekerja = :id_pekerja
+            AND hari.tarikh BETWEEN :starting_date AND :ending_date
+            AND ada_hadir = 1");
+    $stmt->bindParam(":id_pekerja", $id_pekerja);
+    $stmt->bindParam(":starting_date", $starting_date);
+    $stmt->bindParam(":ending_date", $ending_date);
+    $stmt->execute();
+
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result;
 }
