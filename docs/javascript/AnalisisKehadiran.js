@@ -1,15 +1,12 @@
 function searchTable() {
-    let input, filter, table, tr, td, i, txtValue;
-    input = document.getElementById("searchInput");
-    filter = input.value.toUpperCase();
-    table = document.getElementById("attendanceTable");
-    tr = table.getElementsByTagName("tr");
+    const input = document.getElementById("search-input").value.toUpperCase();
+    const table = document.getElementById("attendanceTable");
+    const tr = table.getElementsByTagName("tr");
 
     for (i = 0; i < tr.length; i++) {
         td = tr[i].getElementsByTagName("td")[1]; // index 1 corresponds to the 'Name' column
         if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            if (td.innerText.toUpperCase().indexOf(input) > -1) {
                 tr[i].style.display = "";
             } else {
                 tr[i].style.display = "none";
@@ -20,9 +17,8 @@ function searchTable() {
 
 function handleRowClick(event) {
     const rowData = event.currentTarget.getElementsByTagName('td');
-
-    let workerName = rowData[1].innerText;
-    const url = `Profil.php?name=${workerName}`;
+    const workerId = rowData[1].querySelector('.worker-id').innerText;
+    const url = `Profil.php?selected=pekerja&id=${workerId}`;
 
     window.location.href = url;
 }
@@ -136,4 +132,13 @@ for (let i = 0; i < buttons.length; i++) {
         updateCalendar();
     });
 }
+
+window.addEventListener('resize', function () {
+    if (window.innerWidth <= 850) {
+        this.document.getElementById("date-segment").style.width = "auto";
+    }
+    else {
+        selectorState();
+    }
+});
 

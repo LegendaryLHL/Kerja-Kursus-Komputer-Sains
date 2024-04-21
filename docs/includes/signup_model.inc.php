@@ -103,10 +103,9 @@ function setMajikan(object $pdo, string $name, string $ic_number, string $passwo
     return $result;
 }
 
-function removePekerja(string $name)
+function removePekerja(object $pdo, string $name)
 {
     try {
-        require_once 'dbh.inc.php';
         // Check if the worker exists
         $query = "SELECT nama_pekerja FROM pekerja WHERE nama_pekerja = :name;";
         $stmt = $pdo->prepare($query);
@@ -143,9 +142,10 @@ function login(object $pdo, string $ic_number, string $password)
             $_SESSION['name'] = $pekerja['nama_pekerja'];
             $_SESSION['status'] = 'pekerja';
             $_SESSION['ic_number'] = $ic_number;
+        } else {
+            $errors = [];
+            $errors['failed_login'] = "Nombor kad pengenalan atau kata laluan salah!";
+            $_SESSION['errors'] = $errors;
         }
     }
-    $errors = [];
-    $errors['failed_login'] = "Nombor kad pengenalan atau kata laluan salah!";
-    $_SESSION['errors'] = $errors;
 }

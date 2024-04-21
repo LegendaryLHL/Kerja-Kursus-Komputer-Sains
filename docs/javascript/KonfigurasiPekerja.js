@@ -58,11 +58,11 @@ function handleWorkerCardClick(event) {
     const urlParams = new URLSearchParams(queryString);
     const selected = urlParams.get('selected');
     const card = event.currentTarget.closest('.worker-card');
-    const workerName = card.querySelector('.worker-id').innerText;
+    const workerId = card.querySelector('.worker-id').innerText;
 
-    const encodedWorkerName = encodeURIComponent(workerName);
+    const encodedWorkerId = encodeURIComponent(workerId);
 
-    const url = `./Profil.php?selected=${selected}&id=${encodedWorkerName}`;
+    const url = `./Profil.php?selected=${selected}&id=${encodedWorkerId}`;
 
     window.location.href = url;
 }

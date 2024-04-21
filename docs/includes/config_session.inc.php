@@ -3,12 +3,15 @@
 ini_set('session.use_only_cookies', 1);
 ini_set('session.use_strict_mode', 1);
 
+$domain = ($_SERVER['HTTP_HOST'] != 'localhost') ? $_SERVER['HTTP_HOST'] : false;
+
 session_set_cookie_params([
     'lifetime' => 18000,
-    'domain' => 'localhost',
+    'domain' => $domain,
     'path' => '/',
-    'secure' => true,
-    'httponly' => true
+    'secure' => false, // less secure
+    'httponly' => true,
+    'samesite' => 'Lax'
 ]);
 
 session_start();

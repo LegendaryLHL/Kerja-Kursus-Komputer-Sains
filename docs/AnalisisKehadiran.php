@@ -69,7 +69,7 @@
             </div>
 
             <div id="search">
-              <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Cari..." />
+              <input type="text" id="search-input" onkeyup="searchTable()" placeholder="Cari..." />
               <div id="search-box">
                 <span><i class="fas fa-search fa-fw"></i></span>
               </div>
@@ -101,8 +101,11 @@
           $id_pekerja = getPekerja($pdo, $pekerja['nama_pekerja'])['id_pekerja'];
           echo
           '<tr class="data-row">
-          <td> ' . $count . '</td>
-          <td> ' . htmlspecialchars($pekerja['nama_pekerja']) . '</td>
+          <td>' . $count . '</td>
+          <td>' .
+            htmlspecialchars($pekerja['nama_pekerja']) .
+            '<p class="worker-id" style="display: none;">' . htmlspecialchars($pekerja['id_pekerja']) . '</p> 
+          </td>
           <td>' . countHariDatang($pdo, $start_date, $end_date, $id_pekerja)['bilangan_hari_datang'] . '/' . countHariBekerja($pdo, $start_date, $end_date, $id_pekerja)['bilangan_hari_bekerja'] . ' </td>';
           $count++;
         }
