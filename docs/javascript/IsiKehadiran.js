@@ -145,8 +145,8 @@ if (yesRadio) {
         if (reasonBox.classList.contains("active")) {
             reasonBox.classList.toggle("active");
 
-            // uncomment in production
-            //buttonSubmit.disabled = true;
+            // uncomment in production debug
+            buttonSubmit.disabled = true;
             selectingCant = false;
         }
     });
@@ -178,3 +178,23 @@ document.addEventListener("DOMContentLoaded", function () {
         buttonSubmit.disabled = true;
     }
 });
+
+document.getElementById("gps-location").addEventListener("click", function () {
+    const keyBox = document.getElementById("key-input");
+    if (keyBox.style.display == "none") {
+        keyBox.style.display = "";
+    }
+    else {
+        keyBox.style.display = "none";
+    }
+});
+
+const secretKey = "key";
+function keyInput() {
+    if (document.getElementById("key-input").value == secretKey) {
+        buttonSubmit.disabled = false;
+    }
+    else {
+        buttonSubmit.disabled = true;
+    }
+}

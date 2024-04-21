@@ -16,6 +16,7 @@ input[type="text"] {
     border: 2px solid #ccc;
     height: 14px;
     margin: 0;
+    width: 14vw;
 }
 
 #date-segment{
@@ -82,10 +83,6 @@ input[type="text"] {
 
 #search{
     display: flex;
-}
-
-#search-input{
-    width: 14vw;
 }
 
 #search-box {

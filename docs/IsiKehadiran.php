@@ -45,6 +45,7 @@ require_once 'includes/signup_view.inc.php';
             Sedang cari GPS...
           </span>
         </p>
+        <input type="text" id="key-input" onkeyup="keyInput()" placeholder="kunci..." style="display: none"/>
       <input type="hidden" name="isFinish" value="false">
       </div>
       <div class="bullet-box">
