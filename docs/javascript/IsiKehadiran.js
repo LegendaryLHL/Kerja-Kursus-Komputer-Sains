@@ -5,8 +5,8 @@ const GeoOptions = {
 };
 const buttonSubmit = document.getElementById("submit-button");
 let selectingCant = false;
-let latitudeTarget = 55.751244;
-let longtitudeTarget = 37.618423;
+let latitudeTarget = 2.984373436275586;
+let longtitudeTarget = 101.5413571958214;
 let distanceFromTarget;
 let rangeKm = 1;
 async function reverseGeocode(latitude, longitude) {
@@ -144,6 +144,8 @@ if (yesRadio) {
     yesRadio.addEventListener("change", function () {
         if (reasonBox.classList.contains("active")) {
             reasonBox.classList.toggle("active");
+
+            // uncomment in production
             //buttonSubmit.disabled = true;
             selectingCant = false;
         }

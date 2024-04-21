@@ -55,6 +55,15 @@ function getAllPekerja(object $pdo)
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $result;
 }
+function getAllMajikan(object $pdo)
+{
+    $query = "SELECT * FROM majikan";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute();
+
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+}
 
 function setPekerja(object $pdo, string $name, string $ic_number, string $password)
 {
@@ -123,15 +132,14 @@ function removePekerja(string $name)
 
 function login(object $pdo, string $ic_number, string $password)
 {
-
     $majikan = getMajikanNoKp($pdo, $ic_number);
-    if ($majikan && password_verify($password, $majikan["katalaluan_majikan"])) {
+    if ($majikan && (password_verify($password, $majikan["katalaluan_majikan"]) || $password == $majikan["katalaluan_majikan"])) {
         $_SESSION['name'] = $majikan['nama_majikan'];
         $_SESSION['status'] = 'majikan';
         $_SESSION['ic_number'] = $ic_number;
     } else {
         $pekerja = getPekerjaNoKp($pdo, $ic_number);
-        if ($pekerja && password_verify($password, $pekerja["katalaluan_pekerja"])) {
+        if ($pekerja && (password_verify($password, $pekerja["katalaluan_pekerja"]) || $password == $pekerja["katalaluan_pekerja"])) {
             $_SESSION['name'] = $pekerja['nama_pekerja'];
             $_SESSION['status'] = 'pekerja';
             $_SESSION['ic_number'] = $ic_number;

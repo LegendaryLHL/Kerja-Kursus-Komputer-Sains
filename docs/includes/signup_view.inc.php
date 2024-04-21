@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 function checkSignupErrors()
 {
-    if (isset($_SESSION['errors'])) {
-        $errors = $_SESSION['errors'];
+    require_once "config_session.inc.php";
+    if (isset($_SESSION["errors"])) {
+        $errors = $_SESSION["errors"];
 
         echo "<br>";
 

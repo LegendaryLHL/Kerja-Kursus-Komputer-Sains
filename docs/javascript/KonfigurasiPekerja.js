@@ -27,22 +27,42 @@ for (let i = 0; i < workerCards.length; i++) {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    const addButton = document.querySelector('.add-worker-button');
-
-    addButton.addEventListener('click', handleAddButtonClick);
-
-    function handleAddButtonClick(event) {
-        window.location.href = "./TambahPekerja.php";
+    const addWorker = document.getElementById('add-worker-button');
+    if (addWorker) {
+        addWorker.addEventListener('click', function () {
+            window.location.href = "./TambahPekerja.php?selected=pekerja";
+        });
+    }
+    const addEmployer = document.getElementById('add-employer-button');
+    if (addEmployer) {
+        addEmployer.addEventListener('click', function () {
+            window.location.href = "./TambahPekerja.php?selected=majikan";
+        });
+    }
+    const selectWorker = document.getElementById('select-worker-button');
+    if (selectWorker) {
+        selectWorker.addEventListener('click', function () {
+            window.location.href = "./KonfigurasiPekerja.php?selected=pekerja";
+        });
+    }
+    const selectEmployer = document.getElementById('select-employer-button');
+    if (selectEmployer) {
+        selectEmployer.addEventListener('click', function () {
+            window.location.href = "./KonfigurasiPekerja.php?selected=majikan";
+        });
     }
 });
 
 function handleWorkerCardClick(event) {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const selected = urlParams.get('selected');
     const card = event.currentTarget.closest('.worker-card');
-    const workerName = card.querySelector('.worker-name').innerText;
+    const workerName = card.querySelector('.worker-id').innerText;
 
     const encodedWorkerName = encodeURIComponent(workerName);
 
-    const url = `./Pekerja.php?name=${encodedWorkerName}`;
+    const url = `./Profil.php?selected=${selected}&id=${encodedWorkerName}`;
 
     window.location.href = url;
 }

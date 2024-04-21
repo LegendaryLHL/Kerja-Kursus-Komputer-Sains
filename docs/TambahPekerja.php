@@ -24,7 +24,7 @@ require_once 'includes/signup_view.inc.php';
     <div class="container">
         <form action="includes/signup.inc.php" method="post" id="add-worker-form">
             <div class="info-box">
-                <p class="title-box">Tambah Pekerja</p>
+                <p class="title-box">Tambah <?php echo isset($_GET['selected']) ? htmlspecialchars($_GET['selected']) : "Pekerja" ?></p>
             </div>
             <div class="form-box">
                 <div id="form-form">
@@ -37,11 +37,7 @@ require_once 'includes/signup_view.inc.php';
                 </div>
             </div>
 
-            <div class="majikan-button">
-                <input type="checkbox" id="majikan-button" name="majikan-button" />
-                <label for="majikan-button">Adalah majikan?</label>
-            </div>
-
+            <input type="hidden" name="selected" <?php if (isset($_GET['selected'])) echo 'value="' . htmlspecialchars($_GET['selected']) . '"'; ?> />
             <?php
             checkSignupErrors();
             ?>

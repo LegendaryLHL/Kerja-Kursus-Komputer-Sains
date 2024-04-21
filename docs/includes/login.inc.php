@@ -1,5 +1,4 @@
 <?php
-
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $ic_number = $_POST["ic-number"];
     $password = $_POST["password"];
@@ -12,7 +11,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $errors = [];
 
         require_once 'config_session.inc.php';
-
 
         if (empty($ic_number) || empty($password)) {
             $errors["empty_input"] = "Tolong mengisi semua ruang!";
@@ -33,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $_SESSION['ic_number'] = $ic_number;
             }
             login($pdo, $ic_number, $password);
-            if ($_SESSION["errors"]) {
+            if (isset($_SESSION["errors"])) {
                 header("Location: ../index.php");
                 die();
             } else {
@@ -42,6 +40,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             }
         }
     } catch (PDOException $e) {
+        $errors = [];
+        $errors["db_error"] = $e->getMessage();
+        $_SESSION["errors"] = $errors;
         die("Login db failed: " . $e->getMessage());
     }
 } else {

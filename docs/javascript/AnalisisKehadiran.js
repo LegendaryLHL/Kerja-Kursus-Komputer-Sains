@@ -55,6 +55,9 @@ if (!isDefault) {
     }
     selectorState();
 }
+
+updateCalendar(); // Initial update
+
 function updateCalendar() {
     day.textContent = currentDate.getDate();
     month.textContent = monthNames[currentDate.getMonth()];
@@ -75,6 +78,9 @@ function updateCalendar() {
 
     if (!firstLoad) {
         // client to server
+        if (isDefault) {
+            moveCalendar(1); // Fix weird bug
+        }
         document.getElementById("startDateInput").value = start_date.toISOString().slice(0, 10);
         document.getElementById("endDateInput").value = end_date.toISOString().slice(0, 10);
         document.getElementById("selectedInput").value = selector.value;
@@ -95,17 +101,14 @@ function moveCalendar(direction) {
     } else if (selector.value === "year") {
         currentDate.setFullYear(currentDate.getFullYear() + direction);
     }
-
-    updateCalendar();
 }
-
-updateCalendar(); // Initial update
 
 
 selector.addEventListener("change", function () {
     selectorState();
     updateCalendar();
 });
+
 function selectorState() {
     const dateSeg = document.getElementById("date-segment")
     if (selector.value === "day") {
@@ -130,6 +133,7 @@ for (let i = 0; i < buttons.length; i++) {
     button.addEventListener("click", function (event) {
         event.preventDefault();
         moveCalendar(i === 0 ? -1 : 1);
+        updateCalendar();
     });
 }
 

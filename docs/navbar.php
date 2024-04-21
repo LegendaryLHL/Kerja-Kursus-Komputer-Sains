@@ -19,7 +19,6 @@ if (!empty($_SESSION['status'])) {
           </a>
           <div id="info-content" class="content">
             <a href="Maklumat.php">Maklumat</a>
-            <a href="#">Bantuan</a>
           </div>
         </div>
       </div>
@@ -54,7 +53,6 @@ if (!empty($_SESSION['status'])) {
           </a>
           <div id="info-content" class="content">
             <a href="Maklumat.php">Maklumat</a>
-            <a href="#">Bantuan</a>
           </div>
         </div>
       </div>
@@ -88,7 +86,6 @@ if (!empty($_SESSION['status'])) {
         </a>
         <div id="info-content" class="content">
           <a href="Maklumat.php">Maklumat</a>
-          <a href="#">Bantuan</a>
         </div>
       </div>
     </div>

@@ -45,7 +45,6 @@ if (!empty($_SESSION['status'])) {
       <button type="submit">Log Masuk</button>
     </form>
   </div>
-  <script src="javascript/script.js"></script>
   <script src="javascript/common.js"></script>
 </body>
 

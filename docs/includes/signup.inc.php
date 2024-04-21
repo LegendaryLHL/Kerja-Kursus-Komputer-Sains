@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $_SESSION["errors"] = $errors;
             header("Location: ../TambahPekerja.php");
         } else {
-            if ($is_majikan == 'on') {
+            if (isset($_POST["selected"]) && $_POST["selected"] == "majikan") {
                 setMajikan($pdo, $name, $ic_number, $password);
             } else {
                 setPekerja($pdo, $name, $ic_number, $password);

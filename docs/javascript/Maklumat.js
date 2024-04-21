@@ -1,5 +1,5 @@
-var latitudeTarget = 55.751244;
-var longtitudeTarget = 37.618423;
+let latitudeTarget = 2.984373436275586;
+let longtitudeTarget = 101.5413571958214;
 
 async function reverseGeocode(latitude, longitude) {
     try {
