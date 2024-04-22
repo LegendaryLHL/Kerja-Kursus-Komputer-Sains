@@ -136,12 +136,14 @@ function login(object $pdo, string $ic_number, string $password)
         $_SESSION['name'] = $majikan['nama_majikan'];
         $_SESSION['status'] = 'majikan';
         $_SESSION['ic_number'] = $ic_number;
+        $_SESSION['id'] = $majikan['id_majikan'];
     } else {
         $pekerja = getPekerjaNoKp($pdo, $ic_number);
         if ($pekerja && (password_verify($password, $pekerja["katalaluan_pekerja"]) || $password == $pekerja["katalaluan_pekerja"])) {
             $_SESSION['name'] = $pekerja['nama_pekerja'];
             $_SESSION['status'] = 'pekerja';
             $_SESSION['ic_number'] = $ic_number;
+            $_SESSION['id'] = $pekerja['id_pekerja'];
         } else {
             $errors = [];
             $errors['failed_login'] = "Nombor kad pengenalan atau kata laluan salah!";

@@ -29,17 +29,17 @@ require_once 'includes/signup_view.inc.php';
             <div class="form-box">
                 <div id="form-form">
                     <label for="nama">Nama</label>
-                    <input type="name" id="nama" name="name" placeholder="Jawapan anda" />
+                    <input type="text" id="nama" name="name" placeholder="Nama" />
                     <label for="nombor-kad-pengenalan">Nombor Kad Pengenalan</label>
-                    <input type="number" id="nombor-kad-pengenalan" name="ic-number" placeholder="Jawapan anda" />
+                    <input type="number" id="nombor-kad-pengenalan" name="ic-number" placeholder="Nombor Kad Pengenalan" />
                     <label for="kata-laluan">Kata Laluan</label>
-                    <input type="password" id="kata-laluan" name="password" placeholder="Jawapan anda" />
+                    <input type="password" id="kata-laluan" name="password" placeholder="Kata Lalauan" />
                 </div>
             </div>
 
             <input type="hidden" name="selected" <?php if (isset($_GET['selected'])) echo 'value="' . htmlspecialchars($_GET['selected']) . '"'; ?> />
             <?php
-            checkSignupErrors();
+            processErrors();
             ?>
             <button id="submit-button" type="submit">Hantar</button>
         </form>

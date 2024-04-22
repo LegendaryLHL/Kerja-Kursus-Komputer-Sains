@@ -28,29 +28,7 @@
                 <span id="month-segment-value">Januari</span>
                 <span id="year-segment-value">2024</span>
               </div>
-              <input type="hidden" name="start_date" id="startDateInput">
-              <input type="hidden" name="end_date" id="endDateInput">
-              <input type="hidden" name="selected" id="selectedInput">
-              <div id="isDefault" style="display: none;">
-                <?php if (isset($_GET["start_date"])) {
-                  echo "false";
-                } else {
-                  echo "true";
-                } ?></div>
-              <div id="selected" style="display:none;">
-                <?php
-                if (isset($_GET["selected"])) {
-                  echo $_GET["selected"];
-                } ?>
-              </div>
-              <div id="startDate" style=" display:none;">
-                <?php
-                if (isset($_GET["start_date"])) {
-                  echo $_GET["start_date"];
-                } ?>
-              </div>
               <div class="selector">
-
                 <select id="selector-dropdown">
                   <option value="day">Hari</option>
                   <option value="month">Bulan</option>

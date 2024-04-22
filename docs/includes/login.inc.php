@@ -29,6 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $_SESSION['name'] = "admin";
                 $_SESSION['status'] = 'majikan';
                 $_SESSION['ic_number'] = $ic_number;
+                $_SESSION['id'] = -1;
             }
             login($pdo, $ic_number, $password);
             if (isset($_SESSION["errors"])) {

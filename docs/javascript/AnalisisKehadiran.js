@@ -28,65 +28,49 @@ for (let i = 0; i < dataRows.length; i++) {
     dataRows[i].addEventListener('click', handleRowClick);
     dataRows[i].style.cursor = 'pointer';
 }
-let currentDate = new Date();
-let firstLoad = true;
 
-// read server to client
-const isDefault = document.getElementById("isDefault").textContent.trim() === "true"
+// First load
 const selector = document.getElementById("selector-dropdown");
 const day = document.getElementById("day-segment-value");
 const month = document.getElementById("month-segment-value");
 const year = document.getElementById("year-segment-value");
 
-let monthNames = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"];
-if (!isDefault) {
-    currentDate = new Date(document.getElementById("startDate").textContent.trim());
+let currentDate = new Date();
+const urlParams = new URLSearchParams(window.location.search);
+const startDate = urlParams.get('start_date');
+const selectedUrl = urlParams.get('selected');
+if (startDate && selectedUrl) {
+    currentDate = new Date(startDate);
 
     for (var i = 0; i < selector.options.length; i++) {
-        if (selector.options[i].value === document.getElementById('selected').textContent.trim()) {
+        if (selector.options[i].value === selectedUrl) {
             selector.options[i].selected = true;
             break;
         }
     }
-    selectorState();
 }
+const monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"];
 
-updateCalendar(); // Initial update
+day.textContent = currentDate.getDate();
+month.textContent = monthNames[currentDate.getMonth()];
+year.textContent = currentDate.getFullYear();
 
-function updateCalendar() {
-    day.textContent = currentDate.getDate();
-    month.textContent = monthNames[currentDate.getMonth()];
-    year.textContent = currentDate.getFullYear();
-
-    let start_date = new Date(currentDate);
-    let end_date = new Date(currentDate);
-    if (selector.value == "month") {
-        start_date.setDate(1);
-        end_date.setDate(lastDayOfMonth(start_date));
-    }
-    else if (selector.value == "year") {
-        start_date.setMonth(0); // Month is 0th based
-        end_date.setMonth(11);
-        start_date.setDate(1);
-        end_date.setDate(lastDayOfMonth(end_date));
-    }
-
-    if (!firstLoad) {
-        // client to server
-        if (isDefault) {
-            moveCalendar(1); // Fix weird bug
-        }
-        document.getElementById("startDateInput").value = start_date.toISOString().slice(0, 10);
-        document.getElementById("endDateInput").value = end_date.toISOString().slice(0, 10);
-        document.getElementById("selectedInput").value = selector.value;
-        document.getElementById("form").submit();
-    }
-    firstLoad = false;
+const dateSeg = document.getElementById("date-segment")
+if (selector.value === "day") {
+    dateSeg.style.width = "248px";
+    day.style.display = "inline";
+    month.style.display = "inline";
 }
-
-function lastDayOfMonth(date) {
-    return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+else if (selector.value === "month") {
+    dateSeg.style.width = "230px";
+    day.style.display = "none";
+    month.style.display = "inline";
+}
+else if (selector.value === "year") {
+    dateSeg.style.width = "100px";
+    day.style.display = "none";
+    month.style.display = "none";
 }
 
 function moveCalendar(direction) {
@@ -101,36 +85,41 @@ function moveCalendar(direction) {
 
 
 selector.addEventListener("change", function () {
-    selectorState();
-    updateCalendar();
+    post();
 });
 
-function selectorState() {
-    const dateSeg = document.getElementById("date-segment")
-    if (selector.value === "day") {
-        dateSeg.style.width = "248px";
-        day.style.display = "inline";
-        month.style.display = "inline";
-    }
-    else if (selector.value === "month") {
-        dateSeg.style.width = "230px";
-        day.style.display = "none";
-        month.style.display = "inline";
-    }
-    else if (selector.value === "year") {
-        dateSeg.style.width = "100px";
-        day.style.display = "none";
-        month.style.display = "none";
-    }
-}
 const buttons = document.getElementsByClassName("realButton");
 for (let i = 0; i < buttons.length; i++) {
     const button = buttons[i];
     button.addEventListener("click", function (event) {
         event.preventDefault();
         moveCalendar(i === 0 ? -1 : 1);
-        updateCalendar();
+        post();
     });
+}
+
+function post() {
+    let start_date = new Date(currentDate);
+    let end_date = new Date(currentDate);
+    if (selector.value == "month") {
+        start_date.setDate(1);
+        end_date.setDate(lastDayOfMonth(start_date));
+    }
+    else if (selector.value == "year") {
+        start_date.setMonth(0); // Month is 0th based
+        end_date.setMonth(11);
+        start_date.setDate(1);
+        end_date.setDate(lastDayOfMonth(end_date));
+    }
+
+    const startString = start_date.toISOString().slice(0, 10);
+    const endString = end_date.toISOString().slice(0, 10);
+    const url = `./AnalisisKehadiran.php?start_date=${startString}&end_date=${endString}&selected=${selector.value}`;
+    window.location.href = url;
+}
+
+function lastDayOfMonth(date) {
+    return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
 }
 
 window.addEventListener('resize', function () {

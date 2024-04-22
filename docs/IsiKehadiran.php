@@ -39,37 +39,38 @@ require_once 'includes/signup_view.inc.php';
           <button type="submit" id="submit-button">Habis</button>';
         }
       } else {
-        echo
-        '<p>
+      ?>
+        <p>
           <span id="gps-location" data-tooltip="Sedang kira jarak...">
             Sedang cari GPS...
           </span>
         </p>
-        <input type="text" id="key-input" onkeyup="keyInput()" placeholder="kunci..." style="display: none"/>
-      <input type="hidden" name="isFinish" value="false">
-      </div>
-      <div class="bullet-box">
-        <div id="bullet-form">
-          <p>Adakah anda hadir untuk bekerja?</p>
-          <div class="question">
-            <input type="radio" name="can-go-work" value="Saya boleh hadir" id="yes-radio" required />
-            <label for="yes-radio">Saya boleh hadir</label>
-          </div>
-          <div class="question">
-            <input type="radio" name="can-go-work" value="Saya tidak boleh hadir" id="no-radio" required />
-            <label for="no-radio">Saya tidak boleh hadir</label>
-          </div>
+        <input type="text" id="key-input" onkeyup="keyInput()" placeholder="kunci..." style="display: none" />
+        <input type="hidden" name="isFinish" value="false">
+    </div>
+    <div class="bullet-box">
+      <div id="bullet-form">
+        <p>Adakah anda hadir untuk bekerja?</p>
+        <div class="question">
+          <input type="radio" name="can-go-work" value="Saya boleh hadir" id="yes-radio" required />
+          <label for="yes-radio">Saya boleh hadir</label>
+        </div>
+        <div class="question">
+          <input type="radio" name="can-go-work" value="Saya tidak boleh hadir" id="no-radio" required />
+          <label for="no-radio">Saya tidak boleh hadir</label>
         </div>
       </div>
-      <div class="reason-box">
-        <label for="reason">Tuliskan sebab tidak hadir untuk bekerja</label>
-        <input type="reason" id="reason" name="reason" placeholder="Jawapan anda" />
-      </div>';
-        checkSignupErrors();
+    </div>
+    <div class="reason-box">
+      <label for="reason">Tuliskan sebab tidak hadir untuk bekerja</label>
+      <input type="reason" id="reason" name="reason" placeholder="Jawapan anda" />
+    </div>
+  <?php
+        processErrors();
         echo
         '<button type="submit" id="submit-button">Hantar</button>';
       }
-      ?>
+  ?>
   </form>
   <script src="javascript/IsiKehadiran.js"></script>
   <script src="javascript/common.js"></script>

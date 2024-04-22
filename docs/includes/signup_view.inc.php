@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-function checkSignupErrors()
+function processErrors()
 {
     require_once "config_session.inc.php";
     if (isset($_SESSION["errors"])) {

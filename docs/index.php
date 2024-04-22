@@ -40,7 +40,7 @@ if (!empty($_SESSION['status'])) {
       </div>
 
       <?php
-      checkSignupErrors();
+      processErrors();
       ?>
       <button type="submit">Log Masuk</button>
     </form>
