@@ -1,21 +1,41 @@
-.container {
-    width: clamp(200px, 60%, 500px);
+.container{
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.worker-container{
+    width: calc(clamp(200px, 60%, 500px) + 80px);
     margin: 0 auto;
-    padding: 40px;
+    flex-direction: column;
+}
+
+.box{
+    flex: 1;
+    padding: 20px;
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 4%;
 }
 
-.container a{
-    text-decoration: none;
-    font-size: 13px;
-    padding-right: 13px;
+#password-field{
+    margin-right: 4%;
 }
 
-.container {
-    text-align: left;
+#delete-button {
+    background-color: #d93025;
+}
+
+#delete-button:hover{
+    background-color: red;
+}
+
+.name{
+    font-size: 25px;
+    font-weight: bold;
 }
 
 button {
@@ -25,7 +45,7 @@ button {
     border: none;
     border-radius: 3px;
     cursor: pointer;
-    width: 140px;
+    width: 150px;
     font-size: 16px;
 }
 
@@ -40,14 +60,3 @@ input{
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
-
-#change-coord{
-    padding-bottom: 10px;
-}
-
-#change-coord, #change-key{
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-

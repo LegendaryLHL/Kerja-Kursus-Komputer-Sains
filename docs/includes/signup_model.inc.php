@@ -34,6 +34,26 @@ function getMajikan(object $pdo, string $name)
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result;
 }
+function getPekerjaId(object $pdo, int $id)
+{
+    $query = "SELECT * FROM pekerja WHERE id_pekerja = :id LIMIT 1;";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result;
+}
+function getMajikanId(object $pdo, int $id)
+{
+    $query = "SELECT * FROM majikan WHERE id_majikan = :id LIMIT 1;";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result;
+}
 
 function getMajikanNoKp(object $pdo, string $nokp)
 {
@@ -122,6 +142,46 @@ function removePekerja(object $pdo, string $name)
             $deleteStmt->execute();
         } else {
             echo 'Worker not found.';
+        }
+    } catch (PDOException $e) {
+        echo 'Database error: ' . $e->getMessage();
+        die("db failed: " . $e->getMessage());
+    }
+}
+function removePekerjaId(object $pdo, int $id)
+{
+    try {
+        // Check if the worker exists
+        $worker = getPekerjaId($pdo, $id);
+
+        // If the worker exists, remove them
+        if ($worker) {
+            $deleteQuery = "DELETE FROM pekerja WHERE id_pekerja = :id;";
+            $deleteStmt = $pdo->prepare($deleteQuery);
+            $deleteStmt->bindParam(":id", $id);
+            $deleteStmt->execute();
+        } else {
+            echo 'Worker not found.';
+        }
+    } catch (PDOException $e) {
+        echo 'Database error: ' . $e->getMessage();
+        die("db failed: " . $e->getMessage());
+    }
+}
+function removeMajikanId(object $pdo, int $id)
+{
+    try {
+        // Check if the worker exists
+        $employer = getMajikanId($pdo, $id);
+
+        // If the worker exists, remove them
+        if ($employer) {
+            $deleteQuery = "DELETE FROM majikan WHERE id_majikan = :id;";
+            $deleteStmt = $pdo->prepare($deleteQuery);
+            $deleteStmt->bindParam(":id", $id);
+            $deleteStmt->execute();
+        } else {
+            echo 'Employer not found.';
         }
     } catch (PDOException $e) {
         echo 'Database error: ' . $e->getMessage();
