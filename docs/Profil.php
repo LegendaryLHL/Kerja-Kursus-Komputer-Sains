@@ -37,20 +37,29 @@ require_once 'includes/config_session.inc.php';
             $is_majikan = false;
         }
     }
+    if (!$user) {
+        header("Location: ./Profil.php");
+    }
+    echo '<p style="display: none" id="status-web">' . ($is_majikan ? 'majikan' : 'pekerja') . '</p>';
+    echo '<p style="display: none" id="id-web">' . $user['id_' . ($is_majikan ? 'majikan' : 'pekerja')] . '</p>';
     ?>
     <form id="form" action="includes/other.php" class="container" method="POST">
         <div class=" worker-container">
             <div class="box">
                 <p class="name"><?php echo $is_majikan ? $user["nama_majikan"] : $user["nama_pekerja"] ?></p>
             </div>
-            <?php if ($is_majikan) { ?>
+            <?php if ($_SESSION["status"] == "majikan") { ?>
                 <div class="box">
                     <input type="text" name="new-password" id="password-field" placeholder="Kata laluan baharu" />
                     <button type="submit" id="password-button">Tukar kata laluan</button>
                 </div>
-                <button type="submit" id="delete-button">Keluarkan</button>
-                <input type="hidden" name="selected" id="selected" />
-                <input type="hidden" name="id" id="id" />
+                <?php if (!(($is_majikan ? 'majikan' : 'pekerja') == $_SESSION["status"] &&
+                    $user['id_' . ($is_majikan ? 'majikan' : 'pekerja')] == $_SESSION["id"]
+                )) { ?>
+                    <button type="submit" id="delete-button">Keluarkan</button>
+                <?php } ?>
+                <input type="hidden" name="selected" id="selected-input" />
+                <input type="hidden" name="id" id="id-input" />
                 <input type="hidden" name="request" id="request-input" />
             <?php } ?>
         </div>

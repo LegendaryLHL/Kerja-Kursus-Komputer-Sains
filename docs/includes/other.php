@@ -8,6 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         require_once 'dbh.inc.php';
         require_once 'signup_model.inc.php';
+        require_once 'config_session.inc.php';
 
         if ($request == "key") {
             $value = $_POST["key"];
@@ -24,12 +25,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             } else {
                 removePekerjaId($pdo, $id);
             }
+
             header("Location: ../profil.php");
         } else if ($request == "password") {
             $selected = $_POST["selected"];
             $id = $_POST["id"];
-            echo "password";
+            $new_pass = $_POST["new-password"];
+            if ($selected == "majikan") {
+                changePassMajikan($pdo, $id, $new_pass);
+            } else {
+                changePassPekerja($pdo, $id, $new_pass);
+            }
+
+            header("Location: ../profil.php");
         }
+        var_dump($_POST);
     } catch (PDOException $e) {
         die("Signup db failed: " . $e->getMessage());
     }

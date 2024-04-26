@@ -122,6 +122,40 @@ function setMajikan(object $pdo, string $name, string $ic_number, string $passwo
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result;
 }
+function changePassMajikan(object $pdo, int $id, string $new_pass)
+{
+    $query = "UPDATE majikan SET katalaluan_majikan = :new_pass WHERE id_majikan = :id;";
+    $stmt = $pdo->prepare($query);
+
+    $option = [
+        'cost' => 12
+    ];
+    $hashedPwd = password_hash($new_pass, PASSWORD_BCRYPT, $option);
+
+    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":new_pass", $hashedPwd);
+    $stmt->execute();
+
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result;
+}
+function changePassPekerja(object $pdo, int $id, string $new_pass)
+{
+    $query = "UPDATE pekerja SET katalaluan_pekerja = :new_pass WHERE id_pekerja = :id;";
+    $stmt = $pdo->prepare($query);
+
+    $option = [
+        'cost' => 12
+    ];
+    $hashedPwd = password_hash($new_pass, PASSWORD_BCRYPT, $option);
+
+    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":new_pass", $hashedPwd);
+    $stmt->execute();
+
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result;
+}
 
 function removePekerja(object $pdo, string $name)
 {
