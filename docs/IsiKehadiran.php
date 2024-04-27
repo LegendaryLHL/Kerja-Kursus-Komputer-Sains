@@ -21,6 +21,9 @@ require_once 'includes/signup_view.inc.php';
   require_once 'includes/kehadiran_model.inc.php';
   require_once 'includes/signup_model.inc.php';
   require_once 'includes/dbh.inc.php';
+  require_once 'includes/other_model.php';
+  echo '<p style="display: none" id="longitude">' . getLong($pdo) . '</p>';
+  echo '<p style="display: none" id="latitude">' . getLat($pdo) . '</p>';
   ?>
   <form id="kehadiran-form" action='includes/kehadiran.inc.php' method='POST'>
     <div class="info-box">
@@ -45,7 +48,8 @@ require_once 'includes/signup_view.inc.php';
             Sedang cari GPS...
           </span>
         </p>
-        <input type="text" id="key-input" onkeyup="keyInput()" placeholder="kunci..." style="display: none" />
+        <input type="text" id="key-input" name="key" onkeyup="keyInput()" placeholder="kunci..." style="display: none" autocomplete="off" />
+        <input type="hidden" id="using-key" name="using-key" value="false">
         <input type="hidden" name="isFinish" value="false">
     </div>
     <div class="bullet-box">
@@ -63,7 +67,7 @@ require_once 'includes/signup_view.inc.php';
     </div>
     <div class="reason-box">
       <label for="reason">Tuliskan sebab tidak hadir untuk bekerja</label>
-      <input type="reason" id="reason" name="reason" placeholder="Jawapan anda" />
+      <input type="reason" id="reason" name="reason" placeholder="Jawapan anda" autocomplete="off" />
     </div>
   <?php
         processErrors();

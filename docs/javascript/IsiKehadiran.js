@@ -5,8 +5,8 @@ const GeoOptions = {
 };
 const buttonSubmit = document.getElementById("submit-button");
 let selectingCant = false;
-let latitudeTarget = 2.984373436275586;
-let longtitudeTarget = 101.5413571958214;
+let latitudeTarget = document.getElementById("latitude").textContent.trim();
+let longtitudeTarget = document.getElementById("longitude").textContent.trim();
 let distanceFromTarget;
 let rangeKm = 1;
 async function reverseGeocode(latitude, longitude) {
@@ -163,13 +163,15 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentDate = new Date();
     document.getElementById("date").textContent = currentDate.getDate() + "/" + (currentDate.getMonth() + 1) + "/" + currentDate.getFullYear();
 
-    if (noRadio.checked) {
-        selectingCant = true;
-        buttonSubmit.disabled = false;
-    }
-    else {
-        selectingCant = false;
-        buttonSubmit.disabled = true;
+    if (noRadio) {
+        if (noRadio.checked) {
+            selectingCant = true;
+            buttonSubmit.disabled = false;
+        }
+        else {
+            selectingCant = false;
+            buttonSubmit.disabled = true;
+        }
     }
 
     watchGPSLocation();
@@ -179,22 +181,27 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-document.getElementById("gps-location").addEventListener("click", function () {
-    const keyBox = document.getElementById("key-input");
-    if (keyBox.style.display == "none") {
-        keyBox.style.display = "";
-    }
-    else {
-        keyBox.style.display = "none";
-    }
-});
+const gpsDisplay = document.getElementById("gps-location");
+if (gpsDisplay) {
+    gpsDisplay.addEventListener("click", function () {
+        const keyBox = document.getElementById("key-input");
+        if (keyBox.style.display == "none") {
+            keyBox.style.display = "";
+        }
+        else {
+            keyBox.style.display = "none";
+        }
+    });
+}
 
-const secretKey = "key";
 function keyInput() {
-    if (document.getElementById("key-input").value == secretKey) {
+    const usingKey = document.getElementById("using-key");
+    if (document.getElementById("key-input").value.length > 0) {
         buttonSubmit.disabled = false;
+        usingKey.value = "true";
     }
     else {
         buttonSubmit.disabled = true;
+        usingKey.value = "false";
     }
 }

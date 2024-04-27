@@ -1,4 +1,4 @@
-CREATE DATABASE pkj_kehadiran_db
+CREATE DATABASE pkj_kehadiran_db;
 
 CREATE TABLE pekerja (
     id_pekerja INT(11) NOT NULL AUTO_INCREMENT,
@@ -7,7 +7,7 @@ CREATE TABLE pekerja (
     no_kp_pekerja VARCHAR(12),
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIME,
     PRIMARY KEY (id_pekerja)
-)
+);
 
 CREATE TABLE majikan (
     id_majikan INT(11) NOT NULL AUTO_INCREMENT,
@@ -16,14 +16,14 @@ CREATE TABLE majikan (
     no_kp_majikan VARCHAR(12),
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIME,
     PRIMARY KEY (id_majikan)
-)
+);
 
 CREATE TABLE hari (
     id_hari INT(11) NOT NULL AUTO_INCREMENT,
     tarikh DATE NOT NULL DEFAULT CURRENT_DATE,
     adalah_hari_bekerja TINYINT(1) NOT NULL DEFAULT 1,
     PRIMARY KEY (id_hari)
-)
+);
 
 CREATE TABLE kehadiran (
     id_hari INT(11) NOT NULL,
@@ -41,4 +41,10 @@ CREATE TABLE kehadiran (
     FOREIGN KEY (id_pekerja)
     REFERENCES pekerja (id_pekerja)
     ON UPDATE CASCADE ON DELETE CASCADE
-)
+);
+
+CREATE TABLE other (
+    longitude FLOAT,
+    latitude FLOAT,
+    secret_key VARCHAR(255)
+);

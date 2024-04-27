@@ -15,6 +15,10 @@
   require_once 'navbar.php';
   require_once 'includes/check_user.php';
   require_once 'includes/config_session.inc.php';
+  require_once 'includes/dbh.inc.php';
+  require_once 'includes/other_model.php';
+  echo '<p style="display: none" id="longitude">' . getLong($pdo) . '</p>';
+  echo '<p style="display: none" id="latitude">' . getLat($pdo) . '</p>';
   ?>
 
   <form id="form" class="container" action="includes/other.php" method="POST">

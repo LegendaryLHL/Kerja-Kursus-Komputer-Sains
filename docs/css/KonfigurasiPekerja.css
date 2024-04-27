@@ -71,6 +71,7 @@ button i {
 }
 .worker-name{
     display: block;
+    text-align: center;
 }
 .remove-button{
     background-color: #d93025;

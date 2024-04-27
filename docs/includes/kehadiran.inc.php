@@ -10,6 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         require_once 'kehadiran_model.inc.php';
         require_once 'signup_model.inc.php';
         require_once 'config_session.inc.php';
+        require_once 'other_model.php';
 
         if ($_POST["isFinish"] == "true") {
             if (getKehadiran($pdo, getHari($pdo)['id_hari'], getPekerja($pdo, $_SESSION['name'])['id_pekerja'])['ada_hadir'] == 0) {
@@ -30,6 +31,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
         if (getKehadiran($pdo, getHari($pdo)['id_hari'], getPekerja($pdo, $_SESSION["name"])['id_pekerja'])) {
             $errors["kehadiran_fillled"] = "Kehadiran sudah diisi!";
+        }
+        if ($_POST["using-key"] == "true" && $_POST["key"] != getKey($pdo)) {
+            $errors["wrong_key"] = "Kunci salah!";
         }
 
 

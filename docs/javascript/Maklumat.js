@@ -1,15 +1,17 @@
-let latitudeTarget = 2.984373436275586;
-let longtitudeTarget = 101.5413571958214;
+let latitudeTarget = document.getElementById("latitude").textContent.trim();
+let longtitudeTarget = document.getElementById("longitude").textContent.trim();
 
 async function reverseGeocode(latitude, longitude) {
     try {
         const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
         const data = await response.json();
-        if (data && data.display_name !== undefined || data.display_name !== null) {
+        if (data.error) {
+            const locationDisplay = "Error mungkin Longitude dan Latitude salah";
+            return locationDisplay;
+        }
+        else if (data && data.display_name !== undefined || data.display_name !== null) {
             const locationDisplay = data.display_name;
             return locationDisplay;
-        } else {
-            return "Location not found";
         }
     } catch (error) {
         return "Error occurred during reverse geocoding" + error;
