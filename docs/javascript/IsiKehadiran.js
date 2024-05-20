@@ -90,38 +90,15 @@ function handleLocationError(error) {
 let watchID = null;
 async function watchGPSLocation() {
     if ("geolocation" in navigator) {
-        let geolocationPermission = await navigator.permissions.query({ name: 'geolocation' });
-
-        const startWatching = async () => {
-            if (watchID) {
-                // A watch is already active
-                return;
-            }
-
-            try {
-                watchID = navigator.geolocation.watchPosition(displayGPSLocation, handleLocationError, GeoOptions);
-            } catch (error) {
-                handleLocationError(error);
-            }
-        };
-
-        // Update geolocationPermission
-        setInterval(async () => {
-            geolocationPermission = await navigator.permissions.query({ name: 'geolocation' });
-            if (geolocationPermission.state === "granted") {
-                startWatching();
-            } else {
-                stopWatchingGPSLocation();
-                handleLocationError(new Error("Tolong buka GPS"));
-            }
-        }, 500);
-
-        // Start watching if the permission is initially granted
-        if (geolocationPermission.state === "granted") {
-            startWatching();
+        if (watchID) {
+            // A watch is already active
+            return;
         }
-        else {
-            handleLocationError(new Error("Tolong buka GPS"));
+
+        try {
+            watchID = navigator.geolocation.watchPosition(displayGPSLocation, handleLocationError, GeoOptions);
+        } catch (error) {
+            handleLocationError(error);
         }
     } else {
         handleLocationError(new Error("Geolokasi tidak disokong dalam penyemak imbas anda."));
