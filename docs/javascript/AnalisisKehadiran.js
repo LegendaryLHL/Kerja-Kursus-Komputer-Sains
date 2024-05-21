@@ -29,6 +29,8 @@ for (let i = 0; i < dataRows.length; i++) {
     dataRows[i].style.cursor = 'pointer';
 }
 
+
+
 // First load
 const selector = document.getElementById("selector-dropdown");
 const day = document.getElementById("day-segment-value");
@@ -98,6 +100,23 @@ for (let i = 0; i < buttons.length; i++) {
     });
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+    const datePicker = flatpickr("#date-picker", {
+        defaultDate: currentDate,
+        onChange: function (selectedDates, dateStr, instance) {
+            const date = new Date(dateStr);
+            currentDate = date;
+            post();
+        }
+    });
+
+    const calendarIcon = document.querySelector(".calendar i");
+
+    calendarIcon.addEventListener('mouseenter', function () {
+        document.getElementById('date-picker').focus();
+    });
+});
+
 function post() {
     let start_date = new Date(currentDate);
     let end_date = new Date(currentDate);
@@ -123,11 +142,6 @@ function lastDayOfMonth(date) {
 }
 
 window.addEventListener('resize', function () {
-    if (window.innerWidth <= 850) {
-        this.document.getElementById("date-segment").style.width = "auto";
-    }
-    else {
-        selectorState();
-    }
+    this.document.getElementById("date-segment").style.width = "auto";
 });
 
