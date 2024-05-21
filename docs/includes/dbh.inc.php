@@ -1,7 +1,7 @@
 <?php
 
 $host = 'localhost';
-$dbname = 'pkj_kehadiran_db';
+$dbname = 'hl_kehadiran';
 $dbusername = 'root';
 $dbpassword = '';
 
