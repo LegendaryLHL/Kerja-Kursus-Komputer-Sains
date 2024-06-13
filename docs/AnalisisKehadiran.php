@@ -47,6 +47,9 @@
                 <i class="fa fa-calendar" aria-hidden="true"></i>
                 <input type="text" id="date-picker">
               </div>
+              <div class="teachers" onclick="fontChange(1)">+</div>
+              <div class=" teachers" onclick="fontChange(-1)">-</div>
+              <div class="teachers" onclick="print()">cetak</div>
             </div>
 
             <div id="search">
@@ -55,7 +58,6 @@
                 <span><i class="fas fa-search fa-fw"></i></span>
               </div>
             </div>
-          </div>
         </th>
       </tr>
       <tr>

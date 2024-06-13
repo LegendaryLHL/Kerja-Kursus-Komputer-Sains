@@ -101,6 +101,7 @@ for (let i = 0; i < buttons.length; i++) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById("attendanceTable").style.fontSize = "17px";
     const datePicker = flatpickr("#date-picker", {
         defaultDate: currentDate,
         onChange: function (selectedDates, dateStr, instance) {
@@ -145,3 +146,8 @@ window.addEventListener('resize', function () {
     this.document.getElementById("date-segment").style.width = "auto";
 });
 
+function fontChange(num) {
+    const table = document.getElementById("attendanceTable");
+    let value = parseInt(table.style.fontSize.slice(0, table.style.fontSize.length - 2)) + num;
+    table.style.fontSize = value + "px";
+}

@@ -34,6 +34,7 @@ input[type="text"] {
 .calendar {
     font-size: 25px;
     text-align: center;
+    padding-right: 40px;
 }
 
 #date-picker{
@@ -137,4 +138,13 @@ tr td:nth-child(2), th:nth-child(2){
     div{
         margin-bottom: 5px;
     }
+}
+
+.teachers{
+    margin-right: 5px;
+    border-style: solid;
+    border-width: 2px;
+    padding: 2px 6px;
+    background-color: #f0f0f0;
+    cursor: pointer;
 }

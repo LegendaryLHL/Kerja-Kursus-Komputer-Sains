@@ -4,6 +4,11 @@ body {
     margin: 0;
     padding: 0;
     font-size: 17px;
+    min-height: 100vh;
+    background-image: url('../assets/worker.jpg'), url('../assets/hammer.png');
+    background-size: auto 60%, auto 30%; 
+    background-position: calc(100% - 20px) bottom, calc(0% + 40px) bottom;
+    background-repeat: no-repeat, no-repeat;
 }
 
 /* Add styles for the top bar */
@@ -41,6 +46,8 @@ body {
     color: #9d9d9d;
     display: block;
     padding:1rem;
+    border-style: solid;
+    border-width: 1px;
 }
 
 .navbar-links a:hover{
