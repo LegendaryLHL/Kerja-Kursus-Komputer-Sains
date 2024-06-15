@@ -4,6 +4,7 @@ const GeoOptions = {
     timeout: 10000,
 };
 const buttonSubmit = document.getElementById("submit-button");
+let submitable = true;
 let selectingCant = false;
 let latitudeTarget = document.getElementById("latitude").textContent.trim();
 let longtitudeTarget = document.getElementById("longitude").textContent.trim();
@@ -57,13 +58,13 @@ function displayGPSLocation(position) {
     if (distanceFromTarget < 5) {
         document.getElementById("gps-location").textContent = "* Lokasi GPS anda di tempat kerja";
         document.getElementById("gps-location").style.color = "green";
-        buttonSubmit.disabled = false;
+        submitable = true;
     }
     else {
         document.getElementById("gps-location").textContent = "* Lokasi GPS anda tidak di tempat kerja";
         document.getElementById("gps-location").style.color = "#d93025";
         if (!selectingCant) {
-            buttonSubmit.disabled = true;
+            submitable = false;
         }
     }
 
@@ -122,8 +123,7 @@ if (yesRadio) {
         if (reasonBox.classList.contains("active")) {
             reasonBox.classList.toggle("active");
 
-            // uncomment in production debug
-            buttonSubmit.disabled = true;
+            submitable = false;
             selectingCant = false;
         }
     });
@@ -132,7 +132,7 @@ if (yesRadio) {
 if (noRadio) {
     noRadio.addEventListener("change", function () {
         reasonBox.classList.toggle("active");
-        buttonSubmit.disabled = false;
+        submitable = true;
         selectingCant = true;
     });
 }
@@ -143,19 +143,24 @@ document.addEventListener("DOMContentLoaded", function () {
     if (noRadio) {
         if (noRadio.checked) {
             selectingCant = true;
-            buttonSubmit.disabled = false;
+            submitable = true;
         }
         else {
             selectingCant = false;
-            buttonSubmit.disabled = true;
+            submitable = false;
         }
     }
 
     watchGPSLocation();
     //check if at finish page
     if (buttonSubmit && document.getElementById("gps-location")) {
-        buttonSubmit.disabled = true;
+        submitable = false;
     }
+
+    buttonSubmit.addEventListener("click", function (event) {
+        event.preventDefault();
+        submit();
+    });
 });
 
 const gpsDisplay = document.getElementById("gps-location");
@@ -174,11 +179,20 @@ if (gpsDisplay) {
 function keyInput() {
     const usingKey = document.getElementById("using-key");
     if (document.getElementById("key-input").value.length > 0) {
-        buttonSubmit.disabled = false;
+        submitable = true;
         usingKey.value = "true";
     }
     else {
-        buttonSubmit.disabled = true;
+        submitable = false;
         usingKey.value = "false";
+    }
+}
+
+function submit() {
+    if (submitable) {
+        document.getElementById("kehadiran-form").submit();
+    }
+    else {
+        alert("Tidak menepati syarat untuk menghantar kehadiran!");
     }
 }

@@ -17,7 +17,7 @@ body {
     position: relative;
     background-color: #222222;
     color: #9d9d9d;
-    min-height: 55px;
+    min-height: 57px;
     margin-bottom: clamp(20px, 4%, 50px);
     display: flex;
     align-items: center;
@@ -28,6 +28,7 @@ body {
     padding: 0.9rem 0.8rem;
     color: #9d9d9d;
     text-decoration: none;
+    transition: color 0.3s;
 }
 .brand-title:hover{
     color: white;
@@ -46,12 +47,15 @@ body {
     color: #9d9d9d;
     display: block;
     padding:1rem;
-    border-style: solid;
-    border-width: 1px;
+    border: 2px solid;
+    border-image-slice: 1;
+    transition: color 0.3s, border-image-source 0.6s;
+    border-image-source: linear-gradient(to left, #9d9d9d, #606060);
 }
 
 .navbar-links a:hover{
     color: white;
+    border-image-source: linear-gradient(to left, #707070, #9c9c9c, white);
 }
 .navbar-links a:hover .caret{
     border-top: 4px solid white;
@@ -77,10 +81,15 @@ button {
 #info-content a{
     padding: 0.5rem;
     font-size: 15px;
+    border: 2px solid;
+    border-image-slice: 1;
+    transition: color 0.3s, border-image-source 0.6s;
+    border-image-source: linear-gradient(to left, #9d9d9d, #606060);
 }
 
 #info-content a:hover{
     color: white;
+    border-image-source: linear-gradient(to left, #707070, #9c9c9c, white);
 }
 
 .user{
@@ -95,11 +104,16 @@ button {
     text-decoration: none;
     color: #9d9d9d;
     display: block;
+    border: 2px solid;
+    border-image-slice: 1;
+    transition: color 0.3s, border-image-source 0.6s;
+    border-image-source: linear-gradient(to left, #9d9d9d, #606060);
     padding: 1rem;
 }
 
 .user a:hover{
     color: white;
+    border-image-source: linear-gradient(to left, #707070, #9c9c9c, white);
 }
 .user a:hover .caret{
     border-top: 4px solid white;

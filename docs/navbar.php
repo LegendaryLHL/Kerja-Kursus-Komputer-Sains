@@ -20,15 +20,15 @@ $currentPage = end($parts);
       <?php if ($_SESSION['status'] == "majikan") { ?>
         <a href="KonfigurasiPekerja.php" <?php if ($currentPage === 'KonfigurasiPekerja.php') echo 'id="selected"' ?>>Konfigurasi Pekerja</a>
       <?php } ?>
-    <?php } ?>
-    <div class="info-container">
-      <a id="info-button">Info
-        <span class="caret"></span>
-      </a>
-      <div id="info-content" class="content">
-        <a href="Maklumat.php" <?php if ($currentPage === 'Maklumat.php') echo 'id="selected"' ?>>Maklumat</a>
+      <div class="info-container">
+        <a id="info-button">Info
+          <span class="caret"></span>
+        </a>
+        <div id="info-content" class="content">
+          <a href="Maklumat.php" <?php if ($currentPage === 'Maklumat.php') echo 'id="selected"' ?>>Maklumat</a>
+        </div>
       </div>
-    </div>
+    <?php } ?>
   </div>
   <div class="user">
     <a id="user-button">

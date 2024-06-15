@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             } else {
                 removePekerjaId($pdo, $id);
             }
-            header("Location: ../profil.php");
+            header("Location: ../KonfigurasiPekerja.php");
         } else if ($request == "password") {
             $selected = $_POST["selected"];
             $id = $_POST["id"];
