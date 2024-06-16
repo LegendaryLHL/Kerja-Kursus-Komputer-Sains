@@ -150,3 +150,9 @@ tr td:nth-child(2), th:nth-child(2){
     background-color: #f0f0f0;
     cursor: pointer;
 }
+
+@media print {
+    .no-print {
+        display: none !important;
+    }
+}

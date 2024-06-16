@@ -4,6 +4,16 @@ require_once 'includes/signup_view.inc.php';
 
 if (!empty($_SESSION['status'])) {
   header("Location: AnalisisKehadiran.php");
+} else if (isset($_COOKIE['ic_number']) && isset($_COOKIE['password'])) {
+  $ic_number = $_COOKIE['ic_number'];
+  $password = $_COOKIE['password'];
+
+  require_once 'includes/dbh.inc.php';
+  require_once 'includes/signup_model.inc.php';
+  login($pdo, $ic_number, $password, true);
+  if (!isset($_SESSION["errors"])) {
+    header("Location: AnalisisKehadiran.php");
+  }
 }
 ?>
 

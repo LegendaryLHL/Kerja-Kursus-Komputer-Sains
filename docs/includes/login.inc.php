@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $_SESSION['ic_number'] = $ic_number;
                 $_SESSION['id'] = -1;
             }
-            login($pdo, $ic_number, $password);
+            login($pdo, $ic_number, $password, isset($_POST["remember-me"]));
             if (isset($_SESSION["errors"])) {
                 header("Location: ../index.php");
                 die();

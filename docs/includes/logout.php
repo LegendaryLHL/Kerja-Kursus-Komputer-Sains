@@ -2,6 +2,8 @@
 session_start();
 session_unset();
 session_destroy();
-echo "<script>
-window.location.href='../index.php';
-</script>";
+
+setcookie('ic_number', '', time() - 3600, "/");
+setcookie('password', '', time() - 3600, "/");
+
+header("Location: ../index.php");

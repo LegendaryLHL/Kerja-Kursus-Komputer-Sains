@@ -223,7 +223,7 @@ function removeMajikanId(object $pdo, int $id)
     }
 }
 
-function login(object $pdo, string $ic_number, string $password)
+function login(object $pdo, string $ic_number, string $password, bool $remember)
 {
     $majikan = getMajikanNoKp($pdo, $ic_number);
     if ($majikan && (password_verify($password, $majikan["katalaluan_majikan"]) || $password == $majikan["katalaluan_majikan"])) {
@@ -243,5 +243,10 @@ function login(object $pdo, string $ic_number, string $password)
             $errors['failed_login'] = "Nombor kad pengenalan atau kata laluan salah!";
             $_SESSION['errors'] = $errors;
         }
+    }
+
+    if ($remember && !isset($_SESSION['errors'])) {
+        setcookie('ic_number', $ic_number, time() + 60 * 60 * 24 * 30);
+        setcookie('password', $password, time() + 60 * 60 * 24 * 30);
     }
 }

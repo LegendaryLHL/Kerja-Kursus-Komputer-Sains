@@ -25,34 +25,33 @@
           <div id="title-container">
             <div id="left-container">
               <div id="date-segment">
-
                 <span id="day-segment-value">1</span>
                 <span id="month-segment-value">Januari</span>
                 <span id="year-segment-value">2024</span>
               </div>
-              <div class="selector">
+              <div class="selector no-print">
                 <select id="selector-dropdown">
                   <option value="day">Hari</option>
                   <option value="month">Bulan</option>
                   <option value="year">Tahun</option>
                 </select>
               </div>
-              <div class="button">
+              <div class="button no-print">
                 <button class="realButton">Balik</button>
               </div>
-              <div class="button">
+              <div class="button no-print">
                 <button class="realButton">Depan</button>
               </div>
-              <div class="calendar" id="calendar">
+              <div class="calendar no-print" id="calendar">
                 <i class="fa fa-calendar" aria-hidden="true"></i>
                 <input type="text" id="date-picker">
               </div>
-              <div class="teachers" onclick="fontChange(1)">+</div>
-              <div class=" teachers" onclick="fontChange(-1)">-</div>
-              <div class="teachers" onclick="print()">cetak</div>
+              <div class="teachers no-print" onclick="fontChange(1)">+</div>
+              <div class=" teachers no-print" onclick="fontChange(-1)">-</div>
+              <div class="teachers no-print" onclick="print()">cetak</div>
             </div>
 
-            <div id="search">
+            <div class="no-print" id="search">
               <input type="text" id="search-input" onkeyup="searchTable()" placeholder="Cari..." />
               <div id="search-box">
                 <span><i class="fas fa-search fa-fw"></i></span>
