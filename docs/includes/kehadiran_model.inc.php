@@ -100,7 +100,8 @@ function getHari(object $pdo)
 
 function countHariBekerja(object $pdo, string $starting_date, string $ending_date, int $id_pekerja)
 {
-    $stmt = $pdo->prepare("SELECT 
+    try {
+        $stmt = $pdo->prepare("SELECT 
         COUNT(*) AS bilangan_hari_bekerja
     FROM
         hari
@@ -108,18 +109,44 @@ function countHariBekerja(object $pdo, string $starting_date, string $ending_dat
         tarikh BETWEEN :starting_date AND :ending_date
             AND tarikh >= (SELECT created_at FROM pekerja WHERE id_pekerja = :id_pekerja)
             AND adalah_hari_bekerja = 1");
-    $stmt->bindParam(":starting_date", $starting_date);
-    $stmt->bindParam(":ending_date", $ending_date);
-    $stmt->bindParam(":id_pekerja", $id_pekerja);
-    $stmt->execute();
+        $stmt->bindParam(":starting_date", $starting_date);
+        $stmt->bindParam(":ending_date", $ending_date);
+        $stmt->bindParam(":id_pekerja", $id_pekerja);
+        $stmt->execute();
 
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $result;
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    } catch (PDOException $e) {
+        echo 'Database error: ' . $e->getMessage();
+        die("db failed: " . $e->getMessage());
+    }
 }
 
-function countHariDatang(object $pdo, string $starting_date, string $ending_date, string $id_pekerja)
+function countAllHariBekerja(object $pdo, int $id_pekerja)
 {
-    $stmt = $pdo->prepare("SELECT 
+    try {
+        $stmt = $pdo->prepare("SELECT 
+        COUNT(*) AS bilangan_hari_bekerja
+    FROM
+        hari
+    WHERE
+        tarikh >= (SELECT created_at FROM pekerja WHERE id_pekerja = :id_pekerja)
+            AND adalah_hari_bekerja = 1");
+        $stmt->bindParam(":id_pekerja", $id_pekerja);
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    } catch (PDOException $e) {
+        echo 'Database error: ' . $e->getMessage();
+        die("db failed: " . $e->getMessage());
+    }
+}
+
+function countHariDatang(object $pdo, string $starting_date, string $ending_date, int $id_pekerja)
+{
+    try {
+        $stmt = $pdo->prepare("SELECT 
         COUNT(*) AS bilangan_hari_datang
     FROM
         kehadiran JOIN hari ON kehadiran.id_hari = hari.id_hari
@@ -127,11 +154,58 @@ function countHariDatang(object $pdo, string $starting_date, string $ending_date
         id_pekerja = :id_pekerja
             AND hari.tarikh BETWEEN :starting_date AND :ending_date
             AND ada_hadir = 1");
-    $stmt->bindParam(":id_pekerja", $id_pekerja);
-    $stmt->bindParam(":starting_date", $starting_date);
-    $stmt->bindParam(":ending_date", $ending_date);
-    $stmt->execute();
+        $stmt->bindParam(":id_pekerja", $id_pekerja);
+        $stmt->bindParam(":starting_date", $starting_date);
+        $stmt->bindParam(":ending_date", $ending_date);
+        $stmt->execute();
 
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $result;
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    } catch (PDOException $e) {
+        echo 'Database error: ' . $e->getMessage();
+        die("db failed: " . $e->getMessage());
+    }
+}
+
+function countAllHariDatang(object $pdo, int $id_pekerja)
+{
+    try {
+        $stmt = $pdo->prepare("SELECT 
+        COUNT(*) AS bilangan_hari_datang
+    FROM
+        kehadiran JOIN hari ON kehadiran.id_hari = hari.id_hari
+    WHERE
+        id_pekerja = :id_pekerja
+            AND ada_hadir = 1");
+        $stmt->bindParam(":id_pekerja", $id_pekerja);
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    } catch (PDOException $e) {
+        echo 'Database error: ' . $e->getMessage();
+        die("db failed: " . $e->getMessage());
+    }
+}
+
+function countAllOvertime(object $pdo, int $id_pekerja)
+{
+    try {
+        $stmt = $pdo->prepare("SELECT 
+        COUNT(*) AS bilangan_overtime
+    FROM
+        kehadiran JOIN hari ON kehadiran.id_hari = hari.id_hari
+    WHERE
+        id_pekerja = :id_pekerja
+            AND ada_hadir = 1
+            AND hari.adalah_hari_bekerja = 0");
+        $stmt->bindParam(":id_pekerja", $id_pekerja);
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    } catch (PDOException $e) {
+        echo 'Database error: ' . $e->getMessage();
+        die("db failed: " . $e->getMessage());
+    }
 }

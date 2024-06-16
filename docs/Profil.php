@@ -20,6 +20,7 @@ require_once 'includes/config_session.inc.php';
     require_once 'includes/check_user.php';
     require_once 'includes/dbh.inc.php';
     require_once 'includes/signup_model.inc.php';
+    require_once 'includes/kehadiran_model.inc.php';
     if (isset($_GET["selected"]) && isset($_GET["id"])) {
         if ($_GET["selected"] == "majikan") {
             $user = getMajikanId($pdo, $_GET['id']);
@@ -48,6 +49,23 @@ require_once 'includes/config_session.inc.php';
             <div class="box">
                 <p class="name"><?php echo $is_majikan ? $user["nama_majikan"] : $user["nama_pekerja"] ?></p>
             </div>
+            <?php if (!$is_majikan) {
+                $total = countAllHariBekerja($pdo, $user['id_pekerja'])['bilangan_hari_bekerja'];
+                $count = countAllHariDatang($pdo, $user['id_pekerja'])['bilangan_hari_datang'];
+                $overtime = countAllOvertime($pdo, $user['id_pekerja'])['bilangan_overtime'];
+                $percent = $total == 0 ? 0 : round($count / $total * 100, 2);
+            ?>
+                <div class="box">
+                    <h3>Pekerja telah bekerja:</h3>
+                    <div id="progress">
+                        <div id="left">
+                            <p>Peratus: <?php echo $percent ?>%</p>
+                            <p>Bilangan: <?php echo $count ?>/<?php echo $total ?> </p>
+                        </div>
+                        <p>Overtime: <?php echo $overtime ?> kali</p>
+                    </div>
+                </div>
+            <?php } ?>
             <?php if ($_SESSION["status"] == "majikan") { ?>
                 <div class="box">
                     <input type="text" name="new-password" id="password-field" placeholder="Kata laluan baharu" />
