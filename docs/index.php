@@ -39,7 +39,7 @@ if (!empty($_SESSION['status'])) {
     <h2>Log Masuk</h2>
     <form id="login-form" action='includes/login.inc.php' method='POST'>
       <label for="ic-number">Nombor Kad Pengenalan</label>
-      <input type="text" id="ic-number" name="ic-number" required />
+      <input type="number" id="ic-number" name="ic-number" required />
 
       <label for="password">Katalaluan</label>
       <input type="password" id="password" name="password" required />

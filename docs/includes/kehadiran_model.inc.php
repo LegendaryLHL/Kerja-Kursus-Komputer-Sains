@@ -97,10 +97,11 @@ function getHari(object $pdo)
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
-
+# mendapatkan bilangan hari bekerja dalam tempoh tertentu untuk seseorang pekerja
 function countHariBekerja(object $pdo, string $starting_date, string $ending_date, int $id_pekerja)
 {
     try {
+        # query untuk mendapatkan bilangan hari bekerja
         $stmt = $pdo->prepare("SELECT 
         COUNT(*) AS bilangan_hari_bekerja
     FROM
@@ -114,17 +115,21 @@ function countHariBekerja(object $pdo, string $starting_date, string $ending_dat
         $stmt->bindParam(":id_pekerja", $id_pekerja);
         $stmt->execute();
 
+        # memulangkan hasil
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result;
     } catch (PDOException $e) {
+        # mengehadkan pelaksanaan jika mengalami masalah
         echo 'Database error: ' . $e->getMessage();
         die("db failed: " . $e->getMessage());
     }
 }
 
+# mengira bilangan hari bekerja untuk seseorang pekerja
 function countAllHariBekerja(object $pdo, int $id_pekerja)
 {
     try {
+        # query untuk mendapatkan bilangan hari bekerja
         $stmt = $pdo->prepare("SELECT 
         COUNT(*) AS bilangan_hari_bekerja
     FROM
@@ -135,17 +140,21 @@ function countAllHariBekerja(object $pdo, int $id_pekerja)
         $stmt->bindParam(":id_pekerja", $id_pekerja);
         $stmt->execute();
 
+        # memulangkan hasil
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result;
     } catch (PDOException $e) {
+        # mengehadkan pelaksanaan jika mengalami masalah
         echo 'Database error: ' . $e->getMessage();
         die("db failed: " . $e->getMessage());
     }
 }
 
+# mengira bilangan hari yang telah datang untuk bekerja dalam tempoh
 function countHariDatang(object $pdo, string $starting_date, string $ending_date, int $id_pekerja)
 {
     try {
+        # query untuk mendapatkan bilangan hari datang
         $stmt = $pdo->prepare("SELECT 
         COUNT(*) AS bilangan_hari_datang
     FROM
@@ -159,17 +168,21 @@ function countHariDatang(object $pdo, string $starting_date, string $ending_date
         $stmt->bindParam(":ending_date", $ending_date);
         $stmt->execute();
 
+        # memulangkan hasil
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result;
     } catch (PDOException $e) {
+        # mengehadkan pelakanan jika mengalami masalah
         echo 'Database error: ' . $e->getMessage();
         die("db failed: " . $e->getMessage());
     }
 }
 
+# mengira bilangan hari yang telah datang untuk bekerja
 function countAllHariDatang(object $pdo, int $id_pekerja)
 {
     try {
+        # query untuk mendapatkan bilangan hari datang
         $stmt = $pdo->prepare("SELECT 
         COUNT(*) AS bilangan_hari_datang
     FROM
@@ -180,17 +193,21 @@ function countAllHariDatang(object $pdo, int $id_pekerja)
         $stmt->bindParam(":id_pekerja", $id_pekerja);
         $stmt->execute();
 
+        # memulangkan hasil
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result;
     } catch (PDOException $e) {
+        # mengehadkan pelaksanaan jika mengalami masalah
         echo 'Database error: ' . $e->getMessage();
         die("db failed: " . $e->getMessage());
     }
 }
 
+# mengira bilangan hari yang hadir pada hari tidak bekerja
 function countAllOvertime(object $pdo, int $id_pekerja)
 {
     try {
+        # query untuk mendapatkan bilangan hari hadir pada hari tidak bekerja
         $stmt = $pdo->prepare("SELECT 
         COUNT(*) AS bilangan_overtime
     FROM
@@ -202,9 +219,11 @@ function countAllOvertime(object $pdo, int $id_pekerja)
         $stmt->bindParam(":id_pekerja", $id_pekerja);
         $stmt->execute();
 
+        # memulangkan hasil
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result;
     } catch (PDOException $e) {
+        # mengehadkan pelaksanaan jika mengalami masalah
         echo 'Database error: ' . $e->getMessage();
         die("db failed: " . $e->getMessage());
     }

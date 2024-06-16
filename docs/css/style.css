@@ -47,7 +47,7 @@ label{
     text-align: left;
 }
 
-input[type="text"],
+input[type="number"],
 input[type="password"] {
     width: calc(100% - 12px);;
     padding-top: 10px;
@@ -59,7 +59,7 @@ input[type="password"] {
     font-size: 14px;
 }
 
-input[type="text"]{
+input[type="number"]{
     margin-bottom: 30px;
 }
 

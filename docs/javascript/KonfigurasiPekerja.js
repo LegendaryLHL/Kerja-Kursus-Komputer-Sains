@@ -27,30 +27,18 @@ for (let i = 0; i < workerCards.length; i++) {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    const addWorker = document.getElementById('add-worker-button');
-    if (addWorker) {
-        addWorker.addEventListener('click', function () {
-            window.location.href = "./TambahPekerja.php?selected=pekerja";
-        });
-    }
-    const addEmployer = document.getElementById('add-employer-button');
-    if (addEmployer) {
-        addEmployer.addEventListener('click', function () {
-            window.location.href = "./TambahPekerja.php?selected=majikan";
-        });
-    }
-    const selectWorker = document.getElementById('select-worker-button');
-    if (selectWorker) {
-        selectWorker.addEventListener('click', function () {
-            window.location.href = "./KonfigurasiPekerja.php?selected=pekerja";
-        });
-    }
-    const selectEmployer = document.getElementById('select-employer-button');
-    if (selectEmployer) {
-        selectEmployer.addEventListener('click', function () {
-            window.location.href = "./KonfigurasiPekerja.php?selected=majikan";
-        });
-    }
+    document.getElementById('add-worker-button')?.addEventListener('click', function () {
+        window.location.href = "./TambahPekerja.php?selected=pekerja";
+    });
+    document.getElementById('add-employer-button')?.addEventListener('click', function () {
+        window.location.href = "./TambahPekerja.php?selected=majikan";
+    });
+    document.getElementById('select-worker-button')?.addEventListener('click', function () {
+        window.location.href = "./KonfigurasiPekerja.php?selected=pekerja";
+    });
+    document.getElementById('select-employer-button')?.addEventListener('click', function () {
+        window.location.href = "./KonfigurasiPekerja.php?selected=majikan";
+    });
 });
 
 function handleWorkerCardClick(event) {

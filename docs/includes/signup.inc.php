@@ -1,19 +1,20 @@
 <?php
 
+# menyemak sama ada request method adalah POST
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    # mendapatkan ruang input nama, ic-number, password dan jenis majikan atau pekerja
     $name = $_POST["name"];
     $ic_number = $_POST["ic-number"];
     $password = $_POST["password"];
     $is_majikan = $_POST["majikan-button"];
 
     try {
-
         require_once 'dbh.inc.php';
         require_once 'signup_model.inc.php';
         require_once 'signup_contr.inc.php';
 
+        # mendapatkan error
         $errors = [];
-
         if (isEmpty($name, $ic_number, $password)) {
             $errors["empty_input"] = "Tolong mengisi semua ruang!";
         }
@@ -28,11 +29,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         require_once 'config_session.inc.php';
-
+        # jika error wujud maka boleh diproses
         if ($errors) {
             $_SESSION["errors"] = $errors;
             header("Location: ../TambahPekerja.php");
         } else {
+            # jika jenis majikan dipilih yang diset dengan javascript
             if (isset($_POST["selected"]) && $_POST["selected"] == "majikan") {
                 setMajikan($pdo, $name, $ic_number, $password);
             } else {

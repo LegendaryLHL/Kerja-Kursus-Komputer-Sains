@@ -14,12 +14,12 @@ var hideTimeout;
 
 var isMouseOverContent = false;
 
-button.addEventListener("mouseenter", function () {
+button?.addEventListener("mouseenter", function () {
     clearTimeout(hideTimeout);
     content.style.display = "block";
 });
 
-button.addEventListener("mouseleave", function () {
+button?.addEventListener("mouseleave", function () {
     if (isMouseOverContent) {
         isMouseOverContent = false;
         hideTimeout = setTimeout(function () {
@@ -32,11 +32,11 @@ button.addEventListener("mouseleave", function () {
     }
 });
 
-content.addEventListener("mouseenter", function () {
+content?.addEventListener("mouseenter", function () {
     clearTimeout(hideTimeout);
     isMouseOverContent = true;
 });
-content.addEventListener("mouseleave", function () {
+content?.addEventListener("mouseleave", function () {
     isMouseOverContent = false;
     hideTimeout = setTimeout(function () {
         content.style.display = "none";

@@ -25,13 +25,17 @@ body {
 
 .brand-title {
     font-size: 22px;
-    padding: 0.9rem 0.8rem;
+    padding: 0.85rem 0.8rem;
     color: #9d9d9d;
     text-decoration: none;
-    transition: color 0.3s;
+    transition: color 0.3s, border-image-source 0.3s;
+    border: 2px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(to left, #707070, #222222);
 }
 .brand-title:hover{
     color: white;
+    border-image-source: linear-gradient(to left, white, #222222);
 }
 
 .navbar-links{
@@ -64,6 +68,7 @@ body {
 #selected{
     background-color: black;
     color: white;
+    border-image-source: linear-gradient(to left, #707070, #9c9c9c, white);
 }
 
 button {

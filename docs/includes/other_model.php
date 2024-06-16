@@ -1,6 +1,9 @@
 <?php
+
+# meletakkan kunci rahsia baharu
 function setKey(object $pdo, string $key)
 {
+    # jika tiada rekod dalam table other, maka masukkan rekod kosong kerana table other hanya boleh ada satu rekod yang boleh null
     if (!issetOther($pdo)) {
         insertOther($pdo);
     }
@@ -11,8 +14,11 @@ function setKey(object $pdo, string $key)
 
     return;
 }
+
+# meletakkan koordinat untuk tempat bekerja baharu
 function setCoord(object $pdo, float $long, float $lat)
 {
+    # jika tiada rekod dalam table other, maka masukkan rekod kosong kerana table other hanya boleh ada satu rekod yang boleh null
     if (!issetOther($pdo)) {
         insertOther($pdo);
     }
@@ -25,8 +31,10 @@ function setCoord(object $pdo, float $long, float $lat)
     return;
 }
 
+# mendapatkan kunci rahsia
 function getKey(object $pdo)
 {
+    # jika tiada rekod dalam table other, maka masukkan rekod kosong kerana table other hanya boleh ada satu rekod yang boleh null
     if (!issetOther($pdo)) {
         insertOther($pdo);
     }
@@ -40,8 +48,11 @@ function getKey(object $pdo)
     }
     return $result;
 }
+
+# mendapatkan koordinat latitude untuk tempat kerja
 function getLat(object $pdo)
 {
+    # jika tiada rekod dalam table other, maka masukkan rekod kosong kerana table other hanya boleh ada satu rekod yang boleh null
     if (!issetOther($pdo)) {
         insertOther($pdo);
     }
@@ -55,8 +66,11 @@ function getLat(object $pdo)
     }
     return $result;
 }
+
+# mendapatkan koordinate longtitute untuk tempat kerja
 function getLong(object $pdo)
 {
+    # jika tiada rekod dalam table other, maka masukkan rekod kosong kerana table other hanya boleh ada satu rekod yang boleh null
     if (!issetOther($pdo)) {
         insertOther($pdo);
     }
@@ -70,6 +84,8 @@ function getLong(object $pdo)
     }
     return $result;
 }
+
+# menambah rekod kosong ke dalam table other
 function insertOther(object $pdo)
 {
     $query = "INSERT INTO other (longitude, latitude, secret_key) VALUES (NULL, NULL, NULL);";
@@ -77,6 +93,7 @@ function insertOther(object $pdo)
     $stmt->execute();
 }
 
+# menyemak sama ada terdapat rekod dalam table other
 function issetOther(object $pdo)
 {
     $query = "SELECT * from other";

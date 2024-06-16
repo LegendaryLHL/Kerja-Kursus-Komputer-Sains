@@ -1,7 +1,7 @@
 <?php
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // javascript set
+    # request diset mengunakan javascript
     $request = $_POST["request"];
 
     try {
@@ -11,25 +11,30 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         require_once 'config_session.inc.php';
         require_once 'other_model.php';
 
+        # mendapatkan apakah jenis request yang diperlukan dan melaksanakan fungsi yang ditentukan
         if ($request == "key") {
+            # meletakkan kunci
             $value = $_POST["key"];
             setKey($pdo, $value);
             header("Location: ../Maklumat.php");
         } else if ($request == "coord") {
+            # meletakkan coordinate
             $longitutde = $_POST["longitude"];
             $latitude = $_POST["latitude"];
             setCoord($pdo, $longitutde, $latitude);
             header("Location: ../Maklumat.php");
         } else if ($request == "delete") {
+            # membuang majikan atau pekerja
             $selected = $_POST["selected"];
             $id = $_POST["id"];
             if ($selected == "majikan") {
-                removeMajikanId($pdo, $id);
+                removeMajikan($pdo, $id);
             } else {
-                removePekerjaId($pdo, $id);
+                removePekerja($pdo, $id);
             }
             header("Location: ../KonfigurasiPekerja.php");
         } else if ($request == "password") {
+            # menukar kata laluan
             $selected = $_POST["selected"];
             $id = $_POST["id"];
             $new_pass = $_POST["new-password"];
@@ -40,7 +45,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             }
             header("Location: ../profil.php");
         }
-        echo "you are not suppose to be here";
     } catch (PDOException $e) {
         die("Signup db failed: " . $e->getMessage());
     }

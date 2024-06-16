@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+# fungsi-fungsi yang digunakan untuk menyemak pendaftaran
+
 function isEmpty(string $name, string $ic_number, string $password)
 {
     if (empty($name) || empty($ic_number) || empty($password)) {
@@ -20,7 +22,7 @@ function isNameExist(object $pdo, string $name)
 
 function isNoKpExist(object $pdo, string $ic_number)
 {
-    if(getPekerjaNoKp($pdo, $ic_number)|| getMajikanNoKp($pdo, $ic_number)){
+    if (getPekerjaNoKp($pdo, $ic_number) || getMajikanNoKp($pdo, $ic_number)) {
         return true;
     }
     return false;

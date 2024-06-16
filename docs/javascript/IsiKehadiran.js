@@ -151,10 +151,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    watchGPSLocation();
     //check if at finish page
     if (buttonSubmit && document.getElementById("gps-location")) {
         submitable = false;
+        watchGPSLocation();
     }
 
     buttonSubmit.addEventListener("click", function (event) {

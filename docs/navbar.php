@@ -19,7 +19,7 @@ $currentPage = end($parts);
       <a href="AnalisisKehadiran.php" <?php if ($currentPage === 'AnalisisKehadiran.php') echo 'id="selected"' ?>>Analisis Kehadiran</a>
       <?php if ($_SESSION['status'] == "majikan") { ?>
         <a href="KonfigurasiPekerja.php" <?php if ($currentPage === 'KonfigurasiPekerja.php') echo 'id="selected"' ?>>Konfigurasi Pekerja</a>
-        <a href="MuatNaikPekerja.php" <?php if ($currentPage === 'MuatNaikPekerja.php') echo 'id="selected"' ?>>MuatNaikPekerja</a>
+        <a href="MuatNaikPekerja.php" <?php if ($currentPage === 'MuatNaikPekerja.php') echo 'id="selected"' ?>>Muat Naik Pekerja</a>
       <?php } ?>
       <div class="info-container">
         <a id="info-button">Info
