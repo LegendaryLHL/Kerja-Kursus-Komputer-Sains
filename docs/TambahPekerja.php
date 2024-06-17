@@ -24,8 +24,11 @@ require_once 'includes/signup_view.inc.php';
     <div class="container">
         <form action="includes/signup.inc.php" method="post" id="add-worker-form">
             <div class="info-box">
+                <!-- memaparkan jenis tambah -->
                 <p class="title-box">Tambah <?php echo isset($_GET['selected']) ? htmlspecialchars($_GET['selected']) : "Pekerja" ?></p>
             </div>
+
+            <!-- borang menambah pengguna-->
             <div class="form-box">
                 <div id="form-form">
                     <label for="nama">Nama</label>
@@ -37,8 +40,11 @@ require_once 'includes/signup_view.inc.php';
                 </div>
             </div>
 
+            <!-- memberitahu jenis tambahan-->
             <input type="hidden" name="selected" <?php if (isset($_GET['selected'])) echo 'value="' . htmlspecialchars($_GET['selected']) . '"'; ?> />
+
             <?php
+            # memaparkan error
             processErrors();
             ?>
             <button id="submit-button" type="submit">Hantar</button>

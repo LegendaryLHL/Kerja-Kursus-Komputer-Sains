@@ -21,7 +21,9 @@ require_once 'includes/signup_view.inc.php';
   require_once 'includes/kehadiran_model.inc.php';
   require_once 'includes/signup_model.inc.php';
   require_once 'includes/dbh.inc.php';
-  require_once 'includes/other_model.php';
+  require_once 'includes/other_model.inc.php';
+
+  # menuliskan coordinate untuk digunakan dalam javascript
   echo '<p style="display: none" id="longitude">' . getLong($pdo) . '</p>';
   echo '<p style="display: none" id="latitude">' . getLat($pdo) . '</p>';
   ?>
@@ -29,6 +31,7 @@ require_once 'includes/signup_view.inc.php';
     <div class="info-box">
       <p class="date-box">Tarikh: <span id="date"></span></p>
       <?php
+      # jika sudah ada kehadiran bermaksud papar skrin habis kerja
       $kehadiran = getKehadiran($pdo, getHari($pdo)['id_hari'], getPekerja($pdo, $_SESSION["name"])['id_pekerja']);
       if ($kehadiran) {
         if ($kehadiran['ada_hadir'] == 0) {
@@ -43,6 +46,7 @@ require_once 'includes/signup_view.inc.php';
         }
       } else {
       ?>
+        <!-- isi kehadiran jika menepati syarat -->
         <p>
           <span id="gps-location" data-tooltip="Sedang kira jarak...">
             Sedang cari GPS...
@@ -71,10 +75,9 @@ require_once 'includes/signup_view.inc.php';
     </div>
   <?php
         processErrors();
-        echo
-        '<button type="submit" id="submit-button">Hantar</button>';
       }
   ?>
+  <button id="submit-button" type="submit">Hantar</button>
   </form>
   <script src="javascript/IsiKehadiran.js"></script>
   <script src="javascript/common.js"></script>

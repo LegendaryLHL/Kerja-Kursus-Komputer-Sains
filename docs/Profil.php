@@ -21,6 +21,7 @@ require_once 'includes/config_session.inc.php';
     require_once 'includes/dbh.inc.php';
     require_once 'includes/signup_model.inc.php';
     require_once 'includes/kehadiran_model.inc.php';
+    # mendapatkan adakah profil majikan atau pekerja
     if (isset($_GET["selected"]) && isset($_GET["id"])) {
         if ($_GET["selected"] == "majikan") {
             $user = getMajikanId($pdo, $_GET['id']);
@@ -38,17 +39,21 @@ require_once 'includes/config_session.inc.php';
             $is_majikan = false;
         }
     }
+    # jika tidak cari penguna balik
     if (!$user) {
         header("Location: ./Profil.php");
     }
+
+    # data yang digunakan oleh javascript
     echo '<p style="display: none" id="status-web">' . ($is_majikan ? 'majikan' : 'pekerja') . '</p>';
     echo '<p style="display: none" id="id-web">' . $user['id_' . ($is_majikan ? 'majikan' : 'pekerja')] . '</p>';
     ?>
-    <form id="form" action="includes/other.php" class="container" method="POST">
+    <form id="form" action="includes/other.inc.php" class="container" method="POST">
         <div class=" worker-container">
             <div class="box">
                 <p class="name"><?php echo $is_majikan ? $user["nama_majikan"] : $user["nama_pekerja"] ?></p>
             </div>
+            <!-- analisis kesendirian jika ialah pekerja -->
             <?php if (!$is_majikan) {
                 $total = countAllHariBekerja($pdo, $user['id_pekerja'])['bilangan_hari_bekerja'];
                 $count = countAllHariDatang($pdo, $user['id_pekerja'])['bilangan_hari_datang'];
@@ -66,6 +71,7 @@ require_once 'includes/config_session.inc.php';
                     </div>
                 </div>
             <?php } ?>
+            <!-- tempat menukar maklumat pengguna -->
             <?php if ($_SESSION["status"] == "majikan") { ?>
                 <div class="box">
                     <input type="text" name="new-password" id="password-field" placeholder="Kata laluan baharu" />

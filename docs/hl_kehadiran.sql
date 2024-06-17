@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2024 at 11:54 AM
+-- Generation Time: Jun 17, 2024 at 08:43 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -33,13 +33,6 @@ CREATE TABLE `hari` (
   `adalah_hari_bekerja` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `hari`
---
-
-INSERT INTO `hari` (`id_hari`, `tarikh`, `adalah_hari_bekerja`) VALUES
-(4, '2024-04-27', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -53,13 +46,6 @@ CREATE TABLE `kehadiran` (
   `masa_mula` datetime NOT NULL DEFAULT curtime(),
   `masa_tamat` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `kehadiran`
---
-
-INSERT INTO `kehadiran` (`id_hari`, `id_pekerja`, `ada_hadir`, `masa_mula`, `masa_tamat`) VALUES
-(4, 17, 1, '2024-04-27 17:54:01', NULL);
 
 -- --------------------------------------------------------
 
@@ -80,8 +66,8 @@ CREATE TABLE `majikan` (
 --
 
 INSERT INTO `majikan` (`id_majikan`, `nama_majikan`, `katalaluan_majikan`, `no_kp_majikan`, `created_at`) VALUES
-(15, 'Elon Musk', '$2y$12$r8RaBWdPmlfiGxusqK/Oau8tWkR5UUNgDWAYnSWQnVQ9e3J8Wc9gi', '11', '2024-04-27 17:53:35'),
-(16, 'Jeff Bezos', '$2y$12$/FAefv8NOA3U2KmKMz3l3enW.DuauCd9JEs0OCMScCJEepCiwjv.O', '22', '2024-04-27 17:53:44');
+(19, 'Muhammad Ali', '11', '11', '2024-06-17 14:41:27'),
+(20, 'Lee Chong Wei', '22', '22', '2024-06-17 14:41:57');
 
 -- --------------------------------------------------------
 
@@ -121,10 +107,9 @@ CREATE TABLE `pekerja` (
 --
 
 INSERT INTO `pekerja` (`id_pekerja`, `nama_pekerja`, `katalaluan_pekerja`, `no_kp_pekerja`, `created_at`) VALUES
-(13, 'John Doe', '$2y$12$AAYodJyu2W9wDDFWBci9bekEzxICBmKuYv2o6anmKYo5dlnZt1iRK', '1', '2024-04-27 17:47:00'),
-(14, 'Jake Smith', '$2y$12$noTSajuRrBH71V2a8OaCiOUH8A6nxThr27ucaxeg0bIJz9YCFxm76', '2', '2024-04-27 17:47:13'),
-(15, 'Lapis Lazuli', '$2y$12$hbamGP6GylrShssxD243m.3J/RxuYNWiSiJ8amzvL3suKrlotvbZK', '3', '2024-04-27 17:47:43'),
-(17, 'D\'squarius Green, Jr. III', '$2y$12$DPpAEC6ECH2FHew16n1JzueNXzAQ4SqoD5nWoYNm6RbzvqjF6Dd76', '4', '2024-04-27 17:53:13');
+(36, 'Liew Xian Yang', '1', '1', '2024-06-17 14:39:36'),
+(38, 'Sum Ting Wong', '2', '2', '2024-06-17 14:40:37'),
+(39, 'Muhammad Haikal', '2', '2', '2024-06-17 14:42:32');
 
 --
 -- Indexes for dumped tables
@@ -163,19 +148,19 @@ ALTER TABLE `pekerja`
 -- AUTO_INCREMENT for table `hari`
 --
 ALTER TABLE `hari`
-  MODIFY `id_hari` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_hari` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `majikan`
 --
 ALTER TABLE `majikan`
-  MODIFY `id_majikan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_majikan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `pekerja`
 --
 ALTER TABLE `pekerja`
-  MODIFY `id_pekerja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_pekerja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- Constraints for dumped tables

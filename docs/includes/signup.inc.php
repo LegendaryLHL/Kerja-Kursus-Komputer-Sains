@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         # mendapatkan error
         $errors = [];
-        if (isEmpty($name, $ic_number, $password)) {
+        if (empty($name) || empty($ic_number) || empty($password)) {
             $errors["empty_input"] = "Tolong mengisi semua ruang!";
         }
         if (isNameExist($pdo, $name)) {

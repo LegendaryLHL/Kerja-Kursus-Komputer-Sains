@@ -19,6 +19,7 @@
   ?>
 
   <form id="form">
+    <!-- jadual untuk menganalisis kehadiran -->
     <table id="attendanceTable">
       <tr>
         <th colspan="3" id="title-row">
@@ -46,6 +47,7 @@
                 <i class="fa fa-calendar" aria-hidden="true"></i>
                 <input type="text" id="date-picker">
               </div>
+              <!-- butang untuk membesar, menperkecilkan dan mencetak-->
               <div class="teachers no-print" onclick="fontChange(1)">+</div>
               <div class=" teachers no-print" onclick="fontChange(-1)">-</div>
               <div class="teachers no-print" onclick="print()">cetak</div>
@@ -65,6 +67,7 @@
         <th>Kehadiran</th>
       </tr>
       <?php
+      # mengisi jadual dengan data
       try {
         require_once 'includes/dbh.inc.php';
         require_once 'includes/signup_model.inc.php';

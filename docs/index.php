@@ -37,6 +37,7 @@ if (!empty($_SESSION['status'])) {
 
   <div class="login-container">
     <h2>Log Masuk</h2>
+    <!-- borang untuk log masuk -->
     <form id="login-form" action='includes/login.inc.php' method='POST'>
       <label for="ic-number">Nombor Kad Pengenalan</label>
       <input type="number" id="ic-number" name="ic-number" required />
@@ -50,6 +51,7 @@ if (!empty($_SESSION['status'])) {
       </div>
 
       <?php
+      # memaparkan error
       processErrors();
       ?>
       <button type="submit">Log Masuk</button>

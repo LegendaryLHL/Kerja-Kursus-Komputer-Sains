@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         require_once 'kehadiran_model.inc.php';
         require_once 'signup_model.inc.php';
         require_once 'config_session.inc.php';
-        require_once 'other_model.php';
+        require_once 'other_model.inc.php';
 
         # menyemak sama ada request adalah untuk menamatkan kehadiran
         if ($_POST["isFinish"] == "true") {

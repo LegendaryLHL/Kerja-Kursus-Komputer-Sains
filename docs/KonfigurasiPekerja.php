@@ -18,7 +18,9 @@
 
   <div class="container">
     <?php
+    # jika jenis sudah dipilih
     if (isset($_GET["selected"])) {
+      # memapar skrin untuk mengkonfigurasi pekerja
       if ($_GET["selected"] == "pekerja") {
         echo
         '<div id="workers-container">
@@ -36,6 +38,7 @@
         try {
           require_once 'includes/dbh.inc.php';
           require_once 'includes/signup_model.inc.php';
+          # memaparkan pekerja dari database
           foreach (getAllPekerja($pdo) as $pekerja) {
             echo
             '<div class="worker-card">
@@ -48,6 +51,7 @@
         }
         echo '</div>';
       } else {
+        # memapar skrin untuk mengkonfigurasi majikan
         echo
         '<div id="workers-container">
           <div id="search-container">
@@ -64,6 +68,7 @@
         try {
           require_once 'includes/dbh.inc.php';
           require_once 'includes/signup_model.inc.php';
+          # memapar majikan dari database
           foreach (getAllMajikan($pdo) as $majikan) {
             echo
             '<div class="worker-card">
@@ -76,6 +81,7 @@
         }
       }
     } else {
+      # tempat untuk pilih jenis konfigurasi
       echo
       '<div id="workers-container">
           <div class="worker-grid">

@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         require_once 'dbh.inc.php';
         require_once 'signup_model.inc.php';
         require_once 'config_session.inc.php';
-        require_once 'other_model.php';
+        require_once 'other_model.inc.php';
 
         # mendapatkan apakah jenis request yang diperlukan dan melaksanakan fungsi yang ditentukan
         if ($request == "key") {

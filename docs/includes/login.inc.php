@@ -26,7 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if ($errors) {
             $_SESSION["errors"] = $errors;
             header("Location: ../index.php");
-            die();
         } else {
             # tiada error maka log masuk
             login($pdo, $ic_number, $password, isset($_POST["remember-me"]));
@@ -34,10 +33,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             # menyemak sama ada error daripada login
             if (isset($_SESSION["errors"])) {
                 header("Location: ../index.php");
-                die();
             } else {
                 header("Location: ../AnalisisKehadiran.php");
-                die();
             }
         }
     } catch (PDOException $e) {
