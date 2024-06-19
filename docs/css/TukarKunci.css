@@ -42,11 +42,7 @@ input{
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-#change-coord{
-    padding-bottom: 10px;
-}
-
-#change-coord, #change-key{
+#change-key{
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;

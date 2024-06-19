@@ -26,7 +26,7 @@
     <?php if ($_SESSION['status'] == "majikan") { ?>
       <!-- tempat tukar kunci-->
       <div id="change-key">
-        <input type="text" name="key" id="latitude-input" placeholder="kunci kehadiran" />
+        <input type="text" name="key" id="key-input" placeholder="kunci kehadiran" />
         <button type="submit" id="key-change-button">Tukar Kunci</button>
       </div>
       <input type="hidden" name="request" id="request-input" />
