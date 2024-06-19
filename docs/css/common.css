@@ -179,7 +179,7 @@ button {
     margin-bottom: 1%;
 }
 
-@media(max-width: 1000px){
+@media(max-width: 1150px){
     .toggle-button{
         display: flex;
     }

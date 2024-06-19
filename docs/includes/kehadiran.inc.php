@@ -3,10 +3,6 @@
 # menyemak sama ada request method adalah POST
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    # mendapatkan ruang input can-go-work
-    if (isset($_POST["can-go-work"])) {
-        $can_go_work = $_POST["can-go-work"];
-    }
 
     try {
         # menyertakan fail-fail yang diperlukan
@@ -37,16 +33,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         # memulangakan error
         $errors = [];
-        # ruang input kosong
-        if (empty($can_go_work)) {
-            $errors["empty_input"] = "Tolong mengisi semua ruang!";
-        }
+
         # kehadiran sudah diisi
         if (getKehadiran($pdo, getHari($pdo)['id_hari'], getPekerja($pdo, $_SESSION["name"])['id_pekerja'])) {
             $errors["kehadiran_fillled"] = "Kehadiran sudah diisi!";
         }
+        # ruang input kosong
+        if (empty($_POST["can-go-work"])) {
+            $errors["empty_input"] = "Tolong mengisi sama ada boleh bekerja atau tidak!";
+            $_SESSION["errors"] = $errors;
+            header("Location: ../IsiKehadiran.php");
+            die();
+        }
+        # mendapatkan ruang input can-go-work
+        $can_work = $_POST["can-go-work"] == "Saya boleh hadir";
         # mengunakan kunci tetapi kunci salah
-        if ($_POST["using-key"] == "true" && $_POST["key"] != getKey($pdo)) {
+        if ($can_work && $_POST["key"] != getKey($pdo)) {
             $errors["wrong_key"] = "Kunci salah!";
         }
 
@@ -55,12 +57,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $_SESSION["errors"] = $errors;
             header("Location: ../IsiKehadiran.php");
         } else {
-            $ada_hadir = 0;
-            if ($can_go_work == 'Saya boleh hadir') {
-                $ada_hadir = 1;
-            }
             # tiada error, maka masukkan kehadiran
-            setKehadiran($pdo, getHari($pdo)['id_hari'], getPekerja($pdo, $_SESSION["name"])['id_pekerja'], $ada_hadir);
+            setKehadiran($pdo, getHari($pdo)['id_hari'], getPekerja($pdo, $_SESSION["name"])['id_pekerja'], $can_work ? 1 : 0);
             $_SESSION["success"] = "Kehadiran berjaya diisi!";
             header("Location: ../AnalisisKehadiran.php");
         }

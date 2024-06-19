@@ -76,8 +76,6 @@ INSERT INTO `majikan` (`id_majikan`, `nama_majikan`, `katalaluan_majikan`, `no_k
 --
 
 CREATE TABLE `other` (
-  `longitude` float DEFAULT NULL,
-  `latitude` float DEFAULT NULL,
   `secret_key` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -85,8 +83,8 @@ CREATE TABLE `other` (
 -- Dumping data for table `other`
 --
 
-INSERT INTO `other` (`longitude`, `latitude`, `secret_key`) VALUES
-(101.541, 2.98437, 'boss is good');
+INSERT INTO `other` (`secret_key`) VALUES
+('hello');
 
 -- --------------------------------------------------------
 

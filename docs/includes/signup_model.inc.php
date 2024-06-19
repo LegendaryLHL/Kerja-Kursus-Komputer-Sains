@@ -103,15 +103,10 @@ function setPekerja(object $pdo, string $name, string $ic_number, string $passwo
     $query = "INSERT INTO pekerja (nama_pekerja, katalaluan_pekerja, no_kp_pekerja) VALUES (:name, :password, :ic_number);";
     $stmt = $pdo->prepare($query);
 
-    # hashkan password
-    $option = [
-        'cost' => 12
-    ];
-    $hashedPwd = password_hash($password, PASSWORD_BCRYPT, $option);
 
     $stmt->bindParam(":name", $name);
     $stmt->bindParam(":ic_number", $ic_number);
-    $stmt->bindParam(":password", $hashedPwd);
+    $stmt->bindParam(":password", $password);
     $stmt->execute();
 
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -124,15 +119,9 @@ function setMajikan(object $pdo, string $name, string $ic_number, string $passwo
     $query = "INSERT INTO majikan (nama_majikan, katalaluan_majikan, no_kp_majikan) VALUES (:name, :password, :ic_number);";
     $stmt = $pdo->prepare($query);
 
-    # haskan password
-    $option = [
-        'cost' => 12
-    ];
-    $hashedPwd = password_hash($password, PASSWORD_BCRYPT, $option);
-
     $stmt->bindParam(":name", $name);
     $stmt->bindParam(":ic_number", $ic_number);
-    $stmt->bindParam(":password", $hashedPwd);
+    $stmt->bindParam(":password", $password);
     $stmt->execute();
 
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -145,14 +134,8 @@ function changePassMajikan(object $pdo, int $id, string $new_pass)
     $query = "UPDATE majikan SET katalaluan_majikan = :new_pass WHERE id_majikan = :id;";
     $stmt = $pdo->prepare($query);
 
-    # haskan password
-    $option = [
-        'cost' => 12
-    ];
-    $hashedPwd = password_hash($new_pass, PASSWORD_BCRYPT, $option);
-
     $stmt->bindParam(":id", $id);
-    $stmt->bindParam(":new_pass", $hashedPwd);
+    $stmt->bindParam(":new_pass", $new_pass);
     $stmt->execute();
 
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -165,14 +148,8 @@ function changePassPekerja(object $pdo, int $id, string $new_pass)
     $query = "UPDATE pekerja SET katalaluan_pekerja = :new_pass WHERE id_pekerja = :id;";
     $stmt = $pdo->prepare($query);
 
-    # haskan password
-    $option = [
-        'cost' => 12
-    ];
-    $hashedPwd = password_hash($new_pass, PASSWORD_BCRYPT, $option);
-
     $stmt->bindParam(":id", $id);
-    $stmt->bindParam(":new_pass", $hashedPwd);
+    $stmt->bindParam(":new_pass", $new_pass);
     $stmt->execute();
 
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -233,7 +210,7 @@ function login(object $pdo, string $ic_number, string $password, bool $remember)
     } else {
         # kalau tidak cari majikan cari untuk pekerja
         $pekerja = getPekerjaNoKp($pdo, $ic_number);
-        if ($pekerja && (password_verify($password, $pekerja["katalaluan_pekerja"]) || $password == $pekerja["katalaluan_pekerja"])) {
+        if ($pekerja && $password == $pekerja["katalaluan_pekerja"]) {
             $_SESSION['name'] = $pekerja['nama_pekerja'];
             $_SESSION['status'] = 'pekerja';
             $_SESSION['ic_number'] = $ic_number;

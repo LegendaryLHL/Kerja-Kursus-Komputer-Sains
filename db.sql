@@ -44,7 +44,5 @@ CREATE TABLE kehadiran (
 );
 
 CREATE TABLE other (
-    longitude FLOAT,
-    latitude FLOAT,
     secret_key VARCHAR(255)
 );

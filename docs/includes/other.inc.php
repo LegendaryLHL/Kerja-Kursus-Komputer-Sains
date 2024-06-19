@@ -16,23 +16,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             # meletakkan kunci
             $value = $_POST["key"];
             setKey($pdo, $value);
-            header("Location: ../Maklumat.php");
-        } else if ($request == "coord") {
-            # meletakkan coordinate
-            $longitutde = $_POST["longitude"];
-            $latitude = $_POST["latitude"];
-            setCoord($pdo, $longitutde, $latitude);
-            header("Location: ../Maklumat.php");
+            $_SESSION["success"] = "Kunci berjaya ditukar!";
+            header("Location: ../TukarKunci.php");
         } else if ($request == "delete") {
             # membuang majikan atau pekerja
             $selected = $_POST["selected"];
             $id = $_POST["id"];
             if ($selected == "majikan") {
                 removeMajikan($pdo, $id);
+                $_SESSION["success"] = "Majikan berjaya dipadam!";
+                header("Location: ../KonfigurasiPekerja.php?selected=majikan");
             } else {
                 removePekerja($pdo, $id);
+                $_SESSION["success"] = "Pekerja berjaya dipadam!";
+                header("Location: ../KonfigurasiPekerja.php?selected=pekerja");
             }
-            header("Location: ../KonfigurasiPekerja.php");
         } else if ($request == "password") {
             # menukar kata laluan
             $selected = $_POST["selected"];
@@ -40,10 +38,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $new_pass = $_POST["new-password"];
             if ($selected == "majikan") {
                 changePassMajikan($pdo, $id, $new_pass);
+                $_SESSION["success"] = "Kata laluan berjaya ditukar!";
+                header("Location: ../Profil.php?selected=majikan&id=" . $id);
             } else {
                 changePassPekerja($pdo, $id, $new_pass);
+                $_SESSION["success"] = "Kata laluan berjaya ditukar!";
+                header("Location: ../Profil.php?selected=pekerja&id=" . $id);
             }
-            header("Location: ../profil.php");
         }
     } catch (PDOException $e) {
         die("Signup db failed: " . $e->getMessage());

@@ -15,22 +15,6 @@ function setKey(object $pdo, string $key)
     return;
 }
 
-# meletakkan koordinat untuk tempat bekerja baharu
-function setCoord(object $pdo, float $long, float $lat)
-{
-    # jika tiada rekod dalam table other, maka masukkan rekod kosong kerana table other hanya boleh ada satu rekod yang boleh null
-    if (!issetOther($pdo)) {
-        insertOther($pdo);
-    }
-    $query = "UPDATE other SET longitude = :long, latitude = :lat;";
-    $stmt = $pdo->prepare($query);
-    $stmt->bindParam(":long", $long);
-    $stmt->bindParam(":lat", $lat);
-    $stmt->execute();
-
-    return;
-}
-
 # mendapatkan kunci rahsia
 function getKey(object $pdo)
 {
@@ -45,42 +29,6 @@ function getKey(object $pdo)
     $result = $stmt->fetch(PDO::FETCH_COLUMN);
     if ($result == NULL) {
         $result = "No key1234";
-    }
-    return $result;
-}
-
-# mendapatkan koordinat latitude untuk tempat kerja
-function getLat(object $pdo)
-{
-    # jika tiada rekod dalam table other, maka masukkan rekod kosong kerana table other hanya boleh ada satu rekod yang boleh null
-    if (!issetOther($pdo)) {
-        insertOther($pdo);
-    }
-    $query = "SELECT latitude FROM other";
-    $stmt = $pdo->prepare($query);
-    $stmt->execute();
-
-    $result = $stmt->fetch(PDO::FETCH_COLUMN);
-    if ($result == NULL) {
-        $result = 2.984373436275586;
-    }
-    return $result;
-}
-
-# mendapatkan koordinate longtitute untuk tempat kerja
-function getLong(object $pdo)
-{
-    # jika tiada rekod dalam table other, maka masukkan rekod kosong kerana table other hanya boleh ada satu rekod yang boleh null
-    if (!issetOther($pdo)) {
-        insertOther($pdo);
-    }
-    $query = "SELECT longitude FROM other";
-    $stmt = $pdo->prepare($query);
-    $stmt->execute();
-
-    $result = $stmt->fetch(PDO::FETCH_COLUMN);
-    if ($result == NULL) {
-        $result = 101.5413571958214;
     }
     return $result;
 }

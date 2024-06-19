@@ -25,15 +25,8 @@ $currentPage = end($parts);
       <?php if ($_SESSION['status'] == "majikan") { ?>
         <a href="KonfigurasiPekerja.php" <?php if ($currentPage === 'KonfigurasiPekerja.php') echo 'id="selected"' ?>>Konfigurasi Pekerja</a>
         <a href="MuatNaikPekerja.php" <?php if ($currentPage === 'MuatNaikPekerja.php') echo 'id="selected"' ?>>Muat Naik Pekerja</a>
+        <a href="TukarKunci.php" <?php if ($currentPage === 'TukarKunci.php') echo 'id="selected"' ?>>Tukar Kunci</a>
       <?php } ?>
-      <div class="info-container">
-        <a id="info-button">Info
-          <span class="caret"></span>
-        </a>
-        <div id="info-content" class="content">
-          <a href="Maklumat.php" <?php if ($currentPage === 'Maklumat.php') echo 'id="selected"' ?>>Maklumat</a>
-        </div>
-      </div>
     <?php } ?>
   </div>
   <!-- user -->

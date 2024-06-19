@@ -22,10 +22,6 @@ require_once 'includes/signup_view.inc.php';
   require_once 'includes/signup_model.inc.php';
   require_once 'includes/dbh.inc.php';
   require_once 'includes/other_model.inc.php';
-
-  # menuliskan coordinate untuk digunakan dalam javascript
-  echo '<p style="display: none" id="longitude">' . getLong($pdo) . '</p>';
-  echo '<p style="display: none" id="latitude">' . getLat($pdo) . '</p>';
   ?>
   <form id="kehadiran-form" action='includes/kehadiran.inc.php' method='POST'>
     <div class="info-box">
@@ -48,12 +44,9 @@ require_once 'includes/signup_view.inc.php';
       ?>
         <!-- isi kehadiran jika menepati syarat -->
         <p>
-          <span id="gps-location" data-tooltip="Sedang kira jarak...">
-            Sedang cari GPS...
-          </span>
+          Kunci Kehadiran
         </p>
-        <input type="text" id="key-input" name="key" onkeyup="keyInput()" placeholder="kunci..." style="display: none" autocomplete="off" />
-        <input type="hidden" id="using-key" name="using-key" value="false">
+        <input type="text" id="key-input" name="key" placeholder="kunci..." autocomplete="off" />
         <input type="hidden" name="isFinish" value="false">
     </div>
     <div class="bullet-box">
