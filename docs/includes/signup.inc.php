@@ -24,6 +24,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (isNoKpExist($pdo, $ic_number)) {
             $errors["ic_taken"] = "Nombor kad pengenalan sudah daftar!";
         }
+        #count the number of characters in the ic number
+        if (strlen($ic_number) != 12) {
+            $errors["invalid_ic_length"] = "Nombor kad pengenalan perlu 12 digit!";
+        }
         if (!preg_match('/^[0-9]+$/', $ic_number)) {
             $errors["invalid_ic"] = "Nombor kad pengenalan hanya boleh guna nombor sahaja!";
         }
@@ -37,10 +41,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             # jika jenis majikan dipilih yang diset dengan javascript
             if (isset($_POST["selected"]) && $_POST["selected"] == "majikan") {
                 setMajikan($pdo, $name, $ic_number, $password);
+                $_SESSION["success"] = "Majikan " . $name . " berjaya didaftar!";
+                header("Location: ../konfigurasiPekerja.php?selected=majikan");
             } else {
                 setPekerja($pdo, $name, $ic_number, $password);
+                $_SESSION["success"] = "Pekerja " . $name . " berjaya didaftar!";
+                header("Location: ../konfigurasiPekerja.php?selected=pekerja");
             }
-            header("Location: ../konfigurasiPekerja.php");
         }
     } catch (PDOException $e) {
         die("Signup db failed: " . $e->getMessage());

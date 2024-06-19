@@ -72,6 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 }
             }
             fclose($file);
+            $_SESSION["success"] = "Pekerja-pekerja berjaya didaftar!";
             header("Location: ../KonfigurasiPekerja.php?selected=pekerja");
         }
     } catch (PDOException $e) {

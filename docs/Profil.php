@@ -20,7 +20,10 @@ require_once 'includes/config_session.inc.php';
     require_once 'includes/check_user.php';
     require_once 'includes/dbh.inc.php';
     require_once 'includes/signup_model.inc.php';
+    require_once 'includes/signup_view.inc.php';
     require_once 'includes/kehadiran_model.inc.php';
+    processSucess();
+
     # mendapatkan adakah profil majikan atau pekerja
     if (isset($_GET["selected"]) && isset($_GET["id"])) {
         if ($_GET["selected"] == "majikan") {
@@ -80,7 +83,7 @@ require_once 'includes/config_session.inc.php';
                 <?php if (!(($is_majikan ? 'majikan' : 'pekerja') == $_SESSION["status"] &&
                     $user['id_' . ($is_majikan ? 'majikan' : 'pekerja')] == $_SESSION["id"]
                 )) { ?>
-                    <button type="submit" id="delete-button">Keluarkan</button>
+                    <button type="submit" id="delete-button">Hapuskan</button>
                 <?php } ?>
                 <input type="hidden" name="selected" id="selected-input" />
                 <input type="hidden" name="id" id="id-input" />

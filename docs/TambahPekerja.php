@@ -32,11 +32,11 @@ require_once 'includes/signup_view.inc.php';
             <div class="form-box">
                 <div id="form-form">
                     <label for="nama">Nama</label>
-                    <input type="text" id="nama" name="name" placeholder="Nama" />
+                    <input type="text" id="nama" name="name" placeholder="Nama" required />
                     <label for="nombor-kad-pengenalan">Nombor Kad Pengenalan</label>
-                    <input type="number" id="nombor-kad-pengenalan" name="ic-number" placeholder="Nombor Kad Pengenalan" />
+                    <input type="number" id="nombor-kad-pengenalan" name="ic-number" placeholder="Nombor Kad Pengenalan" required />
                     <label for="kata-laluan">Kata Laluan</label>
-                    <input type="password" id="kata-laluan" name="password" placeholder="Kata Lalauan" />
+                    <input type="password" id="kata-laluan" name="password" placeholder="Kata Lalauan" required />
                 </div>
             </div>
 

@@ -16,6 +16,8 @@
   <?php
   require_once 'navbar.php';
   require_once 'includes/check_user.php';
+  require_once 'includes/signup_view.inc.php';
+  processSucess();
   ?>
 
   <form id="form">
@@ -50,6 +52,7 @@
               <!-- butang untuk membesar, menperkecilkan dan mencetak-->
               <div class="teachers no-print" onclick="fontChange(1)">+</div>
               <div class=" teachers no-print" onclick="fontChange(-1)">-</div>
+              <div class=" teachers no-print" onclick="resetFont()">set balik</div>
               <div class="teachers no-print" onclick="print()">cetak</div>
             </div>
 

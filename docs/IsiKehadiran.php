@@ -75,9 +75,10 @@ require_once 'includes/signup_view.inc.php';
     </div>
   <?php
         processErrors();
+        echo
+        '<button type="submit" id="submit-button">Hantar</button>';
       }
   ?>
-  <button id="submit-button" type="submit">Hantar</button>
   </form>
   <script src="javascript/IsiKehadiran.js"></script>
   <script src="javascript/common.js"></script>

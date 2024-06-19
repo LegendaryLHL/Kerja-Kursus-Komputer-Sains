@@ -29,6 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $datetime = date("Y-m-d H:i:s");
             # mengemaskini masa tamat kehadiran
             setFinish($pdo, getHari($pdo)['id_hari'], getPekerja($pdo, $_SESSION["name"])['id_pekerja'], $datetime);
+            $_SESSION["success"] = "Kehadiran masa tamat " . $datetime . " berjaya diisi!";
             # menuju ke laman profil
             header("Location: ../Profil.php");
             die();
@@ -60,6 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             }
             # tiada error, maka masukkan kehadiran
             setKehadiran($pdo, getHari($pdo)['id_hari'], getPekerja($pdo, $_SESSION["name"])['id_pekerja'], $ada_hadir);
+            $_SESSION["success"] = "Kehadiran berjaya diisi!";
             header("Location: ../AnalisisKehadiran.php");
         }
     } catch (PDOException $e) {

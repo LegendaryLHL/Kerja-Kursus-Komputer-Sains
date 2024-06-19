@@ -18,6 +18,9 @@
 
   <div class="container">
     <?php
+
+    require_once 'includes/signup_view.inc.php';
+    processSucess();
     # jika jenis sudah dipilih
     if (isset($_GET["selected"])) {
       # memapar skrin untuk mengkonfigurasi pekerja

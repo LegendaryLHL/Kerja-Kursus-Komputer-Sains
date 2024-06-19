@@ -20,8 +20,22 @@ function processErrors()
         echo "<script>
                 setTimeout(function() {
                     alert('" . $errorString . "');
-                }, 500);
+                }, 300);
               </script>";
         unset($_SESSION['errors']);
+    }
+}
+
+function processSucess()
+{
+    require_once "config_session.inc.php";
+    # menyemak sama ada terdapat success
+    if (isset($_SESSION["success"])) {
+        echo "<script>
+                setTimeout(function() {
+                    alert('" . $_SESSION["success"] . "');
+                }, 300);
+              </script>";
+        unset($_SESSION['success']);
     }
 }

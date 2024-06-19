@@ -101,7 +101,7 @@ for (let i = 0; i < buttons.length; i++) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById("attendanceTable").style.fontSize = "17px";
+    resetFont();
     const datePicker = flatpickr("#date-picker", {
         defaultDate: currentDate,
         onChange: function (selectedDates, dateStr, instance) {
@@ -150,4 +150,8 @@ function fontChange(num) {
     const table = document.getElementById("attendanceTable");
     let value = parseInt(table.style.fontSize.slice(0, table.style.fontSize.length - 2)) + num;
     table.style.fontSize = value + "px";
+}
+
+function resetFont() {
+    document.getElementById("attendanceTable").style.fontSize = "17px";
 }

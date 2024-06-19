@@ -25,6 +25,16 @@ input[type="text"] {
     font-size: 20px;
     margin: 0;
     margin-left: 1%;
+    animation: glowEffect 0.4s;
+}
+
+@keyframes glowEffect {
+    0% {
+        text-shadow: 0 0 10px #606060;
+    }
+    100% {
+        text-shadow: none;
+    }
 }
 
 #date-segment, .selector, .button{
@@ -152,6 +162,7 @@ tr td:nth-child(2), th:nth-child(2){
     padding: 2px 6px;
     background-color: #f0f0f0;
     cursor: pointer;
+    user-select: none; 
 }
 
 @media print {
