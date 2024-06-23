@@ -3,11 +3,13 @@
 # meletakkan kunci rahsia baharu
 function setKey(object $pdo, string $key)
 {
-    # jika tiada rekod dalam table other, maka masukkan rekod kosong kerana table other hanya boleh ada satu rekod yang boleh null
-    if (!issetOther($pdo)) {
-        insertOther($pdo);
+    # jika tiada rekod dalam table other, maka masukkan rekod kerana kunci_kehadiran ada satu rekod sahaja
+    $query = "";
+    if (!issetKunciKehadiran($pdo)) {
+        $query = "INSERT INTO kunci_kehadiran (kunci) VALUES (:new_secret_key);";
+    } else {
+        $query = "UPDATE kunci_kehadiran SET kunci = :new_secret_key;";
     }
-    $query = "UPDATE other SET secret_key = :new_secret_key;";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(":new_secret_key", $key);
     $stmt->execute();
@@ -18,33 +20,18 @@ function setKey(object $pdo, string $key)
 # mendapatkan kunci rahsia
 function getKey(object $pdo)
 {
-    # jika tiada rekod dalam table other, maka masukkan rekod kosong kerana table other hanya boleh ada satu rekod yang boleh null
-    if (!issetOther($pdo)) {
-        insertOther($pdo);
-    }
-    $query = "SELECT secret_key FROM other";
+    $query = "SELECT kunci FROM kunci_kehadiran";
     $stmt = $pdo->prepare($query);
     $stmt->execute();
 
     $result = $stmt->fetch(PDO::FETCH_COLUMN);
-    if ($result == NULL) {
-        $result = "No key1234";
-    }
     return $result;
 }
 
-# menambah rekod kosong ke dalam table other
-function insertOther(object $pdo)
-{
-    $query = "INSERT INTO other (longitude, latitude, secret_key) VALUES (NULL, NULL, NULL);";
-    $stmt = $pdo->prepare($query);
-    $stmt->execute();
-}
-
 # menyemak sama ada terdapat rekod dalam table other
-function issetOther(object $pdo)
+function issetKunciKehadiran(object $pdo)
 {
-    $query = "SELECT * from other";
+    $query = "SELECT * from kunci_kehadiran";
     $stmt = $pdo->prepare($query);
     $stmt->execute();
 

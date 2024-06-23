@@ -34,11 +34,17 @@ require_once 'includes/signup_view.inc.php';
           echo
           '<p>Tidak Bekerja</p>';
         } else {
-          echo
-          '<p>Habis kerja?</p>
+          if ($kehadiran['masa_tamat'] == null) {
+            echo
+            '<p>Habis kerja?</p>
             <input type="hidden" name="isFinish" value="true">
-          </div>
-          <button type="submit" id="submit-button">Habis</button>';
+            </div>
+            <button type="submit" id="submit-button">Habis</button>';
+          } else {
+            $dateTime = new DateTime($kehadiran['masa_tamat']);
+            echo
+            '<p>Sudah Tamat bekerja pada ' . $dateTime->format('H:i:s') . '</p>';
+          }
         }
       } else {
       ?>

@@ -43,6 +43,7 @@ CREATE TABLE kehadiran (
     ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-CREATE TABLE other (
-    secret_key VARCHAR(255)
+
+CREATE TABLE kunci_kehadiran (
+    kunci VARCHAR(255) UNIQUE NOT NULL,
 );

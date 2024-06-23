@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         # mendapatkan ruang input can-go-work
         $can_work = $_POST["can-go-work"] == "Saya boleh hadir";
         # mengunakan kunci tetapi kunci salah
-        if ($can_work && $_POST["key"] != getKey($pdo)) {
+        if ($can_work && issetKunciKehadiran($pdo) && $_POST["key"] != getKey($pdo)) {
             $errors["wrong_key"] = "Kunci salah!";
         }
 

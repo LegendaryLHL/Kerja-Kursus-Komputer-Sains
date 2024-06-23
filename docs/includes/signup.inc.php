@@ -21,12 +21,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (isNameExist($pdo, $name)) {
             $errors["name_taken"] = "Nama sudah didaftar, guna nama lain!";
         }
-        if (isNoKpExist($pdo, $ic_number)) {
-            $errors["ic_taken"] = "Nombor kad pengenalan sudah daftar!";
-        }
-        #count the number of characters in the ic number
+        # menyemak sama ada nombor kad pengenalan adalah 12 digit dan hanya nombor
         if (strlen($ic_number) != 12) {
             $errors["invalid_ic_length"] = "Nombor kad pengenalan perlu 12 digit!";
+        }
+        if (isNoKpExist($pdo, $ic_number)) {
+            $errors["ic_taken"] = "Nombor kad pengenalan sudah daftar!";
         }
         if (!preg_match('/^[0-9]+$/', $ic_number)) {
             $errors["invalid_ic"] = "Nombor kad pengenalan hanya boleh guna nombor sahaja!";

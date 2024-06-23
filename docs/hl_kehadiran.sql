@@ -72,18 +72,18 @@ INSERT INTO `majikan` (`id_majikan`, `nama_majikan`, `katalaluan_majikan`, `no_k
 -- --------------------------------------------------------
 
 --
--- Table structure for table `other`
+-- Table structure for table `kunci_kehadiran`
 --
 
-CREATE TABLE `other` (
-  `secret_key` varchar(255) DEFAULT NULL
+CREATE TABLE `kunci_kehadiran` (
+  `kunci` varchar(255) UNIQUE NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `other`
+-- Dumping data for table `kunci_kehadiran`
 --
 
-INSERT INTO `other` (`secret_key`) VALUES
+INSERT INTO `kunci_kehadiran` (`kunci`) VALUES
 ('hello');
 
 -- --------------------------------------------------------
