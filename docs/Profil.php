@@ -80,10 +80,15 @@ require_once 'includes/config_session.inc.php';
                     <input type="text" name="new-password" id="password-field" placeholder="Kata laluan baharu" />
                     <button type="submit" id="password-button">Tukar kata laluan</button>
                 </div>
-                <?php if (!(($is_majikan ? 'majikan' : 'pekerja') == $_SESSION["status"] &&
+                <?php if (($is_majikan ? 'majikan' : 'pekerja') == $_SESSION["status"] &&
                     $user['id_' . ($is_majikan ? 'majikan' : 'pekerja')] == $_SESSION["id"]
-                )) { ?>
-                    <button type="submit" id="delete-button">Hapuskan</button>
+                ) { ?>
+                    <!-- tidak boleh menghapuskan sendiri dengan overide event listener lama-->
+                    <button id="delete-button" onclick="alert('Anda tidak boleh hapus akaun sendiri!')">Hapuskan</button>
+                <?php
+
+                } else { ?>
+                    <button type="submit" id="delete-button" onclick="submitCustom()">Hapuskan</button>
                 <?php } ?>
                 <input type="hidden" name="selected" id="selected-input" />
                 <input type="hidden" name="id" id="id-input" />

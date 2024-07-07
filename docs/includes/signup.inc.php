@@ -6,7 +6,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $name = $_POST["name"];
     $ic_number = $_POST["ic-number"];
     $password = $_POST["password"];
-    $is_majikan = $_POST["majikan-button"];
 
     try {
         require_once 'dbh.inc.php';
