@@ -66,8 +66,8 @@ CREATE TABLE `majikan` (
 --
 
 INSERT INTO `majikan` (`id_majikan`, `nama_majikan`, `katalaluan_majikan`, `no_kp_majikan`, `created_at`) VALUES
-(19, 'Muhammad Ali', '11', '11', '2024-06-17 14:41:27'),
-(20, 'Lee Chong Wei', '22', '22', '2024-06-17 14:41:57');
+(1, 'Muhammad Ali', '11', '11', '2024-06-17 14:41:27'),
+(2, 'Lee Chong Wei', '22', '22', '2024-06-17 14:41:57');
 
 -- --------------------------------------------------------
 
@@ -105,9 +105,9 @@ CREATE TABLE `pekerja` (
 --
 
 INSERT INTO `pekerja` (`id_pekerja`, `nama_pekerja`, `katalaluan_pekerja`, `no_kp_pekerja`, `created_at`) VALUES
-(36, 'Liew Xian Yang', '1', '1', '2024-06-17 14:39:36'),
-(38, 'Sum Ting Wong', '2', '2', '2024-06-17 14:40:37'),
-(39, 'Muhammad Haikal', '2', '2', '2024-06-17 14:42:32');
+(1, 'Liew Xian Yang', '1', '1', '2024-06-17 14:39:36'),
+(2, 'Melina Ming', '2', '2', '2024-06-17 14:40:37'),
+(3, 'Muhammad Haikal', '2', '2', '2024-06-17 14:42:32');
 
 --
 -- Indexes for dumped tables
