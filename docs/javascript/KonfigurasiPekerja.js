@@ -17,10 +17,15 @@ for (let i = 0; i < workerCards.length; i++) {
 
 document.addEventListener('DOMContentLoaded', function () {
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has('query')) {
-        document.getElementById('searchInput').value = urlParams.get('query');
-        document.getElementById('searchInput').focus();
+    const search = document.getElementById('searchInput');
+    if (urlParams.has('query') && search) {
+        search.value = urlParams.get('query');
+        search.focus();
     }
+    search?.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') query();
+    });
+    document.getElementById('search-box')?.addEventListener('click', query);
     document.getElementById('add-worker-button')?.addEventListener('click', function () {
         window.location.href = "./TambahPekerja.php?selected=pekerja";
     });

@@ -11,14 +11,6 @@
     justify-content: flex-end;
 }
 
-input[type="text"] {
-    padding: 6px;
-    border-radius: 4px;
-    border: 2px solid #ccc;
-    height: 14px;
-    margin: 0;
-}
-
 #search-box {
     border-radius: 4px;
     color: white;
@@ -29,7 +21,16 @@ input[type="text"] {
     width: 28px;
     padding-left: 8px;
     padding-top: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
+
+
+#search-box:hover {
+    background-color: #0056b3;
+}
+
+
 
 .worker-grid {
     margin-top: 20px;

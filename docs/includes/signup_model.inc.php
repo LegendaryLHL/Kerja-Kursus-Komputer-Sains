@@ -78,7 +78,7 @@ function getMajikanNoKp(object $pdo, string $nokp)
     return $result;
 }
 
-# mendapatkan semua pekerja
+# mendapatkan semua pekerja menguna query
 function getAllPekerja(object $pdo, string $queryName = '%')
 {
     # query untuk mendapatkan semua pekerja
@@ -94,7 +94,7 @@ function getAllPekerja(object $pdo, string $queryName = '%')
     return $result;
 }
 
-# mendapatkan semua majikan
+# mendapatkan semua majikan menguna query
 function getAllMajikan(object $pdo, string $queryName = '%')
 {
     $query = "SELECT * FROM majikan WHERE UPPER(nama_majikan) LIKE :query;";

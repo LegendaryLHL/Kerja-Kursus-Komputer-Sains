@@ -28,7 +28,7 @@
         echo
         '<div id="workers-container">
           <div id="search-container">
-            <input type="text" id="searchInput" onkeyup="query()" placeholder="Cari..." />
+            <input type="text" id="searchInput" placeholder="Cari..." />
             <div id="search-box">
               <span><i class="fas fa-search fa-fw"></i></span>
             </div>
@@ -58,7 +58,7 @@
         echo
         '<div id="workers-container">
           <div id="search-container">
-            <input type="text" id="searchInput" onkeyup="query()" placeholder="Cari..." />
+            <input type="text" id="searchInput" placeholder="Cari..." />
             <div id="search-box">
               <span><i class="fas fa-search fa-fw"></i></span>
             </div>
