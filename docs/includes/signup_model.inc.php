@@ -17,11 +17,15 @@ function getPekerja(object $pdo, string $name)
 # mendapatkan pekerja dengan no_kp
 function getPekerjaNoKp(object $pdo, string $nokp)
 {
+    # query untuk mendapatkan pekerja dengan no_kp
     $query = "SELECT * FROM pekerja WHERE no_kp_pekerja = :nokp LIMIT 1;";
+
+    # melaksanakan statement
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(":nokp", $nokp);
     $stmt->execute();
 
+    # memulangkan hasil
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result;
 }
@@ -75,21 +79,28 @@ function getMajikanNoKp(object $pdo, string $nokp)
 }
 
 # mendapatkan semua pekerja
-function getAllPekerja(object $pdo)
+function getAllPekerja(object $pdo, string $queryName = '%')
 {
-    $query = "SELECT * FROM pekerja";
+    # query untuk mendapatkan semua pekerja
+    $query = "SELECT * FROM pekerja WHERE UPPER(nama_pekerja) LIKE :query;";
     $stmt = $pdo->prepare($query);
+    # mengikat parameter mencari pekerja dengan nama yang sama
+    $searchQuery = '%' . strtoupper($queryName) . '%';
+    $stmt->bindParam(":query", $searchQuery);
     $stmt->execute();
 
+    # memulangkan hasil
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $result;
 }
 
 # mendapatkan semua majikan
-function getAllMajikan(object $pdo)
+function getAllMajikan(object $pdo, string $queryName = '%')
 {
-    $query = "SELECT * FROM majikan";
+    $query = "SELECT * FROM majikan WHERE UPPER(nama_majikan) LIKE :query;";
     $stmt = $pdo->prepare($query);
+    $searchQuery = '%' . strtoupper($queryName) . '%';
+    $stmt->bindParam(":query", $searchQuery);
     $stmt->execute();
 
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);

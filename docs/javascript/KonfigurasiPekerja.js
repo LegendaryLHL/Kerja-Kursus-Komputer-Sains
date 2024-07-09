@@ -1,20 +1,9 @@
-function searchGrid() {
-    let input, filter, grid, card, name, i, txtValue;
-    input = document.getElementById("searchInput");
-    filter = input.value.toUpperCase();
-    grid = document.getElementsByClassName("worker-grid")[0];
-    card = grid.getElementsByClassName("worker-card");
-
-    for (i = 0; i < card.length; i++) {
-        name = card[i].getElementsByClassName("worker-name")[0];
-        if (name) {
-            txtValue = name.textContent || name.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                card[i].style.display = "";
-            } else {
-                card[i].style.display = "none";
-            }
-        }
+function query() {
+    if (document.getElementById('add-worker-button')) {
+        window.location.href = "./KonfigurasiPekerja.php?selected=pekerja&query=" + document.getElementById('searchInput').value;
+    }
+    else if (document.getElementById('add-employer-button')) {
+        window.location.href = "./KonfigurasiPekerja.php?selected=majikan&query=" + document.getElementById('searchInput').value;
     }
 }
 
@@ -27,6 +16,11 @@ for (let i = 0; i < workerCards.length; i++) {
 
 
 document.addEventListener('DOMContentLoaded', function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('query')) {
+        document.getElementById('searchInput').value = urlParams.get('query');
+        document.getElementById('searchInput').focus();
+    }
     document.getElementById('add-worker-button')?.addEventListener('click', function () {
         window.location.href = "./TambahPekerja.php?selected=pekerja";
     });

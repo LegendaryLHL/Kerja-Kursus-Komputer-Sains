@@ -28,7 +28,7 @@
         echo
         '<div id="workers-container">
           <div id="search-container">
-            <input type="text" id="searchInput" onkeyup="searchGrid()" placeholder="Cari..." />
+            <input type="text" id="searchInput" onkeyup="query()" placeholder="Cari..." />
             <div id="search-box">
               <span><i class="fas fa-search fa-fw"></i></span>
             </div>
@@ -41,8 +41,8 @@
         try {
           require_once 'includes/dbh.inc.php';
           require_once 'includes/signup_model.inc.php';
-          # memaparkan pekerja dari database
-          foreach (getAllPekerja($pdo) as $pekerja) {
+          # memaparkan pekerja dari database dengan query
+          foreach (getAllPekerja($pdo, (isset($_GET['query']) ? $_GET['query'] : '%')) as $pekerja) {
             echo
             '<div class="worker-card">
                   <p class="worker-name">' . htmlspecialchars($pekerja['nama_pekerja']) . '</p>
@@ -58,7 +58,7 @@
         echo
         '<div id="workers-container">
           <div id="search-container">
-            <input type="text" id="searchInput" onkeyup="searchGrid()" placeholder="Cari..." />
+            <input type="text" id="searchInput" onkeyup="query()" placeholder="Cari..." />
             <div id="search-box">
               <span><i class="fas fa-search fa-fw"></i></span>
             </div>
@@ -72,7 +72,7 @@
           require_once 'includes/dbh.inc.php';
           require_once 'includes/signup_model.inc.php';
           # memapar majikan dari database
-          foreach (getAllMajikan($pdo) as $majikan) {
+          foreach (getAllMajikan($pdo, (isset($_GET['query']) ? $_GET['qeury'] : '%')) as $majikan) {
             echo
             '<div class="worker-card">
                   <p class="worker-name">' . htmlspecialchars($majikan['nama_majikan']) . '</p>
