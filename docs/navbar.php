@@ -23,7 +23,7 @@ $currentPage = end($parts);
       <!-- majikan sahaja -->
       <a href="AnalisisKehadiran.php" <?php if ($currentPage === 'AnalisisKehadiran.php') echo 'id="selected"' ?>>Analisis Kehadiran</a>
       <?php if ($_SESSION['status'] == "majikan") { ?>
-        <a href="KonfigurasiPekerja.php" <?php if ($currentPage === 'KonfigurasiPekerja.php') echo 'id="selected"' ?>>Konfigurasi Pekerja</a>
+        <a href="KonfigurasiPekerja.php" <?php if ($currentPage === 'KonfigurasiPekerja.php' || $currentPage === 'TambahPekerja.php') echo 'id="selected"' ?>>Konfigurasi Pekerja</a>
         <a href="MuatNaikPekerja.php" <?php if ($currentPage === 'MuatNaikPekerja.php') echo 'id="selected"' ?>>Muat Naik Pekerja</a>
         <a href="TukarKunci.php" <?php if ($currentPage === 'TukarKunci.php') echo 'id="selected"' ?>>Tukar Kunci</a>
       <?php } ?>
