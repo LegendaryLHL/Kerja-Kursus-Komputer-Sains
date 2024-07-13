@@ -3,6 +3,7 @@ function submitCustom() {
     document.getElementById("form").submit();
 }
 
+// mengisi post input
 if (document.getElementById("password-button")) {
     const selected = document.getElementById("status-web").textContent.trim();
     const id = document.getElementById("id-web").textContent.trim();

@@ -7,7 +7,7 @@ toggleButton.addEventListener('click', () => {
     user.classList.toggle('active')
 })
 
-//user
+// script untuk dropdown apabila user mengarahkan kursor ke button user
 var button = document.getElementById("user-button");
 var content = document.getElementById("user-content");
 var hideTimeout;

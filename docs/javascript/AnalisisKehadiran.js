@@ -3,6 +3,7 @@ function searchTable() {
     const table = document.getElementById("attendanceTable");
     const tr = table.getElementsByTagName("tr");
 
+    // query tetapi menguna js kerana lebih cepat
     for (i = 0; i < tr.length; i++) {
         td = tr[i].getElementsByTagName("td")[1]; // index 1 corresponds to the 'Name' column
         if (td) {
@@ -31,7 +32,7 @@ for (let i = 0; i < dataRows.length; i++) {
 
 
 
-// First load
+// apabila masuk menginitialisasikan selepas reload
 const selector = document.getElementById("selector-dropdown");
 const day = document.getElementById("day-segment-value");
 const month = document.getElementById("month-segment-value");
@@ -87,6 +88,7 @@ function moveCalendar(direction) {
 
 
 selector.addEventListener("change", function () {
+    // reload dengan paremeter baru
     post();
 });
 
@@ -96,6 +98,7 @@ for (let i = 0; i < buttons.length; i++) {
     button.addEventListener("click", function (event) {
         event.preventDefault();
         moveCalendar(i === 0 ? -1 : 1);
+        // reload dengan paremeter baru
         post();
     });
 }
@@ -107,6 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
         onChange: function (selectedDates, dateStr, instance) {
             const date = new Date(dateStr);
             currentDate = date;
+            // reload dengan paremeter baru
             post();
         }
     });

@@ -1,3 +1,4 @@
+// query dengan get
 function query() {
     if (document.getElementById('add-worker-button')) {
         window.location.href = "./KonfigurasiPekerja.php?selected=pekerja&query=" + document.getElementById('searchInput').value;
@@ -7,6 +8,7 @@ function query() {
     }
 }
 
+// click menganalisis kendirian
 const workerCards = document.getElementsByClassName('worker-card');
 for (let i = 0; i < workerCards.length; i++) {
     workerCards[i].addEventListener('click', handleWorkerCardClick);
