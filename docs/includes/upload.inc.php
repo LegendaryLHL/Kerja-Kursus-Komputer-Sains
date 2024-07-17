@@ -7,7 +7,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     try {
         require_once 'dbh.inc.php';
         require_once 'signup_model.inc.php';
-        require_once 'signup_contr.inc.php';
 
         require_once 'config_session.inc.php';
         # mendapatkan error fail
@@ -50,14 +49,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 if (empty($name) || empty($ic_number) || empty($password)) {
                     $errors["empty_input"] = "Tolong mengisi semua ruang! Baris ke-" . $count;
                 }
-                if (isNameExist($pdo, $name)) {
+                if (getPenggunaNama($pdo, $name)) {
                     $errors["name_taken"] = "Nama sudah didaftar, guna nama lain! Baris ke-" . $count;
                 }
                 # menyemak sama ada nombor kad pengenalan adalah 12 digit dan hanya nombor
                 if (strlen($ic_number) != 12) {
                     $errors["invalid_ic_length"] = "Nombor kad pengenalan perlu 12 digit!";
                 }
-                if (isNoKpExist($pdo, $ic_number)) {
+                if (getPenggunaNoKp($pdo, $ic_number)) {
                     $errors["ic_taken"] = "Nombor kad pengenalan sudah daftar! Baris ke-" . $count;
                 }
                 if (!preg_match('/^[0-9]+$/', $ic_number)) {

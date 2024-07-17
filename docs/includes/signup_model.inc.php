@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 # mendapatkan pekerja dengan nama
-function getPekerja(object $pdo, string $name)
+function getPenggunaNama(object $pdo, string $name)
 {
-    $query = "SELECT * FROM pekerja WHERE nama_pekerja = :name LIMIT 1;";
+    $query = "SELECT * FROM pengguna WHERE nama_pengguna = :name AND adalah_majikan = 0 LIMIT 1;";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(":name", $name);
     $stmt->execute();
@@ -15,10 +15,10 @@ function getPekerja(object $pdo, string $name)
 }
 
 # mendapatkan pekerja dengan no_kp
-function getPekerjaNoKp(object $pdo, string $nokp)
+function getPenggunaNoKp(object $pdo, string $nokp)
 {
     # query untuk mendapatkan pekerja dengan no_kp
-    $query = "SELECT * FROM pekerja WHERE no_kp_pekerja = :nokp LIMIT 1;";
+    $query = "SELECT * FROM pengguna WHERE no_kp_pengguna = :nokp LIMIT 1;";
 
     # melaksanakan statement
     $stmt = $pdo->prepare($query);
@@ -30,22 +30,10 @@ function getPekerjaNoKp(object $pdo, string $nokp)
     return $result;
 }
 
-# mendapatkan majikan dengan nama
-function getMajikan(object $pdo, string $name)
-{
-    $query = "SELECT * FROM majikan WHERE nama_majikan = :name LIMIT 1;";
-    $stmt = $pdo->prepare($query);
-    $stmt->bindParam(":name", $name);
-    $stmt->execute();
-
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $result;
-}
-
 # mendapatkan pekerja dengan id
-function getPekerjaId(object $pdo, int $id)
+function getPengguna(object $pdo, int $id)
 {
-    $query = "SELECT * FROM pekerja WHERE id_pekerja = :id LIMIT 1;";
+    $query = "SELECT * FROM pengguna WHERE id_pengguna = :id LIMIT 1;";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(":id", $id);
     $stmt->execute();
@@ -54,35 +42,12 @@ function getPekerjaId(object $pdo, int $id)
     return $result;
 }
 
-# mendapatkan majikan dengan id
-function getMajikanId(object $pdo, int $id)
-{
-    $query = "SELECT * FROM majikan WHERE id_majikan = :id LIMIT 1;";
-    $stmt = $pdo->prepare($query);
-    $stmt->bindParam(":id", $id);
-    $stmt->execute();
-
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $result;
-}
-
-# mendapatkan majikan dengan no_kp
-function getMajikanNoKp(object $pdo, string $nokp)
-{
-    $query = "SELECT * FROM majikan WHERE no_kp_majikan = :nokp LIMIT 1;";
-    $stmt = $pdo->prepare($query);
-    $stmt->bindParam(":nokp", $nokp);
-    $stmt->execute();
-
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $result;
-}
 
 # mendapatkan semua pekerja menguna query
 function getAllPekerja(object $pdo, string $queryName = '%')
 {
     # query untuk mendapatkan semua pekerja
-    $query = "SELECT * FROM pekerja WHERE UPPER(nama_pekerja) LIKE :query;";
+    $query = "SELECT * FROM pengguna WHERE UPPER(nama_pengguna) LIKE :query AND adalah_majikan = 0;";
     $stmt = $pdo->prepare($query);
     # mengikat parameter mencari pekerja dengan nama yang sama
     $searchQuery = '%' . strtoupper($queryName) . '%';
@@ -97,7 +62,7 @@ function getAllPekerja(object $pdo, string $queryName = '%')
 # mendapatkan semua majikan menguna query
 function getAllMajikan(object $pdo, string $queryName = '%')
 {
-    $query = "SELECT * FROM majikan WHERE UPPER(nama_majikan) LIKE :query;";
+    $query = "SELECT * FROM pengguna WHERE UPPER(nama_pengguna) LIKE :query AND adalah_majikan = 1;";
     $stmt = $pdo->prepare($query);
     $searchQuery = '%' . strtoupper($queryName) . '%';
     $stmt->bindParam(":query", $searchQuery);
@@ -111,7 +76,7 @@ function getAllMajikan(object $pdo, string $queryName = '%')
 function setPekerja(object $pdo, string $name, string $ic_number, string $password)
 {
     # query untuk memasukkan pekerja
-    $query = "INSERT INTO pekerja (nama_pekerja, katalaluan_pekerja, no_kp_pekerja) VALUES (:name, :password, :ic_number);";
+    $query = "INSERT INTO pengguna (nama_pengguna, katalaluan_pengguna, no_kp_pengguna, adalah_majikan) VALUES (:name, :password, :ic_number, 0);";
     $stmt = $pdo->prepare($query);
 
 
@@ -127,7 +92,7 @@ function setPekerja(object $pdo, string $name, string $ic_number, string $passwo
 # menambah majikan
 function setMajikan(object $pdo, string $name, string $ic_number, string $password)
 {
-    $query = "INSERT INTO majikan (nama_majikan, katalaluan_majikan, no_kp_majikan) VALUES (:name, :password, :ic_number);";
+    $query = "INSERT INTO pengguna (nama_pengguna, katalaluan_pengguna, no_kp_pengguna, adalah_majikan) VALUES (:name, :password, :ic_number, 1);";
     $stmt = $pdo->prepare($query);
 
     $stmt->bindParam(":name", $name);
@@ -140,23 +105,9 @@ function setMajikan(object $pdo, string $name, string $ic_number, string $passwo
 }
 
 # menukar kata laluan majikan
-function changePassMajikan(object $pdo, int $id, string $new_pass)
+function changePass(object $pdo, int $id, string $new_pass)
 {
-    $query = "UPDATE majikan SET katalaluan_majikan = :new_pass WHERE id_majikan = :id;";
-    $stmt = $pdo->prepare($query);
-
-    $stmt->bindParam(":id", $id);
-    $stmt->bindParam(":new_pass", $new_pass);
-    $stmt->execute();
-
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $result;
-}
-
-# menukar kata laluan pekerja
-function changePassPekerja(object $pdo, int $id, string $new_pass)
-{
-    $query = "UPDATE pekerja SET katalaluan_pekerja = :new_pass WHERE id_pekerja = :id;";
+    $query = "UPDATE pengguna SET katalaluan_pengguna = :new_pass WHERE id_pengguna = :id;";
     $stmt = $pdo->prepare($query);
 
     $stmt->bindParam(":id", $id);
@@ -168,15 +119,15 @@ function changePassPekerja(object $pdo, int $id, string $new_pass)
 }
 
 # membuang pekerja
-function removePekerja(object $pdo, int $id)
+function remove(object $pdo, int $id)
 {
     try {
         # menyemak sama ada pekerja wujud
-        $worker = getPekerjaId($pdo, $id);
+        $worker = getPengguna($pdo, $id);
 
         # jika pekerja wujud, maka buang pekerja itu
         if ($worker) {
-            $deleteQuery = "DELETE FROM pekerja WHERE id_pekerja = :id;";
+            $deleteQuery = "DELETE FROM pengguna WHERE id_pengguna = :id;";
             $deleteStmt = $pdo->prepare($deleteQuery);
             $deleteStmt->bindParam(":id", $id);
             $deleteStmt->execute();
@@ -187,52 +138,25 @@ function removePekerja(object $pdo, int $id)
     }
 }
 
-# membuang majikan
-function removeMajikan(object $pdo, int $id)
-{
-    try {
-        # menyemak sama ada majikan wujud
-        $employer = getMajikanId($pdo, $id);
-
-        # jika pekerja wujud, maka buang majikan itu
-        if ($employer) {
-            $deleteQuery = "DELETE FROM majikan WHERE id_majikan = :id;";
-            $deleteStmt = $pdo->prepare($deleteQuery);
-            $deleteStmt->bindParam(":id", $id);
-            $deleteStmt->execute();
-        }
-    } catch (PDOException $e) {
-        echo 'Database error: ' . $e->getMessage();
-        die("db failed: " . $e->getMessage());
-    }
-}
 
 # fungsi untuk membantu login
 function login(object $pdo, string $ic_number, string $password, bool $remember)
 {
     # mendapatkan majikan
-    $majikan = getMajikanNoKp($pdo, $ic_number);
+    $pengguna = getPenggunaNoKp($pdo, $ic_number);
     # jika majikan wujud dan kata laluan sama dengan yang dimasukkan sama ada dihash atau tidak
-    if ($majikan && (password_verify($password, $majikan["katalaluan_majikan"]) || $password == $majikan["katalaluan_majikan"])) {
-        $_SESSION['name'] = $majikan['nama_majikan'];
-        $_SESSION['status'] = 'majikan';
+    if ($pengguna && $password == $pengguna["katalaluan_pengguna"]) {
+        $_SESSION['name'] = $pengguna['nama_pengguna'];
+        $_SESSION['status'] = $pengguna['adalah_majikan'] ? 'majikan' : 'pekerja';
         $_SESSION['ic_number'] = $ic_number;
-        $_SESSION['id'] = $majikan['id_majikan'];
+        $_SESSION['id'] = $pengguna['id_pengguna'];
     } else {
-        # kalau tidak cari majikan cari untuk pekerja
-        $pekerja = getPekerjaNoKp($pdo, $ic_number);
-        if ($pekerja && $password == $pekerja["katalaluan_pekerja"]) {
-            $_SESSION['name'] = $pekerja['nama_pekerja'];
-            $_SESSION['status'] = 'pekerja';
-            $_SESSION['ic_number'] = $ic_number;
-            $_SESSION['id'] = $pekerja['id_pekerja'];
-        } else {
-            # tidak dapat cara majikan atau pekerja maka telah gagal login
-            $errors = [];
-            $errors['failed_login'] = "Nombor kad pengenalan atau kata laluan salah!";
-            $_SESSION['errors'] = $errors;
-        }
+        # tidak dapat cara majikan atau pekerja maka telah gagal login
+        $errors = [];
+        $errors['failed_login'] = "Nombor kad pengenalan atau kata laluan salah!";
+        $_SESSION['errors'] = $errors;
     }
+
 
     # jika remember me diaktifkan maka set cookie untuk mengingati login
     if ($remember && !isset($_SESSION['errors'])) {

@@ -28,7 +28,7 @@ require_once 'includes/signup_view.inc.php';
       <p class="date-box">Tarikh: <span id="date"></span></p>
       <?php
       # jika sudah ada kehadiran bermaksud papar skrin habis kerja
-      $kehadiran = getKehadiran($pdo, getHari($pdo)['id_hari'], getPekerja($pdo, $_SESSION["name"])['id_pekerja']);
+      $kehadiran = getKehadiran($pdo, getHari($pdo)['id_hari'], $_SESSION["id"]);
       if ($kehadiran) {
         if ($kehadiran['ada_hadir'] == 0) {
           echo

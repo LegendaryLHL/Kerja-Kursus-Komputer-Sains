@@ -45,8 +45,8 @@
           foreach (getAllPekerja($pdo, (isset($_GET['query']) ? $_GET['query'] : '%')) as $pekerja) {
             echo
             '<div class="worker-card">
-                  <p class="worker-name">' . htmlspecialchars($pekerja['nama_pekerja']) . '</p>
-                  <p class="worker-id" style="display: none;">' . htmlspecialchars($pekerja['id_pekerja']) . '</p>
+                  <p class="worker-name">' . htmlspecialchars($pekerja['nama_pengguna']) . '</p>
+                  <p class="worker-id" style="display: none;">' . htmlspecialchars($pekerja['id_pengguna']) . '</p>
                 </div>';
           }
         } catch (PDOException $e) {
@@ -75,8 +75,8 @@
           foreach (getAllMajikan($pdo, (isset($_GET['query']) ? $_GET['qeury'] : '%')) as $majikan) {
             echo
             '<div class="worker-card">
-                  <p class="worker-name">' . htmlspecialchars($majikan['nama_majikan']) . '</p>
-                  <p class="worker-id" style="display: none;">' . htmlspecialchars($majikan['id_majikan']) . '</p>
+                  <p class="worker-name">' . htmlspecialchars($majikan['nama_pengguna']) . '</p>
+                  <p class="worker-id" style="display: none;">' . htmlspecialchars($majikan['id_pengguna']) . '</p>
                 </div>';
           }
         } catch (PDOException $e) {

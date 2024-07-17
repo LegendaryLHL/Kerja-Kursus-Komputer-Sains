@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 17, 2024 at 08:43 AM
+-- Generation Time: Jul 17, 2024 at 12:07 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -41,7 +41,7 @@ CREATE TABLE `hari` (
 
 CREATE TABLE `kehadiran` (
   `id_hari` int(11) NOT NULL,
-  `id_pekerja` int(11) NOT NULL,
+  `id_pengguna` int(11) NOT NULL,
   `ada_hadir` tinyint(1) NOT NULL,
   `masa_mula` datetime NOT NULL DEFAULT curtime(),
   `masa_tamat` datetime DEFAULT NULL
@@ -50,64 +50,46 @@ CREATE TABLE `kehadiran` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `majikan`
---
-
-CREATE TABLE `majikan` (
-  `id_majikan` int(11) NOT NULL,
-  `nama_majikan` varchar(60) NOT NULL,
-  `katalaluan_majikan` varchar(255) NOT NULL,
-  `no_kp_majikan` varchar(12) DEFAULT NULL,
-  `created_at` datetime NOT NULL DEFAULT curtime()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `majikan`
---
-
-INSERT INTO `majikan` (`id_majikan`, `nama_majikan`, `katalaluan_majikan`, `no_kp_majikan`, `created_at`) VALUES
-(1, 'Muhammad Ali', '11', '11', '2024-06-17 14:41:27'),
-(2, 'Lee Chong Wei', '22', '22', '2024-06-17 14:41:57');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `kunci_kehadiran`
 --
 
 CREATE TABLE `kunci_kehadiran` (
-  `kunci` varchar(255) UNIQUE NOT NULL
+  `kunci` varchar(255) NOT NULL,
+  `id_pengguna` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `kunci_kehadiran`
 --
 
-INSERT INTO `kunci_kehadiran` (`kunci`) VALUES
-('hello');
+INSERT INTO `kunci_kehadiran` (`kunci`, `id_pengguna`) VALUES
+('hello', 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pekerja`
+-- Table structure for table `pengguna`
 --
 
-CREATE TABLE `pekerja` (
-  `id_pekerja` int(11) NOT NULL,
-  `nama_pekerja` varchar(60) NOT NULL,
-  `katalaluan_pekerja` varchar(255) NOT NULL,
-  `no_kp_pekerja` varchar(12) DEFAULT NULL,
-  `created_at` datetime NOT NULL DEFAULT curtime()
+CREATE TABLE `pengguna` (
+  `id_pengguna` int(11) NOT NULL,
+  `nama_pengguna` varchar(60) NOT NULL,
+  `katalaluan_pengguna` varchar(255) NOT NULL,
+  `no_kp_pengguna` varchar(12) DEFAULT NULL,
+  `adalah_majikan` tinyint(1) NOT NULL DEFAULT 0,
+  `masa_dibuat` datetime NOT NULL DEFAULT curtime()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `pekerja`
+-- Dumping data for table `pengguna`
 --
 
-INSERT INTO `pekerja` (`id_pekerja`, `nama_pekerja`, `katalaluan_pekerja`, `no_kp_pekerja`, `created_at`) VALUES
-(1, 'Liew Xian Yang', '1', '1', '2024-06-17 14:39:36'),
-(2, 'Melina Ming', '2', '2', '2024-06-17 14:40:37'),
-(3, 'Muhammad Haikal', '2', '2', '2024-06-17 14:42:32');
+INSERT INTO `pengguna` (`id_pengguna`, `nama_pengguna`, `katalaluan_pengguna`, `no_kp_pengguna`, `adalah_majikan`, `masa_dibuat`) VALUES
+(1, 'Muhammad Ali', '11', '11', 1, '2024-07-17 17:20:23'),
+(2, 'Lee Chong Wei', '22', '22', 1, '2024-07-17 17:53:21'),
+(3, 'Liew Xian Yang', '1', '1', 0, '2024-07-17 18:03:57'),
+(4, 'Melina Ming', '2', '2', 0, '2024-07-17 18:04:23'),
+(5, 'Muhammad Haikal', '3', '3', 0, '2024-07-17 18:04:46');
 
 --
 -- Indexes for dumped tables
@@ -123,20 +105,21 @@ ALTER TABLE `hari`
 -- Indexes for table `kehadiran`
 --
 ALTER TABLE `kehadiran`
-  ADD PRIMARY KEY (`id_hari`,`id_pekerja`),
-  ADD KEY `id_pekerja` (`id_pekerja`);
+  ADD PRIMARY KEY (`id_hari`,`id_pengguna`),
+  ADD KEY `id_pengguna` (`id_pengguna`);
 
 --
--- Indexes for table `majikan`
+-- Indexes for table `kunci_kehadiran`
 --
-ALTER TABLE `majikan`
-  ADD PRIMARY KEY (`id_majikan`);
+ALTER TABLE `kunci_kehadiran`
+  ADD UNIQUE KEY `kunci` (`kunci`),
+  ADD KEY `id_pengguna` (`id_pengguna`);
 
 --
--- Indexes for table `pekerja`
+-- Indexes for table `pengguna`
 --
-ALTER TABLE `pekerja`
-  ADD PRIMARY KEY (`id_pekerja`);
+ALTER TABLE `pengguna`
+  ADD PRIMARY KEY (`id_pengguna`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -149,16 +132,10 @@ ALTER TABLE `hari`
   MODIFY `id_hari` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
--- AUTO_INCREMENT for table `majikan`
+-- AUTO_INCREMENT for table `pengguna`
 --
-ALTER TABLE `majikan`
-  MODIFY `id_majikan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
-
---
--- AUTO_INCREMENT for table `pekerja`
---
-ALTER TABLE `pekerja`
-  MODIFY `id_pekerja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+ALTER TABLE `pengguna`
+  MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
@@ -169,7 +146,13 @@ ALTER TABLE `pekerja`
 --
 ALTER TABLE `kehadiran`
   ADD CONSTRAINT `kehadiran_ibfk_1` FOREIGN KEY (`id_hari`) REFERENCES `hari` (`id_hari`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `kehadiran_ibfk_2` FOREIGN KEY (`id_pekerja`) REFERENCES `pekerja` (`id_pekerja`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `kehadiran_ibfk_2` FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna` (`id_pengguna`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `kunci_kehadiran`
+--
+ALTER TABLE `kunci_kehadiran`
+  ADD CONSTRAINT `kunci_kehadiran_ibfk_1` FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna` (`id_pengguna`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

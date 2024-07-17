@@ -1,21 +1,13 @@
 CREATE DATABASE pkj_kehadiran_db;
 
-CREATE TABLE pekerja (
-    id_pekerja INT(11) NOT NULL AUTO_INCREMENT,
-    nama_pekerja VARCHAR(60) NOT NULL,
-    katalaluan_pekerja VARCHAR(255) NOT NULL,
-    no_kp_pekerja VARCHAR(12),
-    created_at DATETIME NOT NULL DEFAULT CURRENT_TIME,
-    PRIMARY KEY (id_pekerja)
-);
-
-CREATE TABLE majikan (
-    id_majikan INT(11) NOT NULL AUTO_INCREMENT,
-    nama_majikan VARCHAR(60) NOT NULL,
-    katalaluan_majikan VARCHAR(255) NOT NULL,
-    no_kp_majikan VARCHAR(12),
-    created_at DATETIME NOT NULL DEFAULT CURRENT_TIME,
-    PRIMARY KEY (id_majikan)
+CREATE TABLE pengguna (
+    id_pengguna INT(11) NOT NULL AUTO_INCREMENT,
+    nama_pengguna VARCHAR(60) NOT NULL,
+    katalaluan_pengguna VARCHAR(255) NOT NULL,
+    no_kp_pengguna VARCHAR(12),
+    adalah_majikan TINYINT(1) NOT NULL DEFAULT 0,
+    masa_dibuat DATETIME NOT NULL DEFAULT CURRENT_TIME,
+    PRIMARY KEY (id_pengguna)
 );
 
 CREATE TABLE hari (
@@ -27,23 +19,26 @@ CREATE TABLE hari (
 
 CREATE TABLE kehadiran (
     id_hari INT(11) NOT NULL,
-    id_pekerja INT(11) NOT NULL,
+    id_pengguna INT(11) NOT NULL,
     ada_hadir TINYINT(1) NOT NULL,
     masa_mula DATETIME NOT NULL DEFAULT CURRENT_TIME,
     masa_tamat DATETIME,
 
-    PRIMARY KEY (id_hari, id_pekerja),
+    PRIMARY KEY (id_hari, id_pengguna),
 
     FOREIGN KEY (id_hari)
     REFERENCES hari (id_hari)
     ON UPDATE CASCADE ON DELETE CASCADE,
 
-    FOREIGN KEY (id_pekerja)
-    REFERENCES pekerja (id_pekerja)
+    FOREIGN KEY (id_pengguna)
+    REFERENCES pengguna (id_pengguna)
     ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 
 CREATE TABLE kunci_kehadiran (
     kunci VARCHAR(255) UNIQUE NOT NULL,
+    id_pengguna INT(11) NOT NULL,
+    FOREIGN KEY (id_pengguna)
+    REFERENCES pengguna (id_pengguna)
 );

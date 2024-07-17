@@ -86,13 +86,13 @@
           $end_date = date('Y-m-d');
         }
         foreach (getAllPekerja($pdo) as $pekerja) {
-          $id_pekerja = getPekerja($pdo, $pekerja['nama_pekerja'])['id_pekerja'];
+          $id_pekerja = $pekerja['id_pengguna'];
           echo
           '<tr class="data-row">
           <td>' . $count . '</td>
           <td>' .
-            htmlspecialchars($pekerja['nama_pekerja']) .
-            '<p class="worker-id" style="display: none;">' . htmlspecialchars($pekerja['id_pekerja']) . '</p> 
+            htmlspecialchars($pekerja['nama_pengguna']) .
+            '<p class="worker-id" style="display: none;">' . htmlspecialchars($pekerja['id_pengguna']) . '</p> 
           </td>
           <td>' . countHariDatang($pdo, $start_date, $end_date, $id_pekerja)['bilangan_hari_datang'] . '/' . countHariBekerja($pdo, $start_date, $end_date, $id_pekerja)['bilangan_hari_bekerja'] . ' </td>';
           $count++;

@@ -4,7 +4,7 @@
 function setKehadiran(object $pdo, int $id_hari, int $id_pekerja, int $ada_hadir)
 {
     # query untuk memasukkan kehadiran pekerja
-    $query = "INSERT INTO kehadiran (id_hari, id_pekerja, ada_hadir) VALUES (:id_hari, :id_pekerja, :ada_hadir);";
+    $query = "INSERT INTO kehadiran (id_hari, id_pengguna, ada_hadir) VALUES (:id_hari, :id_pekerja, :ada_hadir);";
 
     # laksanakan statement 
     $stmt = $pdo->prepare($query);
@@ -22,7 +22,7 @@ function setKehadiran(object $pdo, int $id_hari, int $id_pekerja, int $ada_hadir
 function getKehadiran(object $pdo, int $id_hari, int $id_pekerja)
 {
     # query untuk mendapatkan kehadiran pekerja
-    $query = "SELECT * FROM kehadiran WHERE id_hari = :id_hari AND id_pekerja = :id_pekerja LIMIT 1;";
+    $query = "SELECT * FROM kehadiran WHERE id_hari = :id_hari AND id_pengguna = :id_pekerja LIMIT 1;";
 
     # melaksanakan statement 
     $stmt = $pdo->prepare($query);
@@ -39,7 +39,7 @@ function getKehadiran(object $pdo, int $id_hari, int $id_pekerja)
 function setFinish(object $pdo, int $id_hari, int $id_pekerja, string $datetime)
 {
     # query untuk mengemaskini masa tamat kehadiran pekerja
-    $query = "UPDATE kehadiran SET masa_tamat = :date_time WHERE id_hari = :id_hari AND id_pekerja = :id_pekerja;";
+    $query = "UPDATE kehadiran SET masa_tamat = :date_time WHERE id_hari = :id_hari AND id_pengguna = :id_pekerja;";
 
     # melaksanakan statement
     $stmt = $pdo->prepare($query);
@@ -108,7 +108,7 @@ function countHariBekerja(object $pdo, string $starting_date, string $ending_dat
         hari
     WHERE
         tarikh BETWEEN :starting_date AND :ending_date
-            AND tarikh >= (SELECT created_at FROM pekerja WHERE id_pekerja = :id_pekerja)
+            AND tarikh >= DATE((SELECT masa_dibuat FROM pengguna WHERE id_pengguna = :id_pekerja))
             AND adalah_hari_bekerja = 1");
         $stmt->bindParam(":starting_date", $starting_date);
         $stmt->bindParam(":ending_date", $ending_date);
@@ -135,7 +135,7 @@ function countAllHariBekerja(object $pdo, int $id_pekerja)
     FROM
         hari
     WHERE
-        tarikh >= (SELECT created_at FROM pekerja WHERE id_pekerja = :id_pekerja)
+        tarikh >= DATE((SELECT masa_dibuat FROM pengguna WHERE id_pengguna = :id_pekerja))
             AND adalah_hari_bekerja = 1");
         $stmt->bindParam(":id_pekerja", $id_pekerja);
         $stmt->execute();
@@ -160,7 +160,7 @@ function countHariDatang(object $pdo, string $starting_date, string $ending_date
     FROM
         kehadiran JOIN hari ON kehadiran.id_hari = hari.id_hari
     WHERE
-        id_pekerja = :id_pekerja
+        id_pengguna = :id_pekerja
             AND hari.tarikh BETWEEN :starting_date AND :ending_date
             AND ada_hadir = 1");
         $stmt->bindParam(":id_pekerja", $id_pekerja);
@@ -188,7 +188,7 @@ function countAllHariDatang(object $pdo, int $id_pekerja)
     FROM
         kehadiran JOIN hari ON kehadiran.id_hari = hari.id_hari
     WHERE
-        id_pekerja = :id_pekerja
+        id_pengguna = :id_pekerja
             AND ada_hadir = 1");
         $stmt->bindParam(":id_pekerja", $id_pekerja);
         $stmt->execute();
@@ -213,7 +213,7 @@ function countAllOvertime(object $pdo, int $id_pekerja)
     FROM
         kehadiran JOIN hari ON kehadiran.id_hari = hari.id_hari
     WHERE
-        id_pekerja = :id_pekerja
+        id_pengguna = :id_pekerja
             AND ada_hadir = 1
             AND hari.adalah_hari_bekerja = 0");
         $stmt->bindParam(":id_pekerja", $id_pekerja);

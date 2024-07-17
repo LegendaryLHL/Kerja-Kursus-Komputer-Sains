@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if ($request == "key") {
             # meletakkan kunci
             $value = $_POST["key"];
-            setKey($pdo, $value);
+            setKey($pdo, $value, $_SESSION["id"]);
             $_SESSION["success"] = "Kunci berjaya ditukar!";
             header("Location: ../TukarKunci.php");
         } else if ($request == "delete") {
@@ -23,11 +23,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $selected = $_POST["selected"];
             $id = $_POST["id"];
             if ($selected == "majikan") {
-                removeMajikan($pdo, $id);
+                remove($pdo, $id);
                 $_SESSION["success"] = "Majikan berjaya dipadam!";
                 header("Location: ../KonfigurasiPekerja.php?selected=majikan");
             } else {
-                removePekerja($pdo, $id);
+                remove($pdo, $id);
                 $_SESSION["success"] = "Pekerja berjaya dipadam!";
                 header("Location: ../KonfigurasiPekerja.php?selected=pekerja");
             }
@@ -37,11 +37,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $id = $_POST["id"];
             $new_pass = $_POST["new-password"];
             if ($selected == "majikan") {
-                changePassMajikan($pdo, $id, $new_pass);
+                changePass($pdo, $id, $new_pass);
                 $_SESSION["success"] = "Kata laluan berjaya ditukar!";
                 header("Location: ../Profil.php?selected=majikan&id=" . $id);
             } else {
-                changePassPekerja($pdo, $id, $new_pass);
+                changePass($pdo, $id, $new_pass);
                 $_SESSION["success"] = "Kata laluan berjaya ditukar!";
                 header("Location: ../Profil.php?selected=pekerja&id=" . $id);
             }
